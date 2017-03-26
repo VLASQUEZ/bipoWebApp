@@ -16,6 +16,8 @@ $path=$path."/bipo/services/";
 
 require($path."libs/Slim/Slim.php");
 require($path."include/config.php");
+require($path."include/utilities.php");
+require($path."include/encrypt.php");
 require($path."models/jsonResponse.php");
 require($path."models/requires.ini.php");
 require($path."controllers/requires.controllers.php");
@@ -23,6 +25,8 @@ require($path."controllers/requires.controllers.php");
 
 \Slim\Slim::registerAutoloader();
 global $app;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 $app = new \Slim\Slim();
 
 	function echoResponse($status_code, $response) {
