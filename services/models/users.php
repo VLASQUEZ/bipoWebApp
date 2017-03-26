@@ -34,20 +34,21 @@ class Users{
         $stmt->close();
         return $peoples;              
     }
-        public function setTokenByUser($email){ 
+        public function setTokenByUser($email,$token){ 
         //$stmt = $this->mysqcon->open();
-        //$stmt=$this->mysqcon->open();     
-        $stmt=$this->mysqcon->prepare("SELECT u.name, u.lastname, u.nickname, u.email,
-                                u.birthdate, u.cellphone, u.documentid, t.token from tb_users u
-                                LEFT JOIN tb_tokenUsers t
-                                on u.id=t.id 
-                                where email like ? ");
+        //$stmt=$this->mysqcon->open();
+        $stmt = $this->mysqcon->prepare('SET @email := ?');
         $stmt->bind_param('s', $email);
         $stmt->execute();
-        $result = $stmt->get_result();        
-        $peoples = $result->fetch_all(MYSQLI_ASSOC); 
-        $stmt->close();
-        return $peoples;              
+
+        // bind the second parameter to the session variable @userCount
+        $stmt = $this->mysqcon->prepare('SET @token := ?');
+        $stmt->bind_param('s', $token);
+        $stmt->execute();
+
+
+        $stmt=$this->mysqcon->query("call sp_setTokenByUser(@email,@token)");
+              
     }
     public function getPassword($email){ 
         //$stmt = $this->mysqcon->open();
@@ -73,11 +74,6 @@ class Users{
         return $peoples; 
     }
 
-/**
- * añade un nuevo registro en la tabla persona
- * @param String $name nombre completo de persona
- * @return bool TRUE|FALSE 
- */
     public function registerUser($name,$lastname,$nickname,$email,
                     $birthdate,$cellphone,$documentid,$password){
     	
@@ -90,6 +86,7 @@ class Users{
         $stmt->close();
         return $r;        
     }
+
     private function close(){
         try{
             $this->mysqcon->close();

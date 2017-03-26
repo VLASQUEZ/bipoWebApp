@@ -25,5 +25,9 @@ function decrypt($str)
 	
 	return $decrypted;
 }
+function createToken($data){
+	$token =hash('sha256',$data);
+	return $token;
+}
 
 ?>

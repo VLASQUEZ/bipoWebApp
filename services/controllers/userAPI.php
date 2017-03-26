@@ -45,6 +45,10 @@ class UserAPI {
 	   			if($dbpass!=null){
 	   				$dbpass=decrypt($dbpass["0"]["password"]);
 	   				if(strcmp($dbpass,$password)==0){
+	   					$timezone = date("Y-m-d H:i:s");
+	   					
+	   					$token=createToken($email.$password.$timezone);
+	   					$db->setTokenByUser($email,$token);
    						$this->response["error"]=false;
 	   					$this->response["user"]=$db->login($email);
 	   				}
