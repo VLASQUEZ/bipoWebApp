@@ -36,8 +36,7 @@ $app = new \Slim\Slim();
  
 		// setting response content type to json
 		$app->contentType('application/json');
- 
-		echo json_encode($response);
+		echo json_encode($response,JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR);
 	}
 	function authenticate(\Slim\Route $route) {
 		// Getting request headers

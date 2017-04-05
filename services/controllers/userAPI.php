@@ -26,6 +26,21 @@ class UserAPI {
         }
     }
 
+	function getUserIdByToken($token=null){
+	    if($token!=null && $token!=""){
+	    	//muestra 1 solo registro si es que existiera ID                 
+	        $db = new Users();
+	        $this->response["error"]=false;
+	        $this->response["user"] = $db->getUserId($token);
+	        return $this->response;                
+	    }
+	    else{ //muestra todos los registros                   
+	        $this->response["error"]=false;
+	        $this->response["user"]=null;
+	        $this->response["message"]="no se encontraron registros";
+	        return $this->response;              
+	    }
+    }
 
 	function login($email,$password){
 		try{
@@ -131,8 +146,8 @@ class UserAPI {
 	   			$db = new Users();
 	   			$nickname=createNickName($name,$lastname);
 	   			$password=encrypt($password);
-	   			$response["error"]=false;
-	            $response["message"] = $db->registerUser($name,$lastname,$nickname,$email,
+	   			$this->response["error"]=false;
+	            $this->response["message"] = $db->registerUser($name,$lastname,$nickname,$email,
                 $birthdate,$cellphone,$document,$password);
 	   		}
 	   		else{

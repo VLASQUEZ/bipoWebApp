@@ -34,7 +34,7 @@ class Users{
         $stmt->close();
         return $peoples;              
     }
-        public function setTokenByUser($email,$token){ 
+    public function setTokenByUser($email,$token){ 
         //$stmt = $this->mysqcon->open();
         //$stmt=$this->mysqcon->open();
         $stmt = $this->mysqcon->prepare('SET @email := ?');
@@ -73,9 +73,19 @@ class Users{
         $result->close();
         return $peoples; 
     }
+    //obtiene el id del usuario por medio del token
+    public function getUserId($token){ 
 
-    public function registerUser($name,$lastname,$nickname,$email,
-                    $birthdate,$cellphone,$documentid,$password){
+        $stmt=$this->mysqcon->prepare('SELECT id FROM tb_tokenUsers where token like ? and isValid =1');
+        $stmt->bind_param('s', $token);
+        $stmt->execute();
+        $result = $stmt->get_result();        
+        $peoples = $result->fetch_all(MYSQLI_ASSOC); 
+        $stmt->close();
+        return $peoples; 
+    }
+    //Registra al usuario
+    public function registerUser($name,$lastname,$nickname,$email,$birthdate,$cellphone,$documentid,$password){
     	
         $stmt=$this->mysqcon->prepare("INSERT INTO tb_users(name,lastName,nickname,email,
                         birthdate,cellphone,documentid,password)
