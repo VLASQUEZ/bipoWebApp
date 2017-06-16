@@ -44,7 +44,7 @@
 				return $result;
 				break;
 				case 'names':
-				$regex="/^[\\p{L} ]+$/";
+				$regex="/^([a-zA-Zñáéíóú]+[\s]*)+$/";
 				$result["error"]=preg_match($regex, $value);
 
 				if($result["error"]==1){
@@ -67,5 +67,42 @@
 		return $nickname;
 
 	}
+	function createUserDirectory($dirName){
+		try
+		{
+			//$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
+			//$path="bipo/public/bikeImages/";
 
+			//Produccion
+			$path="../../public/bikeImages/".$dirName;
+			if(!file_exists($path)){
+				mkdir($path,0777);
+				chmod($path,0777);
+			}
+			chmod($path,0777);
+			return array("error"=>false,"message"=>null);
+		}
+		catch(Exception $e){
+			return array("error"=>true,"message"=>$e->getMessage());
+		}
+	}
+		function createReportDirectory($dirName){
+		try
+		{
+			//$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
+			//$path="bipo/public/bikeImages/";
+
+			//Produccion
+			$path="../../public/reports/".$dirName;
+			if(!file_exists($path)){
+				mkdir($path,0777);
+				chmod($path,0777);
+			}
+			chmod($path,0777);
+			return array("error"=>false,"message"=>null);
+		}
+		catch(Exception $e){
+			return array("error"=>true,"message"=>$e->getMessage());
+		}
+	}
 ?>

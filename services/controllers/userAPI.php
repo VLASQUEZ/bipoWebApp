@@ -26,12 +26,58 @@ class UserAPI {
         }
     }
 
+    //comprueba si existe el usuario en base de datos
+    function userExist($email=null){
+    	try{
+			$error="";
+   	
+	   		if($email==null){
+	   			$error="El email es obligatorio\n ";
+	   		}
+	   		$this->response=validateField($email,"email");
+   			if($this->response["message"]!=null){
+   				$error.=$this->response["message"];
+   			}
+	   		if(strcmp($error,"")==0){
+	   			$db = new Users();
+	   			$this->response["error"]=false;
+	        	$this->response["userExist"] =$db->userExist($email);
+	   		}
+	   		else{
+	   			$this->response["error"]=true;
+	        	$this->response["message"] = $error;
+	   		}
+	        return $this->response;
+
+    	}
+    	catch(Execption $e){
+    		$this->response["error"]=true;
+	        $this->response["message"] = $e->getmessage();
+	        return $this->response;
+    	}
+    }
+	//obtiene el id del usuario asociado
 	function getUserIdByToken($token=null){
 	    if($token!=null && $token!=""){
 	    	//muestra 1 solo registro si es que existiera ID                 
 	        $db = new Users();
 	        $this->response["error"]=false;
 	        $this->response["user"] = $db->getUserId($token);
+	        return $this->response;                
+	    }
+	    else{ //muestra todos los registros                   
+	        $this->response["error"]=false;
+	        $this->response["user"]=null;
+	        $this->response["message"]="no se encontraron registros";
+	        return $this->response;              
+	    }
+    }
+	function getUserNameByToken($token=null){
+	    if($token!=null && $token!=""){
+	    	//muestra 1 solo registro si es que existiera ID                 
+	        $db = new Users();
+	        $this->response["error"]=false;
+	        $this->response["user"] = $db->getUserName($token);
 	        return $this->response;                
 	    }
 	    else{ //muestra todos los registros                   

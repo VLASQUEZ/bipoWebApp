@@ -2,7 +2,7 @@
 //para desarrollo
 define('DB_USERNAME', 'bipo');
 define('DB_PASSWORD', 'b1p0BdUs3R$');
-define('DB_HOST', '127.0.0.1:3306');
+define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'u546522721_bipo');
 //para pruebas/produccion
 /*define('DB_USERNAME', 'u546522721_b1p0');

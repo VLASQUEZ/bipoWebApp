@@ -1,3 +1,6 @@
 RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^((?s).*)$ index.php?_url=/$1 [QSA,NC,L]
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^inicio$ index.html 
+RewriteRule ^registro$ register.html 
+ErrorDocument 404 /bipo/page/404.html

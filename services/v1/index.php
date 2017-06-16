@@ -157,11 +157,11 @@ $app->get('/bikeColors','authenticate', function() {
   
 });
 //fachada para obtener todas las bicicletas por usuario
-$app->get('/bikes/:userName','authenticate', function($userName) {
+$app->get('/bikes/:token','authenticate', function($token) {
   try{
     $bikeResponse=new bikeAPI();
     $response=array();
-    $response=$bikeResponse->getBikesByUser($userName);
+    $response=$bikeResponse->getBikesByUser($token);
 
     if($response["error"]==false){
       echoResponse(200,$response);
@@ -177,12 +177,12 @@ $app->get('/bikes/:userName','authenticate', function($userName) {
   }
   
 });
-//fachada para obtener todas las bicicletas por usuario
-$app->get('/bike/:userName/:bikeName','authenticate', function($userName,$bikeName) {
+//fachada para obtener una bicicleta por nombre
+$app->get('/bike/:token/:bikeName','authenticate', function($token,$bikeName) {
   try{
     $bikeResponse=new bikeAPI();
     $response=array();
-    $response=$bikeResponse->getBikeByUser($userName,$bikeName);
+    $response=$bikeResponse->getBikeByUser($token,$bikeName);
 
     if($response["error"]==false){
       echoResponse(200,$response);
@@ -197,6 +197,134 @@ $app->get('/bike/:userName/:bikeName','authenticate', function($userName,$bikeNa
     echoResponse(500,$response);  
   }
   
+});
+//fachada para almacenar la foto de la bicicleta en el servidor
+$app->post('/bikePhoto','authenticate', function() {
+  try{
+      $bikeResponse=new bikeAPI();
+      
+      $response=$bikeResponse->savephoto($_POST['bikeName'],$_FILES['image'],$_POST['token']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
+//fachada para registrar un reporte 
+$app->post('/report','authenticate', function() {
+  try{
+      $reportResponse=new ReportAPI();
+      
+      $response=$reportResponse->registerReport($_POST['token'],$_POST['reportName'],$_POST['reportType'],
+                        $_POST['coordinates'],$_POST['idBike'],$_POST['reportDetails']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
+// fachada para obtener un reporte por usuario y por nombre
+$app->get('/report/:token/:reportName','authenticate', function($token,$reportName) {
+  try{
+    $reportResponse=new ReportAPI();
+    $response=array();
+    $response=$reportResponse->getReportByName($token,$reportName);
+
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
+//fachada para almacenar la foto del reporte en el servidor
+$app->post('/reportPhoto','authenticate', function() {
+  try{
+      $reportResponse=new ReportAPI();
+      
+      $response=$reportResponse->savephoto($_POST['reportName'],$_FILES['image'],$_POST['token']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
+//fachada para obtener todos los reportes por tipo
+$app->get('/reports/:reportType','authenticate', function($idReportType) {
+  try{
+    $reportResponse=new ReportAPI();
+    $response=array();
+    $response=$reportResponse->getReports($idReportType,$_GET['fhInicio'],$_GET['fhFin']);
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
+//fachada para verificar si ya existe un usuario
+$app->get('/user/:email','authenticate', function($email) {
+  try{
+    $userResponse=new UserAPI();
+    $response=array();
+    $response=$userResponse->userExist($email);
+   
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
 });
 $app->run();
 

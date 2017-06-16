@@ -84,6 +84,19 @@ class Users{
         $stmt->close();
         return $peoples; 
     }
+    //obtiene el id del usuario por medio del token
+    public function getUserName($token){ 
+
+        $stmt=$this->mysqcon->prepare('SELECT u.id,u.nickname FROM tb_users u
+                            INNER JOIN tb_tokenUsers t
+                            ON u.id=t.id where t.token like ? and isValid =1');
+        $stmt->bind_param('s', $token);
+        $stmt->execute();
+        $result = $stmt->get_result();        
+        $peoples = $result->fetch_all(MYSQLI_ASSOC); 
+        $stmt->close();
+        return $peoples; 
+    }
     //Registra al usuario
     public function registerUser($name,$lastname,$nickname,$email,$birthdate,$cellphone,$documentid,$password){
     	
@@ -140,6 +153,29 @@ class Users{
             }
         }        
         return false;
+    }
+
+    //comprueba si existe el usuario en base de datos
+    function userExist($email){
+        try{
+            $stmt=$this->mysqcon->prepare("SELECT id from tb_users where email like ?");
+            $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();        
+            $result->fetch_all(MYSQLI_ASSOC); 
+            $stmt->close();
+            if($result->num_rows>0){
+                return true;
+            }
+            else{
+                return false;
+            }     
+        }
+        catch(Execption $e){
+            $this->response["error"]=true;
+            $this->response["message"] = $e->getmessage();
+            return $this->response;
+        }
     }
 
 }

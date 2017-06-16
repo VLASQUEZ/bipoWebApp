@@ -7,13 +7,12 @@ date_default_timezone_set('America/Bogota');
 
 global $prefijo;
 global $path;
-$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/Library/WebServer/Documents/";
+$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
 
 //para desarrollo
 $path=$path."/bipo/services/";
 //para pruebas/produccion
 //$path=$path."/services/";
-
 require($path."libs/Slim/Slim.php");
 require($path."include/config.php");
 require($path."include/utilities.php");
