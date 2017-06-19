@@ -86,7 +86,7 @@
 			return array("error"=>true,"message"=>$e->getMessage());
 		}
 	}
-		function createReportDirectory($dirName){
+	function createReportDirectory($dirName){
 		try
 		{
 			//$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
@@ -104,5 +104,31 @@
 		catch(Exception $e){
 			return array("error"=>true,"message"=>$e->getMessage());
 		}
+	}
+	function sendEmail($to,$type){
+		try{
+			switch ($type) {
+			case 'changePassword':
+				$from='registro@bipoapp.com';
+				$headers="From:".$from;
+				$subject='Cambio de contraseña';
+				$message="Tu contraseña ha sido cambiada satisfactoriamente";
+				mail($to,$subject,$message);
+				break;
+			
+			case 'contact':
+				# code...
+				break;
+			
+			default:
+				# code...
+				break;
+			}	
+		return true;
+		}
+		catch(exception $e){
+			return $e->getMessage();
+		}
+		
 	}
 ?>

@@ -203,7 +203,7 @@ $app->post('/bikePhoto','authenticate', function() {
   try{
       $bikeResponse=new bikeAPI();
       
-      $response=$bikeResponse->savephoto($_POST['bikeName'],$_FILES['image'],$_POST['token']);
+      $response=$bikeResponse->savephoto($_POST['bikeName'],$_FILES['file'],$_POST['token']);
 
       if($response["error"]==false){
         echoResponse(200,$response);
@@ -286,12 +286,54 @@ $app->post('/reportPhoto','authenticate', function() {
   }
   
 });
+//enviar email
+$app->post('/sendEmail','authenticate', function() {
+  try{
+      $reportResponse=new ReportAPI();
+      
+      $response=$reportResponse->sendEmail($_POST['token'],$_POST['type']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
 //fachada para obtener todos los reportes por tipo
 $app->get('/reports/:reportType','authenticate', function($idReportType) {
   try{
     $reportResponse=new ReportAPI();
     $response=array();
     $response=$reportResponse->getReports($idReportType,$_GET['fhInicio'],$_GET['fhFin']);
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
+//fachada para obtener los ultimos 10 reportes
+$app->get('/lastReports','authenticate', function() {
+  try{
+    $reportResponse=new ReportAPI();
+    $response=array();
+    $response=$reportResponse->getLastReports();
     if($response["error"]==false){
       echoResponse(200,$response);
     }

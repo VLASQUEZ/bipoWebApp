@@ -87,7 +87,7 @@ class Users{
     //obtiene el id del usuario por medio del token
     public function getUserName($token){ 
 
-        $stmt=$this->mysqcon->prepare('SELECT u.id,u.nickname FROM tb_users u
+        $stmt=$this->mysqcon->prepare('SELECT u.id,u.nickname,u.email FROM tb_users u
                             INNER JOIN tb_tokenUsers t
                             ON u.id=t.id where t.token like ? and isValid =1');
         $stmt->bind_param('s', $token);
