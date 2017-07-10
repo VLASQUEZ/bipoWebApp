@@ -368,6 +368,29 @@ $app->get('/user/:email','authenticate', function($email) {
     echoResponse(500,$response);  
   }
 });
+
+//Cambiar Password
+$app->post('/updatePassword','authenticate', function() {
+  try{
+      $reportResponse=new UserAPI();
+      
+      $response=$reportResponse->updatePassword($_POST['email'],$_POST['password'],$_POST['newPassword']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
 $app->run();
 
 ?>

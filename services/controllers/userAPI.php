@@ -63,6 +63,7 @@ class UserAPI {
 	        $db = new Users();
 	        $this->response["error"]=false;
 	        $this->response["user"] = $db->getUserId($token);
+
 	        return $this->response;                
 	    }
 	    else{ //muestra todos los registros                   
@@ -78,6 +79,7 @@ class UserAPI {
 	        $db = new Users();
 	        $this->response["error"]=false;
 	        $this->response["user"] = $db->getUserName($token);
+	      	$this->response["message"] = "";
 	        return $this->response;                
 	    }
 	    else{ //muestra todos los registros                   
@@ -221,6 +223,62 @@ class UserAPI {
 	        return $this->response;
 	   }
 	    
+    }
+    function updatePassword($email,$password,$newPassword){
+		try{
+			$error="";
+   	
+	   		if(strlen($email)<=1){
+	   			$error="El email es obligatorio\n ";
+	   		}
+	   		if(strlen($password)<=1){
+	   			$error.="El password es obligatorio \n";
+	   		}
+	   		if(strlen($newPassword)<=1){
+	   			$error.="El nuevo password es obligatorio \n";
+	   		}
+	   		if(strcmp($error,"")==0){
+	   			$db = new Users();
+	   			$response["error"]=false;
+	   			$dbpass=$db->getPassword($email);
+	   			
+	   			if($dbpass!=null){
+	   				$dbpass=decrypt($dbpass["0"]["password"]);
+	   				if(strcmp($dbpass,$password)==0){
+	   					$newPassword=encrypt($newPassword);
+   						$update= $db->updatePassword($email,$newPassword);
+   						$this->response["error"]=false;
+	   					$this->response["user"]=$update;
+   						//Envio de email personalizado
+	   					sendEmail($email,"changePassword");	
+	   					//$token=createToken($email.$password.$timezone);
+	   					/*$db->setTokenByUser($email,$token);
+   						$this->response["error"]=false;
+	   					$this->response["user"]=$db->login($email);*/
+	   				}
+	   				else{
+	   					$this->response["error"]=true;
+	   					$this->response["message"]="La contraseña no corresponde.";
+	   				}
+	   			}
+	   			else{
+	   				$this->response["error"]=true;
+	   				$this->response["message"]="El usuario no se encuentra registrado";
+	   			}
+	            //$response["user"] = decrypt($user["password"]);
+	   		}
+	   		else{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	   		return $this->response;
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+	        $this->response["message"] = $e->getmessage();
+	        return $this->response;
+		}
+
     }     
 }
 	

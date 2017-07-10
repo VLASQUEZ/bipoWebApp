@@ -217,6 +217,12 @@ class BikeAPI {
 			}
 			$userAPI=new UserAPI();
 			$userName=$userAPI->getUserNameByToken($token);
+			//throw new Exception($userName["message"]." user: ".$userName["user"], 1);
+			if($userName["message"]!=""){
+				$error.=$userName["message"];
+				//throw new Exception($userName["message"], 1);
+								
+			}
 			//print_r($userName["user"][0]["nickname"]);
 			//exit(0);
 			if(strcasecmp($error,"")==0){
@@ -270,9 +276,9 @@ class BikeAPI {
 	   		}
 	   		return $this->response; 
 		}
-		catch(exception $e){
+		catch(Exception $e){
 			$this->response["error"]=true;
-			$this->response["message"] = $e->getMessage();
+			$this->response["message"] = $e->getMessage()." Stacktrace: ".$e->getTraceAsString()." token: ".$token." bicicleta: ".$bikeName;
 			return $this->response;
 		}
 		

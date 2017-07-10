@@ -85,18 +85,33 @@ class Users{
         return $peoples; 
     }
     //obtiene el id del usuario por medio del token
-    public function getUserName($token){ 
+    /*public function getUserName($token){ 
 
         $stmt=$this->mysqcon->prepare('SELECT u.id,u.nickname,u.email FROM tb_users u
                             INNER JOIN tb_tokenUsers t
-                            ON u.id=t.id where t.token like ? and isValid =1');
+                            ON u.id=t.id where t.token like ? and t.isValid =1');
         $stmt->bind_param('s', $token);
         $stmt->execute();
+        print_r($stmt);
         $result = $stmt->get_result();        
         $peoples = $result->fetch_all(MYSQLI_ASSOC); 
         $stmt->close();
         return $peoples; 
+    }*/
+    public function getUserName($token){ 
+//$stmt = $this->mysqcon->open();
+        $stmt=$this->mysqcon;
+        $stmt=$this->mysqcon->prepare('SET @token := ?');
+        $stmt->bind_param('s', $token);
+        $stmt->execute();
+        //print_r($userName);
+        $stmt=$this->mysqcon->query("call sp_getUserName(@token)");
+        //print_r($stmt);
+        $result = $stmt->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $result; 
     }
+
     //Registra al usuario
     public function registerUser($name,$lastname,$nickname,$email,$birthdate,$cellphone,$documentid,$password){
     	
@@ -117,6 +132,18 @@ class Users{
         }catch(mysqli_sql_exception $e){
             return $e;
         }
+    }
+    public function updatePassword($email, $newPassword) {
+        if($this->checkEmail($email)){
+            $stmt = $this->mysqcon;
+            $stmt->open();    
+            $stmt ->prepare("UPDATE tb_users SET name=? WHERE id = ? ; ");
+            $stmt->bind_param('ss', $newName,$id);
+            $r = $stmt->execute(); 
+            $stmt->close();
+            return $r;    
+        }
+        return false;
     }
 
     /**
@@ -141,11 +168,11 @@ class Users{
      * @param int $id Identificador unico de registro
      * @return Bool TRUE|FALSE
      */
-    public function checkID($id){
+    public function checkEmail($email){
     	$stmt = $this->mysqcon;
         $stmt->open();    
-        $stmt ->prepare("SELECT * FROM tb_users WHERE ID=?");
-        $stmt->bind_param("s", $id);
+        $stmt ->prepare("SELECT * FROM tb_users WHERE email like ?");
+        $stmt->bind_param("s", $email);
         if($stmt->execute()){
             $stmt->store_result();    
             if ($stmt->num_rows == 1){                
