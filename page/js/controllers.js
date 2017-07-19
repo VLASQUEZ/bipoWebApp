@@ -15,7 +15,7 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
       controller: 'registerCtrl',
       controllerAs: '$ctrl',
       size: size,
-      appendTo: parentElem,
+      appendTo: parentElem
     });
 
     $scope.modalInstance.result.then(function (selectedItem) {
