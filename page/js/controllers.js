@@ -1,7 +1,7 @@
 angular.module('bipoApp.controllers', ['ui.bootstrap'])
   
 .controller('registerCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval){
-	$scope.error={errorState:false,message:"Datos incompletos"};
+	$scope.error={errorState:false,message:""};
 	var $ctrl = this;
 	$ctrl.animationsEnabled = true;
 
@@ -45,8 +45,10 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 			$scope.errors.confirmPass=ValidateForm.comparePass($scope.register.password.data,$scope.register.confirmPass.data);
 			$scope.formState=ValidateForm.formState($scope.errors);
 			console.log($scope.formState)
-			$ctrl.open('sm');
+			
 			if($scope.formState){
+				$scope.error.message="Registrando...";
+				$ctrl.open('sm');
 				$scope.error.errorState=false;
 				$scope.response=PostAjax.registerUser($scope.register)
 				if(!$scope.response.error){
@@ -67,6 +69,7 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 		}
 		else{
 			$scope.error.errorState=true;
+			$scope.error.message="Datos incompletos";
 		}
 
 	}

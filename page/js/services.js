@@ -9,7 +9,6 @@ angular.module('bipoApp.services', [])
 	postAjax.registerUser=function(data){
         //postAjax.user={}
         var serviceUrl=url+"register"
-        console.log(data);
 		var params={name:data.name.data,
                     lastName:data.lastName.data,
                     email:data.email.data,
@@ -24,8 +23,8 @@ angular.module('bipoApp.services', [])
 			.then(function(response){
                 return response.data;                
             },
-            function(response){
-                return response.data;
+            function(error){
+                return error.data;
             });
 	}
 

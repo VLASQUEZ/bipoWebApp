@@ -38,7 +38,7 @@
     <script type="text/ng-template" id="modal.html">
         <div class="modal-demo" data-backdrop="static" data-keyboard="false" id="myModal">
             <div class="modal-body">
-               <section class="loaders loaders-bg-3"><span class="loader loader-circles"> </span><span class="loading-text">{{error.message}}</span></section>
+               <section class="loaders loaders-bg-3"><span class="loader loader-circles"> </span><h4 class="loading-text">{{error.message}}</h4></section>
             </div>
 
         </div>
@@ -121,7 +121,7 @@
                             <label>Número de cédula:</label>
                             <input type="text" name="document" class="form-control" placeholder="Escribe tu número de cédula" ng-model="register.document.data" required>
                             <h5 style="color:#ef473a" ng-show="fmRegister.document.$invalid && !fmRegister.document.$pristine">Debes ingresar tu número de documento</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.documento.valid">{{errors.documento.error}}</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.documento.valid">{{errors.document.error}}</h5>
                         </div>
                         <div class="col-sm-7 form-group">
                             <label>Correo Electrónico:</label>
