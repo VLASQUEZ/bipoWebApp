@@ -4,8 +4,8 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 	$scope.error={errorState:false,message:""};
 	var $ctrl = this;
 	$ctrl.animationsEnabled = true;
-
-  	$ctrl.open = function (size, parentSelector) {
+	 $scope.bodyText="";
+  	$ctrl.open = function (size,text) {
     var parentElem = parentSelector ? angular.element($document[0].querySelector('.modal-demo' + parentSelector)) : undefined;
     $scope.modalInstance = $uibModal.open({
       animation: $ctrl.animationsEnabled,
@@ -15,7 +15,12 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
       controller: 'registerCtrl',
       controllerAs: '$ctrl',
       size: size,
-      appendTo: parentElem
+      appendTo: parentElem,
+      resolve:{
+      	bodyText:function(){
+      		return $scope.bodyText;
+      	}
+      }
     });
 
     $scope.modalInstance.result.then(function (selectedItem) {
@@ -48,7 +53,7 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 			
 			if($scope.formState){
 				$scope.error.message="Registrando...";
-				$ctrl.open('sm');
+				$ctrl.open('sm',$scope.error.message);
 				$scope.error.errorState=false;
 				$scope.response=PostAjax.registerUser($scope.register)
 				if(!$scope.response.error){
