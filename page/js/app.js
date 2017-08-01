@@ -8,7 +8,7 @@ angular.module('bipoApp',['bipoApp.controllers','bipoApp.routes','bipoApp.servic
        $httpProvider.defaults.headers.common['Content-Type'] = 'application/x-www-form-urlencoded; charset=utf-8';
       $httpProvider.defaults.headers.common['Accept'] = 'application/json, text/javascript';
       $httpProvider.defaults.headers.common['Authorization'] = '650E01A1B8F9A4DA4A2040FF86E699B7';
-
+      $httpProvider.defaults.timeout = 6000;
       //Transforma el request para que los datos no sean enviados como JSON y sean enviados como url params
       $httpProvider.defaults.transformRequest = function(obj) {
         var str = [];

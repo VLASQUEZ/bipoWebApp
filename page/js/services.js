@@ -4,7 +4,9 @@ angular.module('bipoApp.services', [])
 .factory('PostAjax',function($http,$q){
 	var postAjax={};
     //pruebas
-    var url="http://localhost/bipo/services/v1/";
+    //var url="http://localhost/bipo/services/v1/";
+    //produccion
+    var url="http://www.bipoapp.com/services/v1/";
     //REGISTRO DE USUARIO
 	postAjax.registerUser=function(data){
         //postAjax.user={}
@@ -27,6 +29,23 @@ angular.module('bipoApp.services', [])
                 return error.data;
             });
 	}
+    //INICIO DE SESION
+    postAjax.loginUser=function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"register"
+        var params={email:data.email.data,
+                    password:data.password.data
+                };
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function(response){
+                return response.data;                
+            },
+            function(error){
+                return error.data;
+            });
+    }
 
     return postAjax;		
 })
