@@ -93,7 +93,7 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 
 	}
 
-});
+})
 .controller('registerBikeCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval){
 	
 	var $ctrl = this;
@@ -120,7 +120,7 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
     $scope.modalInstance.result.then(function (selectedItem) {
       	$ctrl.selected = selectedItem;
     	}, function () {
-      		$log.info('Modal dismissed at: ' + new Date());
+      		//$log.info('Modal dismissed at: ' + new Date());
     	});
   	};
 
@@ -183,4 +183,4 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 
 	}
 
-});
+})

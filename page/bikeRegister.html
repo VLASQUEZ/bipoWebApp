@@ -114,40 +114,26 @@
                             <input type="text" name="frame" class="form-control" placeholder="Escribe el Id del marco de tu bicicleta" ng-model="bikeRegister.email.data" required>
                             <h5 style="color:#ef473a" ng-show="fmRegisterBike.frame.$invalid && !fmRegisterBike.frame.$pristine">Debes ingresar el marco de la bicicleta</h5>
                             <h5 style="color:#ef473a" ng-show="!errors.frame.valid">{{errors.frame.error}}</h5>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label>Tipo de bicicleta: </label>
+                            <select class="form-control" placeholder="Tipo de bicicleta" ng-model="bikeRegister.bikeType.data">
+                            </select>
+                            <h5 style="color:#ef473a" ng-show="!errors.bikeType.valid">{{errors.bikeType.error}}</h5>
                         </div> 
                         <div class="col-sm-7 form-group">
-                            <label>Número de cédula:</label>
-                            <input type="text" name="document" class="form-control" placeholder="Escribe tu número de cédula" ng-model="bikeRegister.document.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegisterBike.document.$invalid && !fmRegisterBike.document.$pristine">Debes ingresar tu número de documento</h5>
+                            <label>Caracteristicas de la bicicleta:</label>
+                            <textarea class="form-control" placeholder="Escribe las caracteristicas de tu bicicleta" ng-model="bikeRegister.bikeFeatures.data" rows="5"></textarea>
                             <h5 style="color:#ef473a" ng-show="!errors.documento.valid">{{errors.document.error}}</h5>
                         </div>
-        
-                        <div class="col-sm-7 form-group">
-                            <label>Número de celular:</label>
-                            <input type="text" name="cellphone" class="form-control" placeholder="Escribe tu número de celular" ng-model="bikeRegister.cellphone.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegisterBike.cellphone.$invalid && !fmRegisterBike.cellphone.$pristine">Debes ingresar tu número de celular</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.cellphone.valid">{{errors.cellphone.error}}</h5>
+                        <div class="panel panel-default col-sm-7 ">
+                            <div class="panel-heading">Agrega fotos de tu bicicleta</div>
+                            <div class="panel-body">
+
+                            </div>
                         </div>
                         <div class="col-sm-7 form-group">
-                            <label>Contraseña:</label>
-                            <input type="password" name="password" class="form-control" placeholder="Escribe tu contraseña" ng-model="bikeRegister.password.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegisterBike.password.$invalid && !fmRegisterBike.password.$pristine">Debes ingresar tu contraseña</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.password.valid">{{errors.password.error}}</h5>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <label>Confirma tu contraseña:</label>
-                            <input type="password" name="confirmPass" class="form-control" placeholder="Confirma la contraseña" ng-model="bikeRegister.confirmPass.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegisterBike.confirmPass.$invalid && !fmRegisterBike.confirmPass.$pristine">Debes confirmar tu contraseña</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.confirmPass.valid">{{errors.confirmPass.error}}</h5>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{register.data}}" name="terms" ng-model="bikeRegister.terms.data"> Acepto los <a href="terminos">términos y condiciones</a>
-                                <h5 style="color:#ef473a" ng-show="!errors.terms.valid">{{errors.terms.error}}</h5>
-                            </label>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <button type="button" class="btn btn-primary btn-lg" ng-click="registerUser(fmRegisterBike.$valid)">Continuar</button>
+                            <button type="button" class="btn btn-primary btn-lg" ng-click="registerBike(fmRegisterBike.$valid)">Registrar</button>
                         </div>
                         <div class="col-sm-7 form-group" style="width: 100%; height: 25px;">
                             <h5 style="color:#ef473a" ng-show="error.errorState">{{error.message}}</h5>
