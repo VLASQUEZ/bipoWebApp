@@ -16,7 +16,8 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link href="css/loading.css" rel="stylesheet">
-    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />    
+    <link href="css/upload-photo.css" rel="stylesheet">
     <link href="css/loading.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!--[if lt IE 9]>
@@ -131,7 +132,22 @@
                             <div class="panel-body">
                                 <div class="panel panel-info ">
                                     <div class="panel-body">
-                                
+                                        <div class="file-upload">
+                                          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Subir imagen</button>
+
+                                          <div class="image-upload-wrap">
+                                            <input class="file-upload-input" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
+                                            <div class="drag-text">
+                                              <h3>Imagen</h3>
+                                            </div>
+                                          </div>
+                                          <div class="file-upload-content">
+                                            <img ng-src="{{imageSrc}}" alt="your image" />
+                                            <div class="image-title-wrap">
+                                              <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
+                                            </div>
+                                          </div>
+                                        </div>
                                     </div>
                             </div>
                             </div>

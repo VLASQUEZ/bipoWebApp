@@ -215,7 +215,57 @@ angular.module('bipoApp.services', [])
     }
 	return validate;
 })
+.factory('fileReader', function($q,$log){
+    var fileReader ={};
 
+    fileReader.onLoad = function(reader, deferred, scope) {
+            return function () {
+                scope.$apply(function () {
+                    deferred.resolve(reader.result);
+                });
+            };
+        };
+ 
+    fileReader.onError = function (reader, deferred, scope) {
+            return function () {
+                scope.$apply(function () {
+                    deferred.reject(reader.result);
+                });
+            };
+        };
+ 
+    fileReader.onProgress = function(reader, scope) {
+            return function (event) {
+                scope.$broadcast("fileProgress",
+                    {
+                        total: event.total,
+                        loaded: event.loaded
+                    });
+            };
+        };
+ 
+    fileReader.getReader = function(deferred, scope) {
+            var reader = new FileReader();
+            reader.onload = fileReader.onLoad(reader, deferred, scope);
+            reader.onerror = fileReader.onError(reader, deferred, scope);
+            reader.onprogress = fileReader.onProgress(reader, scope);
+            return reader;
+        };
+ 
+    fileReader.readAsDataURL = function (file, scope) {
+            var deferred = $q.defer();
+             
+            var reader = fileReader.getReader(deferred, scope);         
+            reader.readAsDataURL(file);
+             console.log(reader);
+            return deferred.promise;
+        };
+ 
+        return {
+            readAsDataUrl: fileReader.readAsDataURL  
+        };
+    
+})
 /*.factory('Modal',function($uibModal, $log, $document){
     var modal={};
     var controller;

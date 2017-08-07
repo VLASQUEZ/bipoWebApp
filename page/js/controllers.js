@@ -71,6 +71,7 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 	      					//Inicio de Sesion
 
 	      					//Redireccion a registro de bicicletas
+	      					 $window.location.href = '/registroBicicleta';
 						}, 3000,1);
 					}
 					else
@@ -94,8 +95,22 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 	}
 
 })
-.controller('registerBikeCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval){
-	
+.controller('registerBikeCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval,fileReader) {
+     console.log(fileReader);
+
+    $scope.getFile = function () {
+        $scope.progress = 0;
+        fileReader.readAsDataUrl($scope.file, $scope)
+                      .then(function(result) {
+                          $scope.imageSrc = result;
+                      });
+    };
+ 
+    $scope.$on("fileProgress", function(e, progress) {
+        $scope.progress = progress.loaded / progress.total;
+    });
+
+
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 	$ctrl.animationsEnabled = true;
