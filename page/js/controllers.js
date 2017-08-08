@@ -86,6 +86,10 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 				}
 				
 			}
+			else{
+				$scope.error.errorState=true;
+				$scope.error.message="Datos incompletos";
+			}
 		}
 		else{
 			$scope.error.errorState=true;
@@ -190,6 +194,10 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 				}
 				
 			}
+			else{
+				$scope.error.errorState=true;
+				$scope.error.message="Datos incompletos";
+			}
 		}
 		else{
 			$scope.error.errorState=true;
@@ -198,4 +206,83 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 
 	}
 
+})
+.controller('loginUserCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$ctrl.animationsEnabled = true;
+  	$ctrl.open = function (size,parentSelector) {
+    var parentElem = parentSelector ? angular.element($document[0].querySelector('.modal-demo' + parentSelector)) : undefined;
+    $scope.modalInstance = $uibModal.open({
+      animation: $ctrl.animationsEnabled,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'modal.html',
+      controller: 'modalRegisterCtrl',
+      controllerAs: '$ctrl',
+      size: size,
+      appendTo: parentElem,
+      resolve: {
+        message: function () {
+          return $ctrl.message;
+        }
+      }
+    });
+
+    $scope.modalInstance.result.then(function (selectedItem) {
+      	$ctrl.selected = selectedItem;
+    	}, function () {
+      		//$log.info('Modal dismissed at: ' + new Date());
+    	});
+  	};
+
+  	$scope.login={email:{name:"email",data:null,type:"email"},
+				password:{name:"password",data:null,type:"password"}
+				};
+
+	$scope.loginUser=function(isValid){
+		
+		if(isValid){
+
+			$scope.errors=ValidateForm.fmValid($scope.login);
+			$scope.formState=ValidateForm.formState($scope.errors);
+			
+			if($scope.formState){
+				$ctrl.message="Iniciando Sesión...";
+				$ctrl.open('sm');
+				$scope.error.errorState=false;
+				try{
+					$scope.response=PostAjax.loginUser($scope.login);
+					if(!$scope.response.error){
+						//mostrar modal y pasar al formulario de registro de
+						//bicicletas
+						$ctrl.message="Inicio de sesión exitoso";
+						$interval(function() {
+	      					$scope.modalInstance.close();
+      						//Redireccion al home de usuario
+
+						}, 3000,1);
+					}
+					else
+					{
+						$scope.error.errorState=$scope.response.error;
+						$scope.error.message=$scope.response.message;
+					}
+				}
+				catch(e)
+				{
+					$ctrl.message="e";
+				}
+			}
+			else{
+				$scope.error.errorState=true;
+				$scope.error.message="Datos incompletos";
+			}
+		}
+		else{
+			$scope.error.errorState=true;
+			$scope.error.message="Datos incompletos";
+		}
+
+	}
 })

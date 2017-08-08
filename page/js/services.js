@@ -32,13 +32,13 @@ angular.module('bipoApp.services', [])
     //INICIO DE SESION
     postAjax.loginUser=function(data){
         //postAjax.user={}
-        var serviceUrl=url+"register"
+        var serviceUrl=url+"login"
         var params={email:data.email.data,
                     password:data.password.data
                 };
         var dfd = $q.defer();
         //console.log(params);
-        $http.post(serviceUrl,params)
+        $http.get(serviceUrl,params)
             .then(function(response){
                 return response.data;                
             },

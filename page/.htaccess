@@ -3,5 +3,6 @@ RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^inicio$ index.html 
 RewriteRule ^registro$ register.html 
-RewriteRule ^registroBicicleta$ bikeRegister.html 
+RewriteRule ^registroBicicleta$ bikeRegister.html
+RewriteRule ^login$ login.html
 ErrorDocument 404 /bipo/page/404.html

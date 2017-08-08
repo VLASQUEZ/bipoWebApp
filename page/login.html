@@ -16,7 +16,8 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link href="css/loading.css" rel="stylesheet">
-    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />    
+    <link href="css/upload-photo.css" rel="stylesheet">
     <link href="css/loading.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!--[if lt IE 9]>
@@ -34,7 +35,7 @@
     
 </head><!--/head-->
 
-<body class="homepage" ng-controller="registerCtrl as $ctrl">
+<body class="homepage" ng-controller="loginUserCtrl as $ctrl">
     <script type="text/ng-template" id="modal.html">
         <div class="modal-demo" data-backdrop="static" data-keyboard="false" id="myModal">
             <div class="modal-body" id="modal-body">
@@ -61,10 +62,11 @@
                     </a>
                     <h1 class="navbar-text">bipo</h1>
                 </div>
+				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         <li><a href="inicio">Inicio</a></li>
-                        <li class="active"><a href="registro">Registrate</a></li>
+                        <li ><a href="registro">Registrate</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -75,7 +77,7 @@
                         <li><a href="#">Zónas seguras</a></li>                       
                         <li><a href="#">Contáctanos</a></li>                       
                         <li><a href="#">Bipo en Android</a></li>                       
-                        <li class="btn-slide"><a href="login">Iniciar Sesión</a></li>                          
+                        <li class="active"><a href="login">Iniciar Sesión</a></li>                            
                     </ul>
                 </div>
             </div><!--/.container-->
@@ -84,78 +86,28 @@
     <section id="feature" >
         <div class="container">
            <div class="center wow fadeInDown">
-                <h2>Registrate</h2>
-                <p class="lead">Es totalmente gratis</p>
+                <h2>Inicia sesión</h2>
+                <p class="lead">Y pedalea seguro con Bipo&reg;</p>
 
             </div>
             <div class="row contact-wrap"> 
                 <div class="status alert alert-success" style="display: none"></div>
-                <form id="main-contact-form" class="contact-form" name="fmRegister" novalidate>
+                <form id="main-contact-form" class="contact-form" name="fmLogin" novalidate>
                     <div class="col-lg-12 col-md-10 col-lg-offset-2 col-sm-offset-2">
                         <div class="col-sm-7 form-group">
-                            <label>Nombres: </label>
-                            <input type="text" name="name" class="form-control" placeholder="Escribe tu nombre" ng-model="register.name.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegister.name.$invalid && !fmRegister.name.$pristine ">Debes ingresar tu nombre completo</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.nombre.valid">{{errors.nombre.error}}</h5>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <label>Apellidos: </label>
-                            <input type="text" name="lastName" class="form-control" placeholder="Escribe tus apellidos" ng-model="register.lastName.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegister.lastName.$invalid && !fmRegister.lastName.$pristine">Debes ingresar tus apellidos</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.apellido.valid">{{errors.apellido.error}}</h5>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <label>Fecha de nacimiento:</label>
-                            <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                <input class="form-control" id="fh2" type="text" name="birthdate" value=""  +
-                                readonly ng-model="register.birthdate.data">
-                                
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                            </div>
-                            <h5 style="color:#ef473a" ng-show="!errors.birthdate.valid">{{errors.birthdate.error}}</h5>
-                            <input type="hidden"  value="" />
-
-                        </div>
-                        
-                        <div class="col-sm-7 form-group">
-                            <label>Número de cédula:</label>
-                            <input type="text" name="document" class="form-control" placeholder="Escribe tu número de cédula" ng-model="register.document.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegister.document.$invalid && !fmRegister.document.$pristine">Debes ingresar tu número de documento</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.documento.valid">{{errors.document.error}}</h5>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <label>Correo Electrónico:</label>
-                            <input type="email" name="email" class="form-control" placeholder="Escribe tu correo electrónico" ng-model="register.email.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegister.email.$invalid && !fmRegister.email.$pristine">Debes ingresar tu correo eléctronico</h5>
+                            <label>Email: </label>
+                            <input type="email" name="email" class="col-sm-5 form-control" placeholder="Ingresa tu correo electrónico" ng-model="login.email.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmLogin.email.$invalid && !fmLogin.email.$pristine ">Debes ingresar tu correo electrónico</h5>
                             <h5 style="color:#ef473a" ng-show="!errors.email.valid">{{errors.email.error}}</h5>
-                        </div>         
-                        <div class="col-sm-7 form-group">
-                            <label>Número de celular:</label>
-                            <input type="text" name="cellphone" class="form-control" placeholder="Escribe tu número de celular" ng-model="register.cellphone.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegister.cellphone.$invalid && !fmRegister.cellphone.$pristine">Debes ingresar tu número de celular</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.cellphone.valid">{{errors.cellphone.error}}</h5>
                         </div>
                         <div class="col-sm-7 form-group">
-                            <label>Contraseña:</label>
-                            <input type="password" name="password" class="form-control" placeholder="Escribe tu contraseña" ng-model="register.password.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegister.password.$invalid && !fmRegister.password.$pristine">Debes ingresar tu contraseña</h5>
+                            <label>Contraseña: </label>
+                            <input type="password" name="password" class="form-control col-sm-2" placeholder="Ingresa tu contraseña" ng-model="login.password.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmLogin.password.$invalid && !fmLogin.password.$pristine ">Debes ingresar tu contraseña</h5>
                             <h5 style="color:#ef473a" ng-show="!errors.password.valid">{{errors.password.error}}</h5>
                         </div>
                         <div class="col-sm-7 form-group">
-                            <label>Confirma tu contraseña:</label>
-                            <input type="password" name="confirmPass" class="form-control" placeholder="Confirma la contraseña" ng-model="register.confirmPass.data" required>
-                            <h5 style="color:#ef473a" ng-show="fmRegister.confirmPass.$invalid && !fmRegister.confirmPass.$pristine">Debes confirmar tu contraseña</h5>
-                            <h5 style="color:#ef473a" ng-show="!errors.confirmPass.valid">{{errors.confirmPass.error}}</h5>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{register.data}}" name="terms" ng-model="register.terms.data"> Acepto los <a href="terminos">términos y condiciones</a>
-                                <h5 style="color:#ef473a" ng-show="!errors.terms.valid">{{errors.terms.error}}</h5>
-                            </label>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <button type="button" class="btn btn-primary btn-lg" ng-click="registerUser(fmRegister.$valid)">Continuar</button>
+                            <button type="button" class="btn btn-primary btn-lg" ng-click="loginUser(fmLogin.$valid)">Ingresar</button>
                         </div>
                         <div class="col-sm-7 form-group" style="width: 100%; height: 25px;">
                             <h5 style="color:#ef473a" ng-show="error.errorState">{{error.message}}</h5>
@@ -165,20 +117,6 @@
             </div><!--/.row-->
         </div><!--/.container-->
     </section><!--/#feature-->
-    <section id="partner">
-        <div class="container">
-            <div class="center wow fadeInDown">
-                <h2>Disponible en la Play Store &copy;</h2>
-                <img class="img-responsive bipo-PlayStore" alt="bipo_playStore" src="images/slider/bipo_playStore.png"/>
-            </div>    
-
-            <div class="partners">
-                <button type="button" class=" btn btn-outline-info btn-lg">
-                    <i class="fa fa-download"></i> Descargar ya
-                </button>
-            </div>        
-        </div><!--/.container-->
-    </section><!--/#partner-->
     <footer id="footer" class="midnight-blue">
         <div class="container">
             <div class="row">
