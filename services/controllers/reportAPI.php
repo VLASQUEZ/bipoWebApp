@@ -247,12 +247,16 @@ class ReportAPI {
 	        $reports = $db->getLastReports();
 
 	        if(count($reports)){
-		        $this->response["reports"]=$reports;
-		    }
-		    else
-		    {
-		    	$this->response["message"]="No se encontraron registros";
-		    }
+		        	foreach ($reports as $pos => $report) {
+	        			$db = new Reports();	
+			        	$reports[$pos]["reportPhotos"]=$db->getPhotoReport($report["id"]);
+		        	}	        		
+			        $this->response["reports"]=$reports;
+			    }
+			    else
+			    {
+			    	$this->response["message"]="No se encontraron registros";
+			    }
 	        //print_r($this->response);
 	        return $this->response; 
 		}
