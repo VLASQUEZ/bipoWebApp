@@ -252,8 +252,6 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 				try{
 					$scope.response=PostAjax.loginUser($scope.login);
 					if(!$scope.response.error){
-						//mostrar modal y pasar al formulario de registro de
-						//bicicletas
 						$ctrl.message="Inicio de sesión exitoso";
 						$interval(function() {
 	      					$scope.modalInstance.close();
