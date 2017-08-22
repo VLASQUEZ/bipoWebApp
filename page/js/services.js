@@ -4,9 +4,9 @@ angular.module('bipoApp.services', [])
 .factory('PostAjax',function($http,$q){
 	var postAjax={};
     //pruebas
-    //var url="http://localhost/bipo/services/v1/";
+    var url="http://localhost/bipo/services/v1/";
     //produccion
-    var url="http://www.bipoapp.com/services/v1/";
+    //var url="http://www.bipoapp.com/services/v1/";
     //REGISTRO DE USUARIO
 	postAjax.registerUser=function(data){
         //postAjax.user={}

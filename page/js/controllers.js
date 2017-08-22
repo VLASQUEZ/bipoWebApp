@@ -1,10 +1,14 @@
-angular.module('bipoApp.controllers', ['ui.bootstrap'])
-  .controller('modalRegisterCtrl',function ($uibModalInstance,message)
+angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap'])
+  .controller('modalInstanceCtrl',function ($uibModalInstance,message)
   {
 	var $ctrl = this;
-	$ctrl.message=message;	
+	$ctrl.message=message;
+    $ctrl.closeModal = function(){
+    	console.log("re puta mierda");
+       $uibModalInstance.close();
+    };	
   })
-.controller('registerCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval){
+.controller('registerCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval,$location){
 	
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
@@ -16,7 +20,7 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
       ariaLabelledBy: 'modal-title',
       ariaDescribedBy: 'modal-body',
       templateUrl: 'modal.html',
-      controller: 'modalRegisterCtrl',
+      controller: 'modalInstanceCtrl',
       controllerAs: '$ctrl',
       size: size,
       appendTo: parentElem,
@@ -60,29 +64,46 @@ angular.module('bipoApp.controllers', ['ui.bootstrap'])
 				$ctrl.open('sm');
 				$scope.error.errorState=false;
 				try{
+					$ctrl.closeModal();
 					$scope.response=PostAjax.registerUser($scope.register);
-					if(!$scope.response.error){
-						//mostrar modal y pasar al formulario de registro de
-						//bicicletas
-						$ctrl.message="Iniciando Sesión...";
-						$scope.response=PostAjax.loginUser($scope.register);
-						$interval(function() {
-	      					$scope.modalInstance.close();
-	      					//Inicio de Sesion
+					console.log($scope.response)
 
-	      					//Redireccion a registro de bicicletas
-	      					 $window.location.href = '/registroBicicleta';
-						}, 3000,1);
+					if(!$scope.response.error){
+						console.log("shit")
+						if($scope.response.message){
+
+							//mostrar modal y pasar al formulario de registro de
+							//bicicletas
+							$ctrl.message="Iniciando Sesión...";
+							$scope.response=PostAjax.loginUser($scope.register);
+
+						}
+						else{
+							$ctrl.message="Su cuenta ya existe...";
+
+						}
+						$interval(function() {
+		      					
+		      					//Inicio de Sesion
+
+		      					//Redireccion a registro de bicicletas
+
+							}, 3000,1);
+							$location.path('/bikeRegister.html');
+							console.log("maldita basura de mierda")
 					}
 					else
 					{
+
+						$ctrl.message=$scope.response.message;
 						$scope.error.errorState=$scope.response.error;
 						$scope.error.message=$scope.response.message;
 					}
 				}
 				catch(e)
 				{
-					$ctrl.message="e";
+					console.log(e);
+					$ctrl.message=e;
 				}
 				
 			}
