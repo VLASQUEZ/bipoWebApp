@@ -11,6 +11,7 @@ angular.module('bipoApp.services', [])
 	postAjax.registerUser=function(data){
         //postAjax.user={}
         var serviceUrl=url+"register"
+        var result=null;
 		var params={name:data.name.data,
                     lastName:data.lastName.data,
                     email:data.email.data,
@@ -22,12 +23,14 @@ angular.module('bipoApp.services', [])
         var dfd = $q.defer();
 		//console.log(params);
 	    $http.post(serviceUrl,params)
-			.then(function(response){
-                return response.data;                
+			.then(function successCallback(response){
+                dfd.resolve(response.data);             
             },
-            function(error){
-                return error.data;
+            function errorCallback(error){
+                dfd.resolve(response.data); 
             });
+            
+        return dfd.promise;
 	}
     //INICIO DE SESION
     postAjax.loginUser=function(data){

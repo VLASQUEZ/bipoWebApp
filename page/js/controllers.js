@@ -1,43 +1,9 @@
 angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap'])
-  .controller('modalInstanceCtrl',function ($uibModalInstance,message)
-  {
-	var $ctrl = this;
-	$ctrl.message=message;
-    $ctrl.closeModal = function(){
-    	console.log("re puta mierda");
-       $uibModalInstance.close();
-    };	
-  })
+
 .controller('registerCtrl',function ($scope,ValidateForm,PostAjax,$uibModal, $log, $document,$interval,$location){
 	
-	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
-	$ctrl.animationsEnabled = true;
-  	$ctrl.open = function (size,parentSelector) {
-    var parentElem = parentSelector ? angular.element($document[0].querySelector('.modal-demo' + parentSelector)) : undefined;
-    $scope.modalInstance = $uibModal.open({
-      animation: $ctrl.animationsEnabled,
-      ariaLabelledBy: 'modal-title',
-      ariaDescribedBy: 'modal-body',
-      templateUrl: 'modal.html',
-      controller: 'modalInstanceCtrl',
-      controllerAs: '$ctrl',
-      size: size,
-      appendTo: parentElem,
-      resolve: {
-        message: function () {
-          return $ctrl.message;
-        }
-      }
-    });
-
-    $scope.modalInstance.result.then(function (selectedItem) {
-      	$ctrl.selected = selectedItem;
-    	}, function () {
-      		$log.info('Modal dismissed at: ' + new Date());
-    	});
-  	};
-
+	
 	$scope.register={name:{name:"name",data:null,type:"alpha"},
 					lastName:{name:"lastName",data:null,type:"alpha"},
 					birthdate:{name:"birthdate",data:null,type:"birthdate"},
@@ -52,20 +18,24 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	$scope.registerUser=function(isValid){
 		
 		if(isValid){
-			$ctrl.message="Cargando...";	
+			$scope.error.message="Cargando...";	
 			$scope.register.birthdate.data=document.getElementById('fh2').value;
 			$scope.errors=ValidateForm.fmValid($scope.register);
 			$scope.errors.confirmPass=ValidateForm.comparePass($scope.register.password.data,$scope.register.confirmPass.data);
 			$scope.formState=ValidateForm.formState($scope.errors);
 			
 			if($scope.formState){
-				$ctrl.message="Registrando...";
+				$scope.error.message="Registrando...";
 				
-				$ctrl.open('sm');
+				
 				$scope.error.errorState=false;
 				try{
-					$ctrl.closeModal();
-					$scope.response=PostAjax.registerUser($scope.register);
+					$scope.response
+					PostAjax.registerUser($scope.register)
+						.then(function(data){
+							console.log(data)
+							$scope.response;
+						});
 					console.log($scope.response)
 
 					if(!$scope.response.error){
@@ -74,28 +44,24 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 							//mostrar modal y pasar al formulario de registro de
 							//bicicletas
-							$ctrl.message="Iniciando Sesión...";
+							$scope.error.message="Iniciando Sesión...";
 							$scope.response=PostAjax.loginUser($scope.register);
 
 						}
 						else{
-							$ctrl.message="Su cuenta ya existe...";
+							$scope.error.message="Su cuenta ya existe...";
 
 						}
 						$interval(function() {
 		      					
 		      					//Inicio de Sesion
-
+								$location.path('/bikeRegister.html');
 		      					//Redireccion a registro de bicicletas
 
 							}, 3000,1);
-							$location.path('/bikeRegister.html');
-							console.log("maldita basura de mierda")
 					}
 					else
 					{
-
-						$ctrl.message=$scope.response.message;
 						$scope.error.errorState=$scope.response.error;
 						$scope.error.message=$scope.response.message;
 					}
@@ -103,7 +69,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				catch(e)
 				{
 					console.log(e);
-					$ctrl.message=e;
+					$scope.error.message=e;
 				}
 				
 			}
