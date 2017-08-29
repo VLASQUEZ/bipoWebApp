@@ -266,6 +266,19 @@ class ReportAPI {
 		}
 		              
     }
+    function getReportType(){
+    	try{
+			$db = new Reports();
+	        $this->response["error"]=false;
+	        $this->response["brands"] = $db->getReportType();
+	        //print_r($this->response);
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+    }
     function sendEmail($token,$type){
     	try{
 

@@ -93,6 +93,26 @@ $app->get('/brands','authenticate', function() {
     echoResponse(500,$response);  
   }
 });
+//fachada para obtener los tipos de reporte
+$app->get('/reportType','authenticate', function() {
+  try{
+    $reportResponse=new ReportAPI();
+    $response=array();
+    $response=$reportResponse->getReportType();
+   
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+});
 //fachada para obtener los estados de la bicicleta
 $app->get('/bikeStates','authenticate', function() {
   try{
@@ -204,6 +224,28 @@ $app->post('/bikePhoto','authenticate', function() {
       $bikeResponse=new bikeAPI();
       
       $response=$bikeResponse->savephoto($_POST['bikeName'],$_FILES['file'],$_POST['token']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
+//fachada para eliminar una bicicleta
+$app->post('/deleteBike','authenticate', function() {
+  try{
+      $bikeResponse=new bikeAPI();
+      
+      $response=$bikeResponse->deleteBike($_POST['bikeId'],$_POST['token']);
 
       if($response["error"]==false){
         echoResponse(200,$response);

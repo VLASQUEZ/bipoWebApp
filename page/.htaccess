@@ -5,4 +5,5 @@ RewriteRule ^inicio$ index.html
 RewriteRule ^registro$ register.html 
 RewriteRule ^registroBicicleta$ bikeRegister.html
 RewriteRule ^login$ login.html
+RewriteRule ^zones$ insecureZone.html
 ErrorDocument 404 /bipo/page/404.html

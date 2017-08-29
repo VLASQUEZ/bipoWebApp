@@ -87,6 +87,25 @@ class Bikes{
         return $bikes;              
 
     }
+    //Elimina una bicicleta
+    public function deleteBike($bikeId,$token){ 
+
+        $stmt=$this->mysqcon;
+        $stmt=$this->mysqcon->prepare('SET @bikeId := ?');
+        $stmt->bind_param('i', $bikeId);
+        $stmt->execute();
+
+        $stmt=$this->mysqcon->prepare('SET @token := ?');
+        $stmt->bind_param('s', $token);
+        $stmt->execute();
+        //print_r($userName);
+        $stmt=$this->mysqcon->query("call sp_deleteBike(@bikeId,@token)");
+        //print_r($stmt);
+        $bikes = $stmt->fetch_all();
+        $stmt->close();
+        return $bikes;             
+
+    }
     //Almacena la foto de la bicicleta
     public function InsertPhotoBike($idBike,$url){ 
         try{

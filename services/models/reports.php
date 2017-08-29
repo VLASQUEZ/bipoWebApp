@@ -98,6 +98,15 @@ class Reports{
         return $bikes;              
 
     }
+    //Obtiene los tipos de reporte
+    public function getReportType(){ 
+        $stmt=$this->mysqcon->prepare("SELECT * FROM tb_reportType");
+        $stmt->execute();
+        $result = $stmt->get_result();        
+        $reportType = $result->fetch_all(MYSQLI_ASSOC); 
+        $stmt->close();
+        return $reportType;              
+    }
     //Obtiene todos los reportes asociados al tipo
     public function getReports($idTypeReport,$fhInicio,$fhFin){
         try{

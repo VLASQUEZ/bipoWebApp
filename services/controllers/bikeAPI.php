@@ -101,7 +101,7 @@ class BikeAPI {
 		}
 		              
     }
-    	//Obtiene las bicicletas por usuario
+	//Obtiene las bicicletas por usuario
 	function getBikeByUser($token,$bikeName){
 		try{
 			$error="";
@@ -128,6 +128,47 @@ class BikeAPI {
 			    {
 			    	$this->response["message"]="No se encontraron registros";
 			    }
+	        	
+			}
+	   		else
+	   		{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+		              
+    }
+    //Obtiene las bicicletas por usuario
+	function deleteBike($bikeId,$token){
+		try{
+			$error="";
+			if($bikeId==null || $bikeId==""){
+				$error="El id de la bicicleta es obligatorio /n";
+				
+			}
+			if($token==null || $token==""){
+				$error="El token es obligatorio /n";
+				
+			}
+			if(strcasecmp($error,"")==0)
+			{
+				$db = new Bikes();
+		        $this->response["error"]=false;
+		        $bikes = $db->deleteBike($bikeId,$token);
+
+		        if($bikes[0][0]<=0){
+		        	$this->response["status"]=false;
+		        	$this->response["message"]="No se han efectuado cambios";
+		        }
+		        else{
+	        		$this->response["status"]=true;
+		        	$this->response["message"]="Se ha eliminado la bicicleta";
+		        }
 	        	
 			}
 	   		else
