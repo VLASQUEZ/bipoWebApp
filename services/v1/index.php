@@ -73,6 +73,29 @@ $app->post('/bike','authenticate', function() {
   }
   
 });
+//fachada para poner como default una bicicleta
+$app->post('/defaultBike','authenticate', function() {
+  try{
+      $bikeResponse=new BikeAPI();
+      $response=array();
+      $response=$bikeResponse->defaultBike($_POST["bikeId"],$_POST["token"]);
+
+      if($response["error"]==false)
+      {
+      echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
 //fachada para obtener las marcas
 $app->get('/brands','authenticate', function() {
   try{

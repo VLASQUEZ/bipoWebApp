@@ -143,7 +143,7 @@ class BikeAPI {
 		}
 		              
     }
-    //Obtiene las bicicletas por usuario
+    //elimina una bicicleta
 	function deleteBike($bikeId,$token){
 		try{
 			$error="";
@@ -168,6 +168,47 @@ class BikeAPI {
 		        else{
 	        		$this->response["status"]=true;
 		        	$this->response["message"]="Se ha eliminado la bicicleta";
+		        }
+	        	
+			}
+	   		else
+	   		{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+		              
+    }
+    //actualiza el estado default de una bicicleta
+	function defaultBike($bikeId,$token){
+		try{
+			$error="";
+			if($bikeId==null || $bikeId==""){
+				$error="El id de la bicicleta es obligatorio /n";
+				
+			}
+			if($token==null || $token==""){
+				$error="El token es obligatorio /n";
+				
+			}
+			if(strcasecmp($error,"")==0)
+			{
+				$db = new Bikes();
+		        $this->response["error"]=false;
+		        $bikes = $db->defaultBike($bikeId,$token);
+
+		        if($bikes[0][0]<=0){
+		        	$this->response["status"]=false;
+		        	$this->response["message"]="No se han efectuado cambios";
+		        }
+		        else{
+	        		$this->response["status"]=true;
+		        	$this->response["message"]="Bicicleta seleccionada como principal";
 		        }
 	        	
 			}
