@@ -174,7 +174,48 @@ class Bikes{
         $stmt->close();
         return $r;        
     }
+    //Actualiza los datos de la bicicleta
+    public function updateBike($token,$bikeId,$idColor,$bikeFeatures){
+                $stmt=$this->mysqcon;
+        $stmt=$this->mysqcon->prepare('SET @bikeId := ?');
+        $stmt->bind_param('i', $bikeId);
+        $stmt->execute();
 
+        $stmt=$this->mysqcon->prepare('SET @token := ?');
+        $stmt->bind_param('s', $token);
+        $stmt->execute();
+
+        $stmt=$this->mysqcon->prepare('SET @idColor := ?');
+        $stmt->bind_param('i', $idColor);
+        $stmt->execute();
+        
+        $stmt=$this->mysqcon->prepare('SET @bikeFeatures := ?');
+        $stmt->bind_param('s', $bikeFeatures);
+        $stmt->execute();
+        //print_r($userName);
+        $stmt=$this->mysqcon->query("call sp_updateBike(@bikeId,@token,@idColor,@bikeFeatures)");
+        //print_r($stmt);
+        $bikes = $stmt->fetch_all();
+        $stmt->close();
+        return $bikes;  
+    }
+    //Actualiza el estado de la bicicleta
+    public function updateBikeState($bikeState,$bikeId){
+        try{
+            //print_r($userName);
+            $stmt=$this->mysqcon;
+            $stmt=$this->mysqcon->prepare("UPDATE tb_bikes set idBikeState=? WHERE id=?");
+            $stmt->bind_param('ii', $bikeState,$bikeId);
+            $stmt->execute();
+            $bikes = $stmt->affected_rows;
+            $stmt->close();
+            return $bikes;  
+        }
+        catch(mysqli_sql_exception $e){
+            return $e;
+        }
+
+    }
     private function close(){
         try{
             $this->mysqcon->close();

@@ -224,6 +224,44 @@ class UserAPI {
 	   }
 	    
     }
+    //guarda las preferencias del usuario
+    function setPreferences($token,$emailReceiver,$photoPublication,$enableReportUbication,$enableLocationUbication){
+	   try{
+
+	   		$error="";
+	   	
+	   		if(strlen($token)<=1){
+	   			$error="El token es obligatorio\n ";
+	   		}
+	   		if($emailReceiver==null){
+	   			$error.="la preferencia es obligatoria\n ";
+	   		}
+	   		if($photoPublication==null){
+	   			$error.="la preferencia es obligatoria\n ";
+	   		}
+	   		if($enableLocationUbication==null){
+	   			$error.="la preferencia es obligatoria\n ";
+	   		}
+
+	   		if(strcmp($error,"")==0){
+	   			$db = new Users();
+	   			$this->response["error"]=false;
+	            $this->response["message"] = $db->setPreferences($token,$emailReceiver,$photoPublication,$enableReportUbication,$enableLocationUbication);
+	   		}
+	   		else{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+        
+	        return $this->response;
+	   }
+	   catch(exception $e){
+	   		$this->response["error"]=true;
+	        $this->response["message"] = $e->getmessage();
+	        return $this->response;
+	   }
+	    
+    }
     function updatePassword($email,$password,$newPassword){
 		try{
 			$error="";
@@ -243,10 +281,11 @@ class UserAPI {
 	   			$dbpass=$db->getPassword($email);
 	   			
 	   			if($dbpass!=null){
-	   				$dbpass=decrypt($dbpass["0"]["password"]);
-	   				if(strcmp($dbpass,$password)==0){
+	   				$passdecrypt=decrypt($dbpass["0"]["password"]);
+	   				if(strcmp($passdecrypt,$password)==0){
 	   					$newPassword=encrypt($newPassword);
-   						$update= $db->updatePassword($email,$newPassword);
+	   					
+   						$update= $db->updatePassword($dbpass[0]["id"],$newPassword);
    						$this->response["error"]=false;
 	   					$this->response["user"]=$update;
    						//Envio de email personalizado

@@ -225,6 +225,91 @@ class BikeAPI {
 		}
 		              
     }
+    //actualiza el estado default de una bicicleta
+	function updateBike($token,$bikeId,$idColor,$bikeFeatures){
+		try{
+			$error="";
+			if($bikeId==null || $bikeId==""){
+				$error="El id de la bicicleta es obligatorio /n";
+				
+			}
+			if($token==null || $token==""){
+				$error="El token es obligatorio /n";
+				
+			}
+			if($idColor==null || $idColor==""){
+				$error="La bicicleta debe tener un color /n";
+				
+			}
+			if($bikeFeatures==null ||$bikeFeatures==""){
+				$bikeFeatures="";
+			}
+			if(strcasecmp($error,"")==0)
+			{
+				$db = new Bikes();
+		        $this->response["error"]=false;
+		        $bikes = $db->updateBike($token,$bikeId,$idColor,$bikeFeatures);
+
+		        if($bikes[0][0]<=0){
+		        	$this->response["status"]=false;
+		        	$this->response["message"]="No se han efectuado cambios";
+		        }
+		        else{
+	        		$this->response["status"]=true;
+		        	$this->response["message"]="Datos de la bicicleta actualizados";
+		        }
+	        	
+			}
+	   		else
+	   		{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+		              
+    }
+        //actualiza el estado default de una bicicleta
+	function updateBikeState($bikeState,$bikeId){
+		try{
+			$error="";
+			if($bikeState==null || $bikeState==""){
+				$error="El id de la bicicleta es obligatorio /n";
+				
+			}
+			if(strcasecmp($error,"")==0)
+			{
+				$db = new Bikes();
+		        $this->response["error"]=false;
+		        $bikes = $db->updateBikeState($bikeState,$bikeId);
+
+		        if($bikes<=0){
+		        	$this->response["status"]=false;
+		        	$this->response["message"]="No se han efectuado cambios";
+		        }
+		        else{
+	        		$this->response["status"]=true;
+		        	$this->response["message"]="Datos de la bicicleta actualizados";
+		        }
+	        	
+			}
+	   		else
+	   		{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+		              
+    }
     //Registra una bicicleta
 	function registerBike($bikeName,$idBrand,$idColor,$idFrame,
     	$idType,$bikeFeatures,$idBikeState,$token){
@@ -365,6 +450,7 @@ class BikeAPI {
 		}
 		
     }
+
 } 
 
  ?>

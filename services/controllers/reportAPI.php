@@ -47,12 +47,20 @@ class ReportAPI {
 	   			$this->response["error"]=false;
 	            $this->response["message"] = $db->insertReport($tokenUser,$reportName,$reportType,
 	            	$coordinates,$idBike,$ReportDetails);
+            	//Actualizar estado de bicicleta
+	        	$bike=new BikeAPI();
+	        	if($reportType==1){
+	    			$bike->updateBikeState('1',$idBike);
+	        	}
+	        	else if($reportType== 2){
+					$bike->updateBikeState('2',$idBike);
+	        	}
 	   		}
 	   		else{
 	   			$this->response["error"]=true;
 	   			$this->response["message"]=$error;
 	   		}
-        
+
 	        return $this->response;
 		}
 		catch(exception $e){
@@ -171,6 +179,8 @@ class ReportAPI {
 		        $report = $db->getReportByName($reportName,$token);
 		        
 		        if(count($report)){
+		        	$bike=new Bikes();
+	        		$reports[$pos]["bikePhotos"]=$bike->getBikePhotos($reports[$pos]["idBike"]);
 	        		$db = new Reports();	
 			        $report[0]["reportPhotos"]=$db->getPhotoReport($report[0]["id"]);
 			        $this->response["report"]=$report;
@@ -215,7 +225,49 @@ class ReportAPI {
 
 		        if(count($reports)){
 		        	foreach ($reports as $pos => $report) {
+		        		$bike=new Bikes();
+		        		$reports[$pos]["bikePhotos"]=$bike->getBikePhotos($reports[$pos]["idBike"]);
 	        			$db = new Reports();	
+			        	$reports[$pos]["reportPhotos"]=$db->getPhotoReport($report["id"]);
+		        	}	        		
+			        $this->response["reports"]=$reports;
+			    }
+			    else
+			    {
+			    	$this->response["message"]="No se encontraron registros";
+			    }
+			}
+	   		else
+	   		{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	        //print_r($this->response);
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+		              
+    }
+        //Obtiene todos los reportes de robo con coordenadas
+    function getReportsMaps(){
+		try{
+			$error="";
+			if(strcasecmp($error,"")==0)
+			{
+				$db = new Reports();
+		        $this->response["error"]=false;
+		        $reports = $db->getReportsMaps();
+
+		        if(count($reports)){
+		        	foreach ($reports as $pos => $report) {
+	        			$db = new Reports();
+	        			list($latitude,$longitude)=explode(",",$reports[$pos]["googlemapscoordinate"]);
+	        			$reports[$pos]["latitude"]=$latitude;
+	        			$reports[$pos]["longitude"]=$longitude;
+    					unset($reports[$pos]["googlemapscoordinate"]);
 			        	$reports[$pos]["reportPhotos"]=$db->getPhotoReport($report["id"]);
 		        	}	        		
 			        $this->response["reports"]=$reports;
@@ -248,6 +300,8 @@ class ReportAPI {
 
 	        if(count($reports)){
 		        	foreach ($reports as $pos => $report) {
+		        		$bike=new Bikes();
+		        		$reports[$pos]["bikePhotos"]=$bike->getBikePhotos($reports[$pos]["idBike"]);
 	        			$db = new Reports();	
 			        	$reports[$pos]["reportPhotos"]=$db->getPhotoReport($report["id"]);
 		        	}	        		
