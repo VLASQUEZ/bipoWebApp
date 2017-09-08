@@ -1,4 +1,4 @@
-angular.module('bipoApp',['bipoApp.controllers','bipoApp.routes','bipoApp.services','ui.bootstrap','ngAnimate', 'ngSanitize',])
+angular.module('bipoApp',['bipoApp.controllers','bipoApp.routes','bipoApp.services','ui.bootstrap','ngAnimate', 'ngSanitize','ngMap','heatMapResource'])
 .config(function($httpProvider) {
       
       $httpProvider.defaults.useXDomain = true;
