@@ -281,9 +281,10 @@ class UserAPI {
 	   			$dbpass=$db->getPassword($email);
 	   			
 	   			if($dbpass!=null){
-	   				$dbpass=decrypt($dbpass["0"]["password"]);
-	   				if(strcmp($dbpass,$password)==0){
+	   				$passdecrypt=decrypt($dbpass["0"]["password"]);
+	   				if(strcmp($passdecrypt,$password)==0){
 	   					$newPassword=encrypt($newPassword);
+	   					
    						$update= $db->updatePassword($dbpass[0]["id"],$newPassword);
    						$this->response["error"]=false;
 	   					$this->response["user"]=$update;

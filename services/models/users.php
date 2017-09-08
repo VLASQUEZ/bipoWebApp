@@ -160,10 +160,10 @@ class Users{
             return $e;
         }
     }
-    public function updatePassword($newPassword, $id) {
+    public function updatePassword($id,$newPassword) {
       
             $stmt = $this->mysqcon;
-            $stmt ->prepare("UPDATE tb_users SET password=? WHERE id = ? ; ");
+            $stmt =$this->mysqcon->prepare("UPDATE tb_users SET password=? WHERE id = ? ");
             $stmt->bind_param('si', $newPassword,$id);
             $r = $stmt->execute(); 
             $stmt->close();
