@@ -22,10 +22,14 @@ class Users{
     public function login($email){ 
         //$stmt = $this->mysqcon->open();
         //$stmt=$this->mysqcon->open();     
-        $stmt=$this->mysqcon->prepare("SELECT u.name, u.lastname, u.nickname, u.email,
-                                u.birthdate, u.cellphone, u.documentid, t.token from tb_users u
+        $stmt=$this->mysqcon->prepare("SELECT u.id,u.name, u.lastname, u.nickname, u.email,
+                                u.birthdate, u.cellphone, u.documentid, t.token,
+                                p.emailReceiver,p.photoPublication,p.enableReportUbication,p.enableLocationUbication
+                                from tb_users u
                                 LEFT JOIN tb_tokenUsers t
-                                on u.id=t.id 
+                                on u.id=t.id
+                                INNER JOIN tb_userConfigurations p
+                                on u.id=p.idUser
                                 where email like ? ");
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -50,10 +54,33 @@ class Users{
         $stmt=$this->mysqcon->query("call sp_setTokenByUser(@email,@token)");
               
     }
+    // Configura las preferencias del usuario
+    public function setPreferences($token,$emailReceiver,$photoPublication,$enableReportUbication,$enableLocationUbication){ 
+        // bind the second parameter to the session variable @userCount
+        $stmt = $this->mysqcon->prepare('SET @token := ?');
+        $stmt->bind_param('s', $token);
+        $stmt->execute();
+        $stmt = $this->mysqcon->prepare('SET @emailReceiver := ?');
+        $stmt->bind_param('i', $emailReceiver);
+        $stmt->execute();
+        $stmt = $this->mysqcon->prepare('SET @photoPublication := ?');
+        $stmt->bind_param('i', $photoPublication);
+        $stmt->execute();
+        $stmt = $this->mysqcon->prepare('SET @enableReportUbication := ?');
+        $stmt->bind_param('i', $enableReportUbication);
+        $stmt->execute();
+        $stmt = $this->mysqcon->prepare('SET @enableLocationUbication := ?');
+        $stmt->bind_param('i', $enableLocationUbication);
+        $stmt->execute();
+
+
+        $stmt=$this->mysqcon->query("call sp_setPreferences(@token,@emailReceiver,@photoPublication,@enableReportUbication,@enableLocationUbication)");
+              
+    }
     public function getPassword($email){ 
         //$stmt = $this->mysqcon->open();
         //$stmt=$this->mysqcon->open();     
-        $stmt=$this->mysqcon->prepare("SELECT password from tb_users where email like ?");
+        $stmt=$this->mysqcon->prepare("SELECT id,password from tb_users where email like ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();        
@@ -133,17 +160,14 @@ class Users{
             return $e;
         }
     }
-    public function updatePassword($email, $newPassword) {
-        if($this->checkEmail($email)){
+    public function updatePassword($newPassword, $id) {
+      
             $stmt = $this->mysqcon;
-            $stmt->open();    
-            $stmt ->prepare("UPDATE tb_users SET name=? WHERE id = ? ; ");
-            $stmt->bind_param('ss', $newName,$id);
+            $stmt ->prepare("UPDATE tb_users SET password=? WHERE id = ? ; ");
+            $stmt->bind_param('si', $newPassword,$id);
             $r = $stmt->execute(); 
             $stmt->close();
             return $r;    
-        }
-        return false;
     }
 
     /**
@@ -151,7 +175,7 @@ class Users{
      * @param int $id Description
      */
     public function update($id, $newName) {
-        if($this->checkID($id)){
+        
         	$stmt = $this->mysqcon;
             $stmt->open();    
             $stmt ->prepare("UPDATE tb_users SET name=? WHERE id = ? ; ");
@@ -159,7 +183,7 @@ class Users{
             $r = $stmt->execute(); 
             $stmt->close();
             return $r;    
-        }
+        
         return false;
     }
 
@@ -170,7 +194,6 @@ class Users{
      */
     public function checkEmail($email){
     	$stmt = $this->mysqcon;
-        $stmt->open();    
         $stmt ->prepare("SELECT * FROM tb_users WHERE email like ?");
         $stmt->bind_param("s", $email);
         if($stmt->execute()){

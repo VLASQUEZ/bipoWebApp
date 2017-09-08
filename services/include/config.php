@@ -1,4 +1,5 @@
-<?php 
+<?php
+error_reporting(E_ALL ^ E_DEPRECATED);
 //para desarrollo
 define('DB_USERNAME', 'bipo');
 define('DB_PASSWORD', 'b1p0BdUs3R$');

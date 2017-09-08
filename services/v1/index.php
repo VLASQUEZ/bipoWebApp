@@ -50,6 +50,51 @@ $app->post('/register','authenticate', function() {
   }
   
 });
+$app->post('/setPreferences','authenticate', function() {
+  try{
+      $userResponse=new UserAPI();
+      $response=array();
+      $response=$userResponse->setpreferences($_POST["token"],$_POST["emailReceiver"],$_POST["photoPublication"],$_POST["enableReportUbication"],$_POST["enableLocationUbication"]);
+
+      if($response["error"]==false)
+      {
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
+$app->get('/getPreferences','authenticate', function() {
+  try{
+      $userResponse=new UserAPI();
+      $response=array();
+      $response=$userResponse->getPreferences
+      ();
+
+      if($response["error"]==false)
+      {
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
 
 $app->post('/bike','authenticate', function() {
   try{
@@ -122,6 +167,26 @@ $app->get('/reportType','authenticate', function() {
     $reportResponse=new ReportAPI();
     $response=array();
     $response=$reportResponse->getReportType();
+   
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+});
+//fachada para obtener los tipos de reporte
+$app->get('/getReportsMaps','authenticate', function() {
+  try{
+    $reportResponse=new ReportAPI();
+    $response=array();
+    $response=$reportResponse->getReportsMaps();
    
     if($response["error"]==false){
       echoResponse(200,$response);
@@ -247,6 +312,28 @@ $app->post('/bikePhoto','authenticate', function() {
       $bikeResponse=new bikeAPI();
       
       $response=$bikeResponse->savephoto($_POST['bikeName'],$_FILES['file'],$_POST['token']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
+//Actualizar bicicleta
+$app->post('/updateBike','authenticate', function() {
+  try{
+      $bikeResponse=new BikeAPI();
+      
+      $response=$bikeResponse->updateBike($_POST['token'],$_POST['bikeId'],$_POST['idColor'],$_POST['bikeFeatures']);
 
       if($response["error"]==false){
         echoResponse(200,$response);
