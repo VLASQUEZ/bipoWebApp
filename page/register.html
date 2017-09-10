@@ -16,7 +16,8 @@
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
     <link href="css/loading.css" rel="stylesheet">
-    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />    
+    <link href="css/upload-photo.css" rel="stylesheet">
     <link href="css/loading.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!--[if lt IE 9]>
@@ -31,6 +32,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
     
 </head><!--/head-->
 
@@ -145,6 +147,12 @@
                             </label>
                         </div>
                         <div class="col-sm-7 form-group">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="{{register.data}}" name="terms" ng-model="register.publish.data"> Acepto  <a href="terminos">publicar las fotos de mi bicicleta en la página de bipo y en redes sociales</a>
+                                <h5 style="color:#ef473a" ng-show="!errors.terms.valid">{{errors.publish.error}}</h5>
+                            </label>
+                        </div>
+                        <div class="col-sm-7 form-group">
                             <button type="button" class="btn btn-primary btn-lg" ng-click="registerUser(fmRegister.$valid)">Continuar</button>
                         </div>
                         <div class="col-sm-7 form-group" style="width: 100%; height: 25px;">
@@ -179,7 +187,7 @@
                     <ul class="pull-right">
                         <li><a href="inicio">Inicio</a></li>
                         <li><a href="contact-us.html">Contáctanos</a></li>
-                        <li><a href="termsConditions.html">Términos y condiciones</a></li>
+                        <li><a href="terminos">Términos y condiciones</a></li>
                     </ul>
                 </div>
             </div>

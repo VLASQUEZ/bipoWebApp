@@ -10,7 +10,8 @@ var taxiData = [
     new google.maps.LatLng(4.735668, -74.095999),
     new google.maps.LatLng(4.738214, -74.099485)
 ];
-angular.module('bipoApp').controller('HeatMapCtrl',['NgMap','heatMapResource',function (NgMap,heatMapResource) {
+angular.module('bipoApp.controllers').controller('HeatMapCtrl',['NgMap','heatMapResource',function (NgMap,heatMapResource) {
+    console.log('Mapa');
     heatMapResource.query(function (completed, headers) {
         console.log(completed);
     })
