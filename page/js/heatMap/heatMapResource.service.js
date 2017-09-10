@@ -3,7 +3,7 @@ angular.module('bipoApp').factory('heatMapResource',['$resource',function ($reso
         query:{
             responseType: 'json',
             params:{
-                token:'basic 650E01A1B8F9A4DA4A2040FF86E699B7'
+                Authorization:'650E01A1B8F9A4DA4A2040FF86E699B7'
             }
         }
     });
