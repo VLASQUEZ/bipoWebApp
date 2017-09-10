@@ -290,9 +290,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
         new google.maps.LatLng(4.735668, -74.095999),
         new google.maps.LatLng(4.738214, -74.099485)
     ];
-    heatMapResource.query(function (completed, headers) {
+
+    heatMapResource.getReports()
+        .then(function(data){
+            console.log(data);
+			//$scope.bikeTypes=data.biketypes;
+        });
+    /*heatMapResource.query(function (completed, headers) {
         console.log(completed);
-    })
+    })*/
     var heatmap, vm = this;
     vm.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U&callback=initMap"
 

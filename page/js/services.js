@@ -461,18 +461,43 @@ angular.module('bipoApp.services', [])
         };
     
 })
-    .factory('heatMapResource',['$resource',function ($resource) {
-    return $resource('http://www.bipoapp.com/services/v1/getReportsMaps/:id',{id:'@id'},{
-        query:{
-            method:'GET',
-            responseType: 'json',
-            /*headers:{
-                'Authorization':'650E01A1B8F9A4DA4A2040FF86E699B7',
-                'Access-Control-Allow-Methods':'GET'
-            }*/
+    .factory('heatMapResource',function($http,$q){
+        //pruebas
+        var url="http://www.bipoapp.com/services/v1/";
+        //produccion
+        //var url="http://www.bipoapp.com/services/v1/";
+        //login
+        return{
+            getReports: function(data){
+                //postAjax.user={}
+                var serviceUrl=url+"getReportsMaps"
+                var result=null;
+                var dfd = $q.defer();
+                //console.log(params);
+                $http.get(serviceUrl)
+                    .then(function successCallback(response){
+                            dfd.resolve(response.data);
+                        },
+                        function errorCallback(error){
+                            dfd.resolve(error.data);
+                        });
+
+                return dfd.promise;
+            }
         }
-    });
-}]);
+
+        /*['$resource',function ($resource) {
+            return $resource('http://www.bipoapp.com/services/v1/getReportsMaps/:id',{id:'@id'},{
+                query:{
+                    method:'GET',
+                    responseType: 'json',
+                    headers:{
+                        'Authorization':'650E01A1B8F9A4DA4A2040FF86E699B7',
+                        'Access-Control-Allow-Methods':'*'
+                    }
+                }
+            });*/
+});
 /*.factory('Modal',function($uibModal, $log, $document){
     var modal={};
     var controller;
