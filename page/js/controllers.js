@@ -1,15 +1,3 @@
-var taxiData = [
-    new google.maps.LatLng(4.651006, -74.066541),
-    new google.maps.LatLng(4.677319, -74.110354),
-    new google.maps.LatLng(4.674245, -74.104251),
-    new google.maps.LatLng(4.689753, -74.068944),
-    new google.maps.LatLng(4.738853, -74.090383),
-    new google.maps.LatLng(4.739813, -74.087815),
-    new google.maps.LatLng(4.733947, -74.094018),
-    new google.maps.LatLng(4.734866, -74.097512),
-    new google.maps.LatLng(4.735668, -74.095999),
-    new google.maps.LatLng(4.738214, -74.099485)
-];
 
 angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap'])
 
@@ -290,6 +278,18 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 }).controller('HeatMapCtrl',['NgMap','heatMapResource',function (NgMap,heatMapResource) {
     console.log('Mapa');
+    $scope.taxiData = [
+        new google.maps.LatLng(4.651006, -74.066541),
+        new google.maps.LatLng(4.677319, -74.110354),
+        new google.maps.LatLng(4.674245, -74.104251),
+        new google.maps.LatLng(4.689753, -74.068944),
+        new google.maps.LatLng(4.738853, -74.090383),
+        new google.maps.LatLng(4.739813, -74.087815),
+        new google.maps.LatLng(4.733947, -74.094018),
+        new google.maps.LatLng(4.734866, -74.097512),
+        new google.maps.LatLng(4.735668, -74.095999),
+        new google.maps.LatLng(4.738214, -74.099485)
+    ];
     heatMapResource.query(function (completed, headers) {
         console.log(completed);
     })
