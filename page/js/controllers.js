@@ -278,7 +278,8 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 }).controller('HeatMapCtrl',['NgMap','heatMapResource','$scope',function (NgMap,heatMapResource,$scope) {
     console.log('Mapa');
-    $scope.taxiData = [
+    $scope.taxiData = [];
+    /*$scope.taxiData = [
         new google.maps.LatLng(4.651006, -74.066541),
         new google.maps.LatLng(4.677319, -74.110354),
         new google.maps.LatLng(4.674245, -74.104251),
@@ -289,18 +290,24 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
         new google.maps.LatLng(4.734866, -74.097512),
         new google.maps.LatLng(4.735668, -74.095999),
         new google.maps.LatLng(4.738214, -74.099485)
-    ];
+    ];*/
 
     heatMapResource.getReports()
         .then(function(data){
-            console.log(data);
-			//$scope.bikeTypes=data.biketypes;
+        	angular.forEach(data.reports,function (value, key) {
+				$scope.taxiData.push(new google.maps.LatLng(value.latitude, value.longitude));
+				if(key == data.reports.length()){
+					$scope.loaded = true;
+				}
+            });
+
+        	//$scope.bikeTypes=data.biketypes;
         });
     /*heatMapResource.query(function (completed, headers) {
         console.log(completed);
     })*/
     var heatmap, vm = this;
-    vm.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U&callback=initMap"
+    vm.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U"
 
     NgMap.getMap().then(function(map) {
         vm.map = map;
