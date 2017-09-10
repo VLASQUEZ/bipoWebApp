@@ -276,7 +276,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
 
-}).controller('HeatMapCtrl',['NgMap','heatMapResource','$scope',function (NgMap,heatMapResource,$scope) {
+}).controller('HeatMapCtrl',function (NgMap,heatMapResource,$scope) {
     console.log('Mapa');
     $scope.taxiData = [
         new google.maps.LatLng(4.651006, -74.066541),
@@ -335,4 +335,4 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     vm.changeOpacity = function() {
         heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
     }
-}]);
+});
