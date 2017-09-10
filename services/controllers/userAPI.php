@@ -42,7 +42,8 @@ class UserAPI {
 	   			$this->response["error"]=false;
 	        	$userExist=$db->userExist($email);
 	        	if($userExist){
-	        		
+	        		$tokenRecover=encrypt($email);
+        			
 	        	}else{
 	        		$this->response["message"] = "No se pudo verificar la dirección de correo";
 	        	}
