@@ -25,7 +25,41 @@ class UserAPI {
             return $this->response;              
         }
     }
+    // inicia el proceso de recuperacion de password
+    function recoverPass($email=null){
+		try{
+			$error="";
+		
+	   		if($email==null){
+	   			$error="El email es obligatorio\n ";
+	   		}
+	   		$this->response=validateField($email,"email");
+				if($this->response["message"]!=null){
+					$error.=$this->response["message"];
+				}
+	   		if(strcmp($error,"")==0){
+	   			$db = new Users();
+	   			$this->response["error"]=false;
+	        	$userExist=$db->userExist($email);
+	        	if($userExist){
+	        		
+	        	}else{
+	        		$this->response["message"] = "No se pudo verificar la dirección de correo";
+	        	}
+	   		}
+	   		else{
+	   			$this->response["error"]=true;
+	        	$this->response["message"] = $error;
+	   		}
+	        return $this->response;
 
+		}
+		catch(Execption $e){
+			$this->response["error"]=true;
+	        $this->response["message"] = $e->getmessage();
+	        return $this->response;
+		}
+    }
     //comprueba si existe el usuario en base de datos
     function userExist($email=null){
     	try{
