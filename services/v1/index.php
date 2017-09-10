@@ -1,7 +1,5 @@
 <?php 
-header("Access-Control-Allow-Origin: *");
 header('Access-Control-Allow-Credentials: true');
-header('Access-Control-Allow-Methods: PUT, GET, POST,');
 header("Access-Control-Allow-Headers: X-Requested-With");
 header('Content-Type: text/html; charset=utf-8');
 header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
@@ -527,6 +525,28 @@ $app->post('/updatePassword','authenticate', function() {
       $reportResponse=new UserAPI();
       
       $response=$reportResponse->updatePassword($_POST['email'],$_POST['password'],$_POST['newPassword']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
+//Cambiar Password
+$app->post('/recoverPass','authenticate', function() {
+  try{
+      $reportResponse=new UserAPI();
+      
+      $response=$reportResponse->recoverPass($_POST['email']);
 
       if($response["error"]==false){
         echoResponse(200,$response);
