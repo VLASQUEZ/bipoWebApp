@@ -1,18 +1,19 @@
 angular.module('bipoApp.services', [])
 
-//REALIZA LAS PETICIONES POST DENTRO DEL APLICATIVO
-.factory('PostAjax',function($http,$q){
-	var postAjax={};
+
+//REGISTRO DE USUARIO
+.factory('Register',function($http,$q){
     //pruebas
     var url="http://localhost/bipo/services/v1/";
     //produccion
     //var url="http://www.bipoapp.com/services/v1/";
     //REGISTRO DE USUARIO
-	postAjax.registerUser=function(data){
+    return{
+        register: function(data){
         //postAjax.user={}
         var serviceUrl=url+"register"
         var result=null;
-		var params={name:data.name.data,
+        var params={name:data.name.data,
                     lastName:data.lastName.data,
                     email:data.email.data,
                     birthdate:data.birthdate.data,
@@ -21,36 +22,215 @@ angular.module('bipoApp.services', [])
                     password:data.password.data
                 };
         var dfd = $q.defer();
-		//console.log(params);
-	    $http.post(serviceUrl,params)
-			.then(function successCallback(response){
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
                 dfd.resolve(response.data);             
             },
             function errorCallback(error){
-                dfd.resolve(response.data); 
+                dfd.resolve(error.data); 
             });
             
         return dfd.promise;
-	}
-    //INICIO DE SESION
-    postAjax.loginUser=function(data){
+    }      } 
+})
+//INICIO DE SESION
+.factory('Login',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        login: function(data){
         //postAjax.user={}
         var serviceUrl=url+"login"
+        var result=null;
         var params={email:data.email.data,
                     password:data.password.data
                 };
         var dfd = $q.defer();
         //console.log(params);
-        $http.get(serviceUrl,params)
-            .then(function(response){
-                return response.data;                
+        $http.get(serviceUrl,{params:params})
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
             },
-            function(error){
-                return error.data;
+            function errorCallback(error){
+                dfd.resolve(error.data); 
             });
+            
+        return dfd.promise;
+    }      } 
+})
+//OBTENER MARCAS DE BICICLETA
+.factory('Brands',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        brands: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"brands"
+        var result=null;
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.get(serviceUrl)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
+//OBTENER COLORES DE BICICLETA
+.factory('Colors',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        colors: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"bikeColors"
+        var result=null;
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.get(serviceUrl)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
+//OBTENER TIPOS DE BICICLETA
+.factory('bikeTypes',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        bikeTypes: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"bikeTypes"
+        var result=null;
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.get(serviceUrl)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
+//OBTENER ESTADOS DE BICICLETA
+.factory('bikeStates',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        colors: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"bikeStates"
+        var result=null;
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.get(serviceUrl)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
+//INICIO DE SESION
+.factory('setPreferences',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        setPreferences: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"setPreferences"
+        var result=null;
+        console.log(data);
+        var params={token:data.token,
+                    emailReceiver:data.emailReceiver,
+                    photoPublication:data.photoPublication,
+                    enableReportUbication:data.enableReportUbication,
+                    enableLocationUbication:data.enableLocationUbication
+                };
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
+//INICIO DE SESION
+.factory('CookieManager',function($cookies,$cookieStore){
+    var cookieManager={};
+
+    cookieManager.writeCookie=function(data){
+
+        $cookieStore.put('nickname',data.nickname);
+        $cookieStore.put('name',data.name);
+        $cookieStore.put('lastName',data.lastName);
+        $cookieStore.put('id',data.id);
+        $cookieStore.put('email',data.email);
+        $cookieStore.put('token',data.token);  
+
+    }
+    cookieManager.remove=function(){
+        $cookieStore.remove("nickname"),
+        $cookieStore.remove("name"),
+        $cookieStore.remove("lastName"),
+        $cookieStore.remove("id"),
+        $cookieStore.remove("email"),
+        $cookieStore.remove("token");
     }
 
-    return postAjax;		
+    cookieManager.login=function(){
+        if(($cookieStore.get('nickname')!=undefined ||$cookieStore.get('nickname')!=null)&&
+           ($cookieStore.get('name')!=undefined ||$cookieStore.get('name')!=null)&&
+           ($cookieStore.get('lastName')!=undefined ||$cookieStore.get('lastName')!=null)&&
+           ($cookieStore.get('id')!=undefined ||$cookieStore.get('id')!=null)&&
+           ($cookieStore.get('email')!=undefined ||$cookieStore.get('email')!=null)&&
+           ($cookieStore.get('token')!=undefined ||$cookieStore.get('token')!=null)){
+            return true
+        }
+        else{
+            return false;
+        }
+    }
+    return cookieManager;
 })
 //VALIDA TODOS LOS FORMULARIOS
 .factory('ValidateForm', function(){
@@ -68,6 +248,9 @@ angular.module('bipoApp.services', [])
                 },
                 checkbox:{
                     error:"Debes aceptar los terminos y condiciones"
+                },
+                publish:{
+                    error:"Debes aceptar la publicación en redes sociales"
                 },
                 password:{
                     error:"Contraseña no valida, debe contener una letra mayúscula,"+
@@ -159,6 +342,15 @@ angular.module('bipoApp.services', [])
                             validate.fmFields[field.name]={
                                 valid:false,
                                 error:error.checkbox.error};
+                        }
+                    case 'publish':
+                        if(field.data==true){
+                             validate.fmFields[field.name]={valid:true};
+                        }
+                        else{
+                            validate.fmFields[field.name]={
+                                valid:false,
+                                error:error.publish.error};
                         }
                     break;
                         

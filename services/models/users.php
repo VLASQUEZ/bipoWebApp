@@ -28,7 +28,7 @@ class Users{
                                 from tb_users u
                                 LEFT JOIN tb_tokenUsers t
                                 on u.id=t.id
-                                INNER JOIN tb_userConfigurations p
+                                LEFT JOIN tb_userConfigurations p
                                 on u.id=p.idUser
                                 where email like ? ");
         $stmt->bind_param('s', $email);
