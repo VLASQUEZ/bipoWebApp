@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="eaecb035-e8f7-4c5b-b271-ed8be68511f9" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/js/controllers.js" afterPath="$PROJECT_DIR$/page/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/insecureZone.html" afterPath="$PROJECT_DIR$/page/insecureZone.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,26 +14,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="insecureZone.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="insecureZone.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="194">
-              <caret line="87" column="34" lean-forward="false" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="34" />
+              <caret line="87" column="42" lean-forward="false" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#4669#4675#0" expanded="true" />
-                <element signature="e#5128#5134#0" expanded="true" />
+                <element signature="e#4677#4683#0" expanded="true" />
+                <element signature="e#5136#5142#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="298" column="26" lean-forward="false" selection-start-line="298" selection-start-column="26" selection-end-line="298" selection-end-column="26" />
+            <state relative-caret-position="130">
+              <caret line="299" column="41" lean-forward="true" selection-start-line="299" selection-start-column="41" selection-end-line="299" selection-end-column="41" />
               <folding>
                 <element signature="e#310#878#0" expanded="false" />
                 <element signature="e#919#2921#0" expanded="false" />
@@ -145,8 +145,8 @@
         <option value="$PROJECT_DIR$/page/js/heatMap/heatMapController.js" />
         <option value="$PROJECT_DIR$/page/js/app.js" />
         <option value="$PROJECT_DIR$/page/js/services.js" />
-        <option value="$PROJECT_DIR$/page/insecureZone.html" />
         <option value="$PROJECT_DIR$/page/js/controllers.js" />
+        <option value="$PROJECT_DIR$/page/insecureZone.html" />
       </list>
     </option>
   </component>
@@ -270,12 +270,12 @@
       <updated>1504846342509</updated>
       <workItem from="1504846346879" duration="11898000" />
       <workItem from="1504894201885" duration="1317000" />
-      <workItem from="1505065936895" duration="13235000" />
+      <workItem from="1505065936895" duration="13519000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26450000" />
+    <option name="totallyTimeSpent" value="26734000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -337,8 +337,8 @@
           <folding>
             <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#4669#4675#0" expanded="true" />
-            <element signature="e#5128#5134#0" expanded="true" />
+            <element signature="e#4677#4683#0" expanded="true" />
+            <element signature="e#5136#5142#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -441,8 +441,8 @@
           <folding>
             <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#4669#4675#0" expanded="true" />
-            <element signature="e#5128#5134#0" expanded="true" />
+            <element signature="e#4677#4683#0" expanded="true" />
+            <element signature="e#5136#5142#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -638,27 +638,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="87" column="34" lean-forward="false" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="34" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#4669#4675#0" expanded="true" />
-            <element signature="e#5128#5134#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="298" column="26" lean-forward="false" selection-start-line="298" selection-start-column="26" selection-end-line="298" selection-end-column="26" />
+        <state relative-caret-position="130">
+          <caret line="299" column="41" lean-forward="true" selection-start-line="299" selection-start-column="41" selection-end-line="299" selection-end-column="41" />
           <folding>
             <element signature="e#310#878#0" expanded="false" />
             <element signature="e#919#2921#0" expanded="false" />
             <element signature="e#3115#6305#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="87" column="42" lean-forward="false" selection-start-line="87" selection-start-column="42" selection-end-line="87" selection-end-column="42" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#4677#4683#0" expanded="true" />
+            <element signature="e#5136#5142#0" expanded="true" />
           </folding>
         </state>
       </provider>
