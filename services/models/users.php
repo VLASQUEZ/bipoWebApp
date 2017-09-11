@@ -54,6 +54,29 @@ class Users{
         $stmt=$this->mysqcon->query("call sp_setTokenByUser(@email,@token)");
               
     }
+    public function setTokenRecoverPass($token,$id){ 
+        //$stmt = $this->mysqcon->open();
+        //$stmt=$this->mysqcon->open();
+        $stmt = $this->mysqcon->prepare('UPDATE tb_tokenUsers set token=?,isValid=0 WHERE id=?');
+        $stmt->bind_param('si', $token,$id);
+        $stmt->execute();
+        $user=$stmt->affected_rows;
+        return $user;
+             
+    }
+    public function getTokenRecovery($email){ 
+        //$stmt = $this->mysqcon->open();
+        //$stmt=$this->mysqcon->open();     
+        $stmt=$this->mysqcon->prepare("SELECT t.token from tb_tokenUsers t
+                                INNER JOIN tb_users u ON t.id=u.id
+                                WHERE u.email like ? and t.isValid=0");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();        
+        $peoples = $result->fetch_all(MYSQLI_ASSOC); 
+        $stmt->close();
+        return $peoples;              
+    }
     // Configura las preferencias del usuario
     public function setPreferences($token,$emailReceiver,$photoPublication,$enableReportUbication,$enableLocationUbication){ 
         // bind the second parameter to the session variable @userCount
@@ -212,14 +235,9 @@ class Users{
             $stmt->bind_param('s', $email);
             $stmt->execute();
             $result = $stmt->get_result();        
-            $result->fetch_all(MYSQLI_ASSOC); 
+            $user=$result->fetch_all(MYSQLI_ASSOC); 
             $stmt->close();
-            if($result->num_rows>0){
-                return true;
-            }
-            else{
-                return false;
-            }     
+            return $user;
         }
         catch(Execption $e){
             $this->response["error"]=true;
