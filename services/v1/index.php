@@ -585,6 +585,28 @@ $app->post('/recoverPass','authenticate', function() {
   }
   
 });
+//Facebook
+$app->get('/twitter', function() {
+  try{
+      $reportResponse=new ReportAPI();
+      
+      $response=CreateTweet($_GET["content"]);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage()." ".$e->getTraceAsString());
+    echoResponse(500,$response);  
+  }
+  
+});
 $app->run();
 
 ?>

@@ -51,9 +51,15 @@ class ReportAPI {
 	        	$bike=new BikeAPI();
 	        	if($reportType==1){
 	    			$bike->updateBikeState('1',$idBike);
+	    			CreateTweet("Bicicleta robada!! \n https://www.google.com/maps/dir/Current+Location/".$coordinates);
 	        	}
 	        	else if($reportType== 2){
 					$bike->updateBikeState('2',$idBike);
+					CreateTweet("Bicicleta recuperada!! \n https://www.google.com/maps/dir/Current+Location/".$coordinates);
+	        	}
+	        	else if($idReportType=4){
+					CreateTweet("Bicicleta vista!! \n https://www.google.com/maps/dir/Current+Location/".$coordinates);
+
 	        	}
 	   		}
 	   		else{
@@ -356,6 +362,18 @@ class ReportAPI {
 		        $this->response["error"]=false;
 				$this->response["message"]=sendEmail($user["user"][0]["email"],$type);
 		    }
+		    return $this->response;
+    	}
+    	catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+    	}
+    }
+    function Facebook($content){
+    	try{
+
+			$error="";
+			CreateFacebookPublication($content);
 		    return $this->response;
     	}
     	catch(exception $e){

@@ -60,6 +60,22 @@ class Reports{
             return $e->getMessage();
         }
     }
+        //Almacena la foto del reporte
+    public function InsertFacebookToken($token){ 
+        try{
+        //$stmt = $this->mysqcon->open();
+            $stmt=$this->mysqcon->prepare("insert into tb_facebook(token)values(?)");
+            $thumb=$url;
+            $stmt->bind_param('s',$token);
+            $r = $stmt->execute(); 
+            $stmt->close();
+            return $r;
+        }
+        catch(Exception $e)
+        {
+            return $e->getMessage();
+        }
+    }
     //Obtiene todas las fotos asociadas al reporte
     public function getPhotoReport($idReport){
         try{
@@ -121,7 +137,7 @@ class Reports{
                 INNER JOIN tb_brands br on b.idBrand=br.id
 		        INNER JOIN tb_bikeType t on b.idType=t.id
 		        INNER JOIN tb_users bo on b.idUser=bo.id
-		        where r.idReportType=? and r.fhReport >=? and r.fhReport<=?;");
+		        where r.idReportType=? and r.fhReport >=? and r.fhReport<=? order by r.fhUpdated desc;");
             $stmt->bind_param('iss',$idTypeReport,$fhInicio,$fhFin);
 
             $stmt->execute();
@@ -151,7 +167,7 @@ class Reports{
                 INNER JOIN tb_brands br on b.idBrand=br.id
                 INNER JOIN tb_bikeType t on b.idType=t.id
                 INNER JOIN tb_users bo on b.idUser=bo.id
-                where rt.ReportType like 'BICICLETA ROBADA'");
+                where rt.ReportType like 'BICICLETA ROBADA' order by r.fhUpdated desc");
 
             $stmt->execute();
             $result = $stmt->get_result();        
@@ -179,7 +195,7 @@ class Reports{
                 INNER JOIN tb_colors c on b.idColor=c.id
                 INNER JOIN tb_brands br on b.idBrand=br.id
                 INNER JOIN tb_bikeType t on b.idType=t.id
-                INNER JOIN tb_users bo on b.idUser=bo.id order by r.fhReport desc LIMIT 10 ");
+                INNER JOIN tb_users bo on b.idUser=bo.id order by r.fhUpdated desc LIMIT 10 ");
             $stmt->execute();
             $result = $stmt->get_result();        
             $reports = $result->fetch_all(MYSQLI_ASSOC);

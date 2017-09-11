@@ -1,5 +1,7 @@
 <?php 
-	
+//require("../models/requires.php");
+//require("../libs/twitter-api-php/TwitterAPIExchange.php");
+
 	function validateField($value,$type){
 		$result=array();
 		switch ($type) {
@@ -149,4 +151,62 @@
 		}
 		
 	}
-?>
+
+	function CreateFacebookPublication(){
+		$config['App_ID']      =   '1734546943514239';
+		$config['App_Secret']  =  '9ce5d149a777bef76dfd55c012ecff84'; 
+		if (!session_id()) {
+    		session_start();
+		}
+
+	// Create our Application instance (replace this with your appId and secret).
+		$facebook = new Facebook\Facebook(array(
+		  'app_id'  => $config['App_ID'],
+		  'app_secret' => $config['App_Secret'],
+		    'default_graph_version' => 'v2.4'
+		));
+
+		$helper = $facebook->getRedirectLoginHelper();
+		$permissions = ['email', 'user_likes','publish_actions','user_managed_groups','manage_pages','publish_pages']; // optional
+		$loginUrl = $helper->getLoginUrl('http://www.bipoapp.com/services/v1/post.php', $permissions);
+
+		echo '<a href="' . $loginUrl . '">Log in with Facebook!</a>';
+
+	}
+		function CreateTweet($content){
+			try{
+
+
+			$settings = array(
+				'oauth_access_token' => '906614341671284736-mTLSK7EKLOx65ZjtwlPYfyXooIBAeDM',
+				'oauth_access_token_secret' => 'DNosGYTwRfrnjFt0HZsnN1xzeDqZdO0URlEdkLcooUGEE',
+				'consumer_key' => 'yB29f3JCLbblHgoUbrKCSjueg',
+				'consumer_secret' => '5EkjtWVe5K2kbBpUY0LMYW5STsGtUHsIvKG2cgfSnUvWtlWPfs',
+			);
+
+			// url
+			$url = "https://api.twitter.com/1.1/statuses/update.json";
+
+			// tipo de metodo
+			$requestMethod = 'POST';
+
+			//tweet
+			$postfields = array('status' => $content." ".'@AndreyVlasquez');
+
+			// instancia de la conexion con twitter
+			$twitter = new TwitterAPIExchange ($settings);
+
+			// enviamos el tweet
+			$response = $twitter->buildOauth($url, $requestMethod)
+								->setPostfields($postfields)
+								->performRequest();
+
+								return true;
+			}catch(exception $e)
+			{
+				return $e->getTraceAsString();
+			}
+
+
+	}
+	?>
