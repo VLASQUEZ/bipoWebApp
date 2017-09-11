@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="bipoApp" id="ng-app">
+<html lang="es" ng-app="bipoApp" id="ng-app">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,93 +40,21 @@
 
 </head><!--/head-->
 
-<body class="homepage">
-<header id="header">
-	<nav class="navbar navbar-inverse" role="banner">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="inicio">
-					<span style="display:inline"><img src="images/logo40x40.png" alt="logo"></span>
-				</a>
-				<h1 class="navbar-text">bipo</h1>
-			</div>
-
-			<div class="collapse navbar-collapse navbar-right">
-				<ul class="nav navbar-nav">
-					<li><a href="inicio">Inicio</a></li>
-					<li class="active"><a href="registro">Registrate</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <i class="fa fa-angle-down"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="#">Bicicletas robadas</a></li>
-							<li><a href="#">Bicicletas encontradas</a></li>
-						</ul>
-					</li>
-					<li><a href="#">Zónas seguras</a></li>
-					<li><a href="#">Contáctanos</a></li>
-					<li><a href="https://play.google.com/store">Bipo en Android</a></li>
-					<li class="btn-slide"><a href="login">Iniciar Sesión</a></li>
-				</ul>
-			</div>
-		</div><!--/.container-->
-	</nav><!--/nav-->
-</header><!--/header-->
-<section id="feature" >
-	<div class="container">
+<body class="homepage" ng-controller="HeatMapCtrl as Ctrl">
+<section id="featureMaps" >
+	<div data-ng-init="loadMaps()" class="container">
 		<div class="center wow fadeInDown">
-			<h2>Mapa de Reportes</h2>
+			<h2>Reporte de zonas seguras</h2>
 		</div>
-		<div class="row contact-wrap">
-			<div class="status alert alert-success" style="display: none"></div>
-			<div class="col-lg-12 col-md-10 col-lg-offset-2 col-sm-offset-2" ng-controller="HeatMapCtrl as Ctrl">
-				<div map-lazy-load-params="{{Ctrl.googleMapsUrl}}">
-					<ng-map zoom="13" center="4.710838, -74.072495" map-type-id="SATELLITE" >
+			<div  class="col-lg-12 col-md-10" >
+				<div map-lazy-load-params="{{googleMapsUrl}}">
+					<ng-map zoom="13" center="4.710838, -74.072495" map-type-id="ROADMAP" style="height: 500px;">
 						<heatmap-layer id="foo" data="taxiData"></heatmap-layer>
 					</ng-map>
 				</div>
 			</div>
-		</div><!--/.row-->
 	</div><!--/.container-->
 </section><!--/#feature-->
-<section id="partner">
-	<div class="container">
-		<div class="center wow fadeInDown">
-			<h2>Disponible en la Play Store &copy;</h2>
-			<img class="img-responsive bipo-PlayStore" alt="bipo_playStore" src="images/slider/bipo_playStore.png"/>
-		</div>
-
-		<div class="partners">
-			<button type="button" class=" btn btn-outline-info btn-lg">
-				<i class="fa fa-download"></i> Descargar ya
-			</button>
-		</div>
-	</div><!--/.container-->
-</section><!--/#partner-->
-<footer id="footer" class="midnight-blue">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-6">
-				&copy; 2017. Todos los derechos reservados.
-			</div>
-			<div class="col-sm-6">
-				<ul class="pull-right">
-					<li><a href="inicio">Inicio</a></li>
-					<li><a href="contact-us.html">Contáctanos</a></li>
-					<li><a href="termsConditions.html">Términos y condiciones</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<!-- Modal -->
-
-
-</footer><!--/#footer-->
 
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>

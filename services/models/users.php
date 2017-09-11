@@ -30,7 +30,7 @@ class Users{
                                 on u.id=t.id
                                 LEFT JOIN tb_userConfigurations p
                                 on u.id=p.idUser
-                                where email like ? ");
+                                where email like ?  and t.isValid=1");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();        
@@ -59,6 +59,16 @@ class Users{
         //$stmt=$this->mysqcon->open();
         $stmt = $this->mysqcon->prepare('UPDATE tb_tokenUsers set token=?,isValid=0 WHERE id=?');
         $stmt->bind_param('si', $token,$id);
+        $stmt->execute();
+        $user=$stmt->affected_rows;
+        return $user;
+             
+    }
+    public function setPassword($password,$id){ 
+        //$stmt = $this->mysqcon->open();
+        //$stmt=$this->mysqcon->open();
+        $stmt = $this->mysqcon->prepare('UPDATE tb_users set password=? WHERE id=?');
+        $stmt->bind_param('si', $password,$id);
         $stmt->execute();
         $user=$stmt->affected_rows;
         return $user;
@@ -233,6 +243,24 @@ class Users{
         try{
             $stmt=$this->mysqcon->prepare("SELECT id from tb_users where email like ?");
             $stmt->bind_param('s', $email);
+            $stmt->execute();
+            $result = $stmt->get_result();        
+            $user=$result->fetch_all(MYSQLI_ASSOC); 
+            $stmt->close();
+            return $user;
+        }
+        catch(Execption $e){
+            $this->response["error"]=true;
+            $this->response["message"] = $e->getmessage();
+            return $this->response;
+        }
+    }
+        //comprueba si existe el usuario en base de datos
+    function userExistToken($token){
+        try{
+            $stmt=$this->mysqcon->prepare("SELECT u.id from tb_users u 
+                                INNER JOIN tb_tokenUsers tu on tu.id=u.id where tu.token like ?");
+            $stmt->bind_param('s', $token);
             $stmt->execute();
             $result = $stmt->get_result();        
             $user=$result->fetch_all(MYSQLI_ASSOC); 

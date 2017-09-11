@@ -552,7 +552,11 @@ input.search-form:hover {
   background: #f2f2f2;
   padding-bottom: 40px;
 }
+#featureMaps {
+  background: #f2f2f2;
+  padding-bottom: 20%;
 
+}
 .features{
   padding: 0;
 }

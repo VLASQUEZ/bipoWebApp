@@ -62,6 +62,90 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }      } 
 })
+//RECUPERAR CONTRASEÑA
+.factory('RecoverPass',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        RecoverPass: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"recoverPass"
+        var result=null;
+        var params={email:data.email.data
+                };
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
+//ACTUALIZAR CONTRASEÑA
+.factory('UpdatePass',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        UpdatePass: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"updatePassword"
+        var result=null;
+        var params={email:data.email.data,
+                    password:data.password.data,
+                    newPassword:data.newPassword.data,
+                };
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
+//SET CONTRASEÑA
+.factory('setPass',function($http,$q){
+    //pruebas
+    //var url="http://localhost/bipo/services/v1/";
+    //produccion
+    var url="http://www.bipoapp.com/services/v1/";
+    //login
+    return{
+        setPass: function(data){
+        //postAjax.user={}
+        var serviceUrl=url+"setPassword"
+        var result=null;
+        var params={password:data.password.data,
+            token:data.token.data                    
+                };
+        var dfd = $q.defer();
+
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }      } 
+})
 //OBTENER MARCAS DE BICICLETA
 .factory('Brands',function($http,$q){
     //pruebas
@@ -218,12 +302,12 @@ angular.module('bipoApp.services', [])
     }
 
     cookieManager.login=function(){
-        if(($cookieStore.get('nickname')!=undefined ||$cookieStore.get('nickname')!=null)&&
-           ($cookieStore.get('name')!=undefined ||$cookieStore.get('name')!=null)&&
-           ($cookieStore.get('lastName')!=undefined ||$cookieStore.get('lastName')!=null)&&
-           ($cookieStore.get('id')!=undefined ||$cookieStore.get('id')!=null)&&
-           ($cookieStore.get('email')!=undefined ||$cookieStore.get('email')!=null)&&
-           ($cookieStore.get('token')!=undefined ||$cookieStore.get('token')!=null)){
+        if(($cookieStore.get('nickname')!=undefined && $cookieStore.get('nickname')!=null)&&
+           ($cookieStore.get('name')!=undefined && $cookieStore.get('name')!=null)&&
+           ($cookieStore.get('lastName')!=undefined && $cookieStore.get('lastName')!=null)&&
+           ($cookieStore.get('id')!=undefined && $cookieStore.get('id')!=null)&&
+           ($cookieStore.get('email')!=undefined && $cookieStore.get('email')!=null)&&
+           ($cookieStore.get('token')!=undefined && $cookieStore.get('token')!=null)){
             return true
         }
         else{
@@ -410,6 +494,13 @@ angular.module('bipoApp.services', [])
     }
 	return validate;
 })
+.factory('getParams',[ '$window',function(){
+    return function getParams(){
+        var paramsObject={};
+        window.location.search.replace(/\?/,'').split('&').map(function(o){ paramsObject[o.split('=')[0]]= o.split('=')[1]});
+        return paramsObject;
+    };
+}])
 .factory('fileReader', function($q,$log){
     var fileReader ={};
 

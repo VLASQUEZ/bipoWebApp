@@ -44,9 +44,10 @@ class UserAPI {
 	        	
 	        	if($userExist[0]['id']!=null){
 	        		$tokenRecover=encrypt($email);
-	        		print_r($tokenRecover);
         			$db=new Users();
         			$user=$db->setTokenRecoverPass($tokenRecover,$userExist[0]['id']);
+        			$url="http://www.bipoapp.com/page/recoverPass?uid=".$tokenRecover;
+        			sendEmail($email,'recoverPassword',$url);
 	        	}else{
 	        		$this->response["message"] = "No se pudo verificar la dirección de correo";
 	        	}
@@ -61,6 +62,44 @@ class UserAPI {
 		catch(Execption $e){
 			$this->response["error"]=true;
 	        $this->response["message"] = $e->getmessage();
+	        return $this->response;
+		}
+    }
+        // inicia el proceso de recuperacion de password
+    function setPassword($password,$token){
+		try{
+			$error="";
+		
+	   		if($token==null){
+	   			$error="El token es obligatorio\n ";
+	   		}
+	   		if($password==null){
+	   			$error="La contraseña es obligatoria\n ";
+	   		}
+	   		if(strcmp($error,"")==0){
+	   			$db = new Users();
+	   			$this->response["error"]=false;
+	        	$userExist=$db->userExistToken($token);
+	        	
+	        	if($userExist[0]['id']!=null){
+	        		$password=encrypt($password);
+        			$db=new Users();
+        			$user=$db->setPassword($password,$userExist[0]['id']);
+        			$this->response["message"]="Contraseña actualizada satisfactoriamente";
+	        	}else{
+	        		$this->response["message"] = "No se pudo verificar la dirección de correo";
+	        	}
+	   		}
+	   		else{
+	   			$this->response["error"]=true;
+	        	$this->response["message"] = $error;
+	   		}
+	        return $this->response;
+
+		}
+		catch(Execption $e){
+			$this->response["error"]=true;
+	        $this->response["message"] = "No se pudo verificar la dirección de correo";
 	        return $this->response;
 		}
     }

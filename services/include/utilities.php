@@ -105,19 +105,37 @@
 			return array("error"=>true,"message"=>$e->getMessage());
 		}
 	}
-	function sendEmail($to,$type){
+	function sendEmail($to,$type,$Content=null){
 		try{
 			switch ($type) {
 			case 'changePassword':
-				$from='registro@bipoapp.com';
+				$from='registro@bipoapp.com'. "\r\n";
 				$headers="From:".$from;
+				$headers .= "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 				$subject='Cambio de contraseña';
 				$message="Tu contraseña ha sido cambiada satisfactoriamente";
-				mail($to,$subject,$message);
+				mail($to,$subject,$message,$headers);
 				break;
 			
 			case 'contact':
 				# code...
+				break;
+			case 'recoverPassword':
+				$from='registro@bipoapp.com'. "\r\n";
+				$headers="From:".$from;
+				$headers .= "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+				$subject='Solicitaste un cambio de contraseña';
+				$message="<html>
+							<head>
+							<title>Recuperación de contraseña</title>
+							</head>
+							<body>
+							<p>Ingresa al siguiente <a href=".$Content.">link</a> para continuar</p>
+							</body>
+							</html>";
+				mail($to,$subject,$message,$headers);
 				break;
 			
 			default:
