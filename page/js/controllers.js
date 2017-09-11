@@ -296,9 +296,6 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
         .then(function(data){
         	angular.forEach(data.reports,function (value, key) {
 				$scope.taxiData.push(new google.maps.LatLng(value.latitude, value.longitude));
-				if(key == data.reports.length){
-					$scope.loaded = true;
-				}
             });
 
         	//$scope.bikeTypes=data.biketypes;
