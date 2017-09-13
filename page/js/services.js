@@ -283,7 +283,6 @@ angular.module('bipoApp.services', [])
     var cookieManager={};
 
     cookieManager.writeCookie=function(data){
-
         $cookieStore.put('nickname',data.nickname);
         $cookieStore.put('name',data.name);
         $cookieStore.put('lastName',data.lastName);
@@ -299,9 +298,11 @@ angular.module('bipoApp.services', [])
         $cookieStore.remove("id"),
         $cookieStore.remove("email"),
         $cookieStore.remove("token");
+        return true;
     }
 
     cookieManager.login=function(){
+
         if(($cookieStore.get('nickname')!=undefined && $cookieStore.get('nickname')!=null)&&
            ($cookieStore.get('name')!=undefined && $cookieStore.get('name')!=null)&&
            ($cookieStore.get('lastName')!=undefined && $cookieStore.get('lastName')!=null)&&

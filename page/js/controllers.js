@@ -231,7 +231,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 							if(!data.error){
 								$scope.error.message="Inicio de sesión exitoso";
 								$scope.error.errorState=true;
-											
+								CookieManager.writeCookie(data.user[0]);			
 		   						//Redireccion al home de usuario
 	   							$window.location.href='home';
 
@@ -343,10 +343,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	if(CookieManager.login){
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
-    		console.log($scope.nickname);
     	}else{
     		$window.location.href='inicio';
     	}
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove)
+	 	{
+	 		$window.location.href='inicio';
+	 	}
     }
 
 }).controller('HeatMapCtrl',function (NgMap,heatMapResource,$scope) {
