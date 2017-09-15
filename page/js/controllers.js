@@ -297,6 +297,8 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
         	angular.forEach(data.reports,function (value, key) {
 				$scope.taxiData.push(new google.maps.LatLng(value.latitude, value.longitude));
             });
+        	//$scope.bikeTypes=data.biketypes;
+        }.finally(function () {
             var heatmap, vm = this;
             vm.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U"
 
@@ -333,8 +335,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
             vm.changeOpacity = function() {
                 heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
             }
-        	//$scope.bikeTypes=data.biketypes;
-        });
+        }));
     /*heatMapResource.query(function (completed, headers) {
         console.log(completed);
     })*/
