@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bipoApp" id="ng-app">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Bienvenido a bipo</title>
+	
+	<!-- core CSS -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/loading.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />    
+    <link href="css/upload-photo.css" rel="stylesheet">
+    <link href="css/loading.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.js"></script>
+    <script src="js/bower_components/ngmap/build/scripts/ng-map.js"></script>
+    
+</head><!--/head-->
+
+<body class="homepage" ng-controller="registerCtrl as $ctrl">
+
+    <header id="header">
+        <nav class="navbar navbar-inverse" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="inicio">
+                        <span style="display:inline"><img src="images/logo40x40.png" alt="logo"></span>
+                    </a>
+                    <h1 class="navbar-text">bipo</h1>
+                </div>
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="inicio">Inicio</a></li>
+                        <li class="active"><a href="registro">Registrate</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Bicicletas robadas</a></li>
+                                <li><a href="#">Bicicletas encontradas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="zones">Zónas seguras</a></li>                       
+                        <li><a href="#">Contáctanos</a></li>                       
+                        <li><a href="https://play.google.com/store">Bipo en Android</a></li>                       
+                        <li ng-show="!islogged" class="btn-slide"><a href="login">Iniciar Sesión</a></li>
+                        <li ng-show="islogged" class="btn-slide dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{nickname}} <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li ><a href="#" ng-click="logout()">cerrar sesión</a></li>
+                            </ul>
+                        </li>                      
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+    </header><!--/header-->
+    <section id="feature" >
+        <div class="container">
+           <div class="center wow fadeInDown">
+                <h2>Registrate</h2>
+                <p class="lead">Es totalmente gratis</p>
+
+            </div>
+            <div class="row contact-wrap"> 
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="main-contact-form" class="contact-form" name="fmRegister" novalidate>
+                    <div class="col-lg-12 col-md-10 col-lg-offset-2 col-sm-offset-2">
+                        <div class="col-sm-7 form-group">
+                            <label>Nombres: </label>
+                            <input type="text" name="name" class="form-control" placeholder="Escribe tu nombre" ng-model="register.name.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRegister.name.$invalid && !fmRegister.name.$pristine ">Debes ingresar tu nombre completo</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.nombre.valid">{{errors.nombre.error}}</h5>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label>Apellidos: </label>
+                            <input type="text" name="lastName" class="form-control" placeholder="Escribe tus apellidos" ng-model="register.lastName.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRegister.lastName.$invalid && !fmRegister.lastName.$pristine">Debes ingresar tus apellidos</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.apellido.valid">{{errors.apellido.error}}</h5>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label>Fecha de nacimiento:</label>
+                            <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                <input class="form-control" id="fh2" type="text" name="birthdate" value=""  +
+                                readonly ng-model="register.birthdate.data">
+                                
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <h5 style="color:#ef473a" ng-show="!errors.birthdate.valid">{{errors.birthdate.error}}</h5>
+                            <input type="hidden"  value="" />
+
+                        </div>
+                        
+                        <div class="col-sm-7 form-group">
+                            <label>Número de cédula:</label>
+                            <input type="text" name="document" class="form-control" placeholder="Escribe tu número de cédula" ng-model="register.document.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRegister.document.$invalid && !fmRegister.document.$pristine">Debes ingresar tu número de documento</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.documento.valid">{{errors.document.error}}</h5>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label>Correo Electrónico:</label>
+                            <input type="email" name="email" class="form-control" placeholder="Escribe tu correo electrónico" ng-model="register.email.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRegister.email.$invalid && !fmRegister.email.$pristine">Debes ingresar tu correo eléctronico</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.email.valid">{{errors.email.error}}</h5>
+                        </div>         
+                        <div class="col-sm-7 form-group">
+                            <label>Número de celular:</label>
+                            <input type="text" name="cellphone" class="form-control" placeholder="Escribe tu número de celular" ng-model="register.cellphone.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRegister.cellphone.$invalid && !fmRegister.cellphone.$pristine">Debes ingresar tu número de celular</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.cellphone.valid">{{errors.cellphone.error}}</h5>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label>Contraseña:</label>
+                            <input type="password" name="password" class="form-control" placeholder="Escribe tu contraseña" ng-model="register.password.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRegister.password.$invalid && !fmRegister.password.$pristine">Debes ingresar tu contraseña</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.password.valid">{{errors.password.error}}</h5>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label>Confirma tu contraseña:</label>
+                            <input type="password" name="confirmPass" class="form-control" placeholder="Confirma la contraseña" ng-model="register.confirmPass.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRegister.confirmPass.$invalid && !fmRegister.confirmPass.$pristine">Debes confirmar tu contraseña</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.confirmPass.valid">{{errors.confirmPass.error}}</h5>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{register.data}}" name="terms" ng-model="register.terms.data"> Acepto los <a href="terminos">términos y condiciones</a>
+                                <h5 style="color:#ef473a" ng-show="!errors.terms.valid">{{errors.terms.error}}</h5>
+                            </label>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <label class="form-check-label">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="{{register.data}}" name="terms" ng-model="register.publish.data"> Acepto  <a href="terminos">publicar las fotos de mi bicicleta en la página de bipo y en redes sociales</a>
+                                <h5 style="color:#ef473a" ng-show="!errors.terms.valid">{{errors.publish.error}}</h5>
+                            </label>
+                        </div>
+                        <div class="col-sm-7 form-group">
+                            <button type="button" class="btn btn-primary btn-lg" ng-click="registerUser(fmRegister.$valid)">Continuar</button>
+                        </div>
+                        <div class="col-sm-7 form-group" style="width: 100%; height: 25px;">
+                            <h5 style="color:#ef473a" ng-show="error.errorState">{{error.message}}</h5>
+                        </div> 
+                    </div>
+                </form> 
+            </div><!--/.row-->
+        </div><!--/.container-->
+    </section><!--/#feature-->
+    <section id="partner">
+        <div class="container">
+            <div class="center wow fadeInDown">
+                <h2>Disponible en la Play Store &copy;</h2>
+                <img class="img-responsive bipo-PlayStore" alt="bipo_playStore" src="images/slider/bipo_playStore.png"/>
+            </div>    
+
+            <div class="partners">
+                <button type="button" class=" btn btn-outline-info btn-lg">
+                    <i class="fa fa-download"></i> Descargar ya
+                </button>
+            </div>        
+        </div><!--/.container-->
+    </section><!--/#partner-->
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    &copy; 2017. Todos los derechos reservados.
+                </div>
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="inicio">Inicio</a></li>
+                        <li><a href="contact-us.html">Contáctanos</a></li>
+                        <li><a href="terminos">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <!-- Modal -->
+
+        
+    </footer><!--/#footer-->
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script> 
+    <script src="js/locales/bootstrap-datetimepicker.es.js"></script>
+    <script src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/wow.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/services.js"></script>
+
+    <script type="text/javascript">
+        $('.form_date').datetimepicker({
+            language:  'es',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+        });
+    
+    </script> 
+
+</body>
+</html>
