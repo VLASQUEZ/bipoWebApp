@@ -8,4 +8,5 @@ RewriteRule ^login$ login.html
 RewriteRule ^zones$ insecureZone.html
 RewriteRule ^terminos$ terms.html
 RewriteRule ^home$ home.html
+RewriteRule ^recoverPass$ recoverPass.html
 ErrorDocument 404 /bipo/page/404.html

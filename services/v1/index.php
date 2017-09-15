@@ -326,6 +326,28 @@ $app->post('/bikePhoto','authenticate', function() {
   }
   
 });
+//fachada para almacenar la foto de la bicicleta en el servidor
+$app->post('/setPassword','authenticate', function() {
+  try{
+      $userResponse=new UserAPI();
+      
+      $response=$userResponse->setPassword($_POST['password'],$_POST['token']);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>"No se pudo verificar la cuenta ");
+    echoResponse(500,$response);  
+  }
+  
+});
 //Actualizar bicicleta
 $app->post('/updateBike','authenticate', function() {
   try{
@@ -559,6 +581,28 @@ $app->post('/recoverPass','authenticate', function() {
   catch(exception $e)
   {
     $response=array('error' =>true,'message'=>$e->getMessage());
+    echoResponse(500,$response);  
+  }
+  
+});
+//Facebook
+$app->get('/twitter', function() {
+  try{
+      $reportResponse=new ReportAPI();
+      
+      $response=CreateTweet($_GET["content"]);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage()." ".$e->getTraceAsString());
     echoResponse(500,$response);  
   }
   

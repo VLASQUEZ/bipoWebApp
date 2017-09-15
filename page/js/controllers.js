@@ -231,7 +231,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 							if(!data.error){
 								$scope.error.message="Inicio de sesión exitoso";
 								$scope.error.errorState=true;
-											
+								CookieManager.writeCookie(data.user[0]);			
 		   						//Redireccion al home de usuario
 	   							$window.location.href='home';
 
@@ -261,19 +261,105 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 	}
 })
-.controller('homeCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager) {
+.controller('recoverPassCtrl', function ($scope,ValidateForm,setPass, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,$window,getParams) {
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
-	$scope.islogged=false;
-	$scope.nickname;
+
+  	$scope.recover={password:{name:"password",data:null,type:"password"},
+  					confirm:{name:"confirm",data:null,type:"password"},
+				};
 	 $scope.checkLogin=function(){
     	if(CookieManager.login){
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
-    		console.log($scope.nickname);
+    		Colors.colors()
+				.then(function(data){
+					console.log(data);
+					$scope.colors=data.bikeColor;
+				});
+    		Brands.brands()
+				.then(function(data){
+					console.log(data);
+					$scope.brands=data.brands;
+			});
+    		bikeTypes.bikeTypes()
+				.then(function(data){
+					console.log(data);
+					$scope.bikeTypes=data.biketypes;
+			});
+
     	}else{
     		$window.location.href='inicio';
     	}
+    }	
+	$scope.recoverPass=function(isValid){
+		if(isValid){
+
+			$scope.errors=ValidateForm.fmValid($scope.recover);
+			$scope.errors.confirmPass=ValidateForm.comparePass($scope.recover.password.data,$scope.recover.confirm.data);
+			$scope.formState=ValidateForm.formState($scope.errors);
+			if($scope.formState){
+				try{
+					$scope.recover.token={name:"token",data:getParams().uid,type:"password"};
+					setPass.setPass($scope.recover)
+						.then(function(data){
+							if(!data.error){
+								$scope.error.message="Se ha restaurado tu contraseña";
+								$scope.error.errorState=true;
+
+							}
+							else
+							{
+								$scope.error.errorState=true;
+								$scope.error.message=data.message;
+							}
+							});
+
+				}
+				catch(e)
+				{
+					$scope.error.errorState=true;
+					$scope.error.message=e;
+				}
+			}
+			else{
+				$scope.error.errorState=true;
+				$scope.error.message="Datos incompletos";
+			}
+		}
+		else{
+			$scope.error.errorState=true;
+			$scope.error.message="Datos incompletos";
+		}
+
+	}
+})
+.controller('homeCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.nickname;
+	$scope.reports={}
+	 $scope.checkLogin=function(){
+    	if(CookieManager.login){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
+    		Reports.getLastReports()
+    			.then(function(data){
+					$scope.reports=data.reports;
+					console.log($scope.reports[0].bikePhotos[0].url);
+    			});
+    			
+
+	    	}else{
+    		$window.location.href='inicio';
+    	}
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove)
+	 	{
+	 		$window.location.href='inicio';
+	 	}
     }
 
 }).controller('HeatMapCtrl',function (NgMap,heatMapResource,$scope) {
@@ -291,20 +377,27 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
         new google.maps.LatLng(4.735668, -74.095999),
         new google.maps.LatLng(4.738214, -74.099485)
     ];*/
-
-    heatMapResource.getReports()
+    $scope.loadMaps=function(){
+		heatMapResource.getReports()
         .then(function(data){
+        	console.log(data.reports);
         	angular.forEach(data.reports,function (value, key) {
 				$scope.taxiData.push(new google.maps.LatLng(value.latitude, value.longitude));
             });
         	//$scope.bikeTypes=data.biketypes;
-        }.finally(function () {
+        }.done(function () {
             var heatmap, vm = this;
             vm.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U"
 
             NgMap.getMap().then(function(map) {
                 vm.map = map;
                 heatmap = vm.map.heatmapLayers.foo;
+                var center = map.getCenter();
+                google.maps.event.trigger(map, "resize");
+                map.setCenter(center);
+
+                vm.changeRadius();
+
             });
             vm.toggleHeatmap= function(event) {
                 heatmap.setMap(heatmap.getMap() ? null : vm.map);
@@ -330,12 +423,14 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
                 heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
             }
             vm.changeRadius = function() {
-                heatmap.set('radius', heatmap.get('radius') ? null : 20);
+                heatmap.set('radius', heatmap.get('radius') ? null : 30);
             }
             vm.changeOpacity = function() {
                 heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
             }
         }));
+    }
+    
     /*heatMapResource.query(function (completed, headers) {
         console.log(completed);
     })*/

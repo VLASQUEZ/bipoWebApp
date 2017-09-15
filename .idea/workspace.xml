@@ -2,8 +2,114 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="eaecb035-e8f7-4c5b-b271-ed8be68511f9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/test/img.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/page/recoverPass.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Authentication/AccessToken.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Authentication/AccessTokenMetadata.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Authentication/OAuth2Client.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookAuthenticationException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookAuthorizationException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookClientException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookOtherException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookResponseException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookResumableUploadException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookSDKException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookServerException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookThrottleException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Facebook.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookApp.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookBatchRequest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookBatchResponse.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookRequest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookResponse.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookFile.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookResumableUploader.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookTransferChunk.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookVideo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/Mimetypes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/Birthday.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/Collection.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphAchievement.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphAlbum.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphApplication.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphCoverPhoto.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphEdge.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphEvent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphGroup.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphList.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphLocation.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphNode.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphNodeFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphObject.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphObjectFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphPage.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphPicture.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphSessionInfo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphUser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookCanvasHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookJavaScriptHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookPageTabHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookRedirectLoginHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookSignedRequestFromInputHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/GraphRawResponse.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/RequestBodyInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/RequestBodyMultipart.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/RequestBodyUrlEncoded.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookCurl.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookCurlHttpClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookGuzzleHttpClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookHttpClientInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookStream.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookStreamHttpClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/HttpClientsFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/certs/DigiCertHighAssuranceEVRootCA.pem" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/FacebookMemoryPersistentDataHandler.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/FacebookSessionPersistentDataHandler.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/PersistentDataFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/PersistentDataInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/McryptPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/OpenSslPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/PseudoRandomStringGeneratorFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/PseudoRandomStringGeneratorInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/PseudoRandomStringGeneratorTrait.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/RandomBytesPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/UrandomPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/SignedRequest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Url/FacebookUrlDetectionHandler.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Url/FacebookUrlManipulator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Url/UrlDetectionInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/autoload.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/polyfills.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/TwitterAPIExchange.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/index.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/phpunit.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/test/TwitterAPIExchangeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/v1/facebookIndex.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/v1/post.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/v1/twitter.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page/template/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page/template/portfolio-single.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page/template/sendemail.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/.htaccess" afterPath="$PROJECT_DIR$/page/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/css/main.css" afterPath="$PROJECT_DIR$/page/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/home.html" afterPath="$PROJECT_DIR$/page/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/insecureZone.html" afterPath="$PROJECT_DIR$/page/insecureZone.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/js/app.js" afterPath="$PROJECT_DIR$/page/js/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/js/controllers.js" afterPath="$PROJECT_DIR$/page/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/js/services.js" afterPath="$PROJECT_DIR$/page/js/services.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/controllers/reportAPI.php" afterPath="$PROJECT_DIR$/services/controllers/reportAPI.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/controllers/userAPI.php" afterPath="$PROJECT_DIR$/services/controllers/userAPI.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/include/config.php" afterPath="$PROJECT_DIR$/services/include/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/include/utilities.php" afterPath="$PROJECT_DIR$/services/include/utilities.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/models/reports.php" afterPath="$PROJECT_DIR$/services/models/reports.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/models/requires.php" afterPath="$PROJECT_DIR$/services/models/requires.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/models/users.php" afterPath="$PROJECT_DIR$/services/models/users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/v1/.htaccess" afterPath="$PROJECT_DIR$/services/v1/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/v1/index.php" afterPath="$PROJECT_DIR$/services/v1/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,14 +123,9 @@
       <file leaf-file-name="insecureZone.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1479">
-              <caret line="87" column="20" lean-forward="false" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
-              <folding>
-                <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#4654#4660#0" expanded="true" />
-                <element signature="e#5113#5119#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="119">
+              <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -32,12 +133,15 @@
       <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="786">
-              <caret line="336" column="13" lean-forward="false" selection-start-line="336" selection-start-column="13" selection-end-line="336" selection-end-column="13" />
+            <state relative-caret-position="300">
+              <caret line="429" column="13" lean-forward="false" selection-start-line="429" selection-start-column="13" selection-end-line="429" selection-end-column="13" />
               <folding>
                 <element signature="e#310#878#0" expanded="false" />
                 <element signature="e#919#2921#0" expanded="false" />
                 <element signature="e#3115#6305#0" expanded="false" />
+                <element signature="e#11568#11845#0" expanded="false" />
+                <element signature="e#11894#12012#0" expanded="false" />
+                <element signature="e#12057#12805#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -49,13 +153,10 @@
             <state relative-caret-position="748">
               <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
               <folding>
-                <element signature="e#2024#2668#0" expanded="false" />
-                <element signature="e#4891#5897#0" expanded="false" />
-                <element signature="e#5974#7286#0" expanded="false" />
-                <element signature="e#7354#14174#0" expanded="false" />
-                <element signature="e#7394#7679#0" expanded="false" />
-                <element signature="e#8415#13359#0" expanded="false" />
-                <element signature="e#14216#15770#0" expanded="false" />
+                <element signature="e#17727#19281#0" expanded="false" />
+                <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+                <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+                <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -65,7 +166,7 @@
         <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="4" lean-forward="true" selection-start-line="0" selection-start-column="25" selection-end-line="9" selection-end-column="4" />
+              <caret line="9" column="4" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="9" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -86,7 +187,12 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="157" lean-forward="false" selection-start-line="0" selection-start-column="157" selection-end-line="0" selection-end-column="157" />
-              <folding />
+              <folding>
+                <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+                <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+                <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+                <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -258,12 +364,12 @@
       <workItem from="1504846346879" duration="11898000" />
       <workItem from="1504894201885" duration="1317000" />
       <workItem from="1505065936895" duration="15464000" />
-      <workItem from="1505444958987" duration="1775000" />
+      <workItem from="1505444958987" duration="2312000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30454000" />
+    <option name="totallyTimeSpent" value="30991000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
@@ -322,12 +428,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1479">
           <caret line="87" column="20" lean-forward="false" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#4654#4660#0" expanded="true" />
-            <element signature="e#5113#5119#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -336,13 +437,10 @@
         <state relative-caret-position="748">
           <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
           <folding>
-            <element signature="e#2024#2668#0" expanded="false" />
-            <element signature="e#4891#5897#0" expanded="false" />
-            <element signature="e#5974#7286#0" expanded="false" />
-            <element signature="e#7354#14174#0" expanded="false" />
-            <element signature="e#7394#7679#0" expanded="false" />
-            <element signature="e#8415#13359#0" expanded="false" />
-            <element signature="e#14216#15770#0" expanded="false" />
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -367,7 +465,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="157" lean-forward="false" selection-start-line="0" selection-start-column="157" selection-end-line="0" selection-end-column="157" />
-          <folding />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -397,6 +500,9 @@
             <element signature="e#310#878#0" expanded="false" />
             <element signature="e#919#2921#0" expanded="false" />
             <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -405,12 +511,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2516">
           <caret line="148" column="42" lean-forward="false" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#4654#4660#0" expanded="true" />
-            <element signature="e#5113#5119#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -422,6 +523,9 @@
             <element signature="e#310#878#0" expanded="false" />
             <element signature="e#919#2921#0" expanded="false" />
             <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -438,13 +542,10 @@
         <state relative-caret-position="4590">
           <caret line="270" column="2" lean-forward="false" selection-start-line="270" selection-start-column="2" selection-end-line="270" selection-end-column="2" />
           <folding>
-            <element signature="e#2024#2668#0" expanded="false" />
-            <element signature="e#4891#5897#0" expanded="false" />
-            <element signature="e#5974#7286#0" expanded="false" />
-            <element signature="e#7354#14174#0" expanded="false" />
-            <element signature="e#7394#7679#0" expanded="false" />
-            <element signature="e#8415#13359#0" expanded="false" />
-            <element signature="e#14216#15770#0" expanded="false" />
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -461,7 +562,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
-          <folding />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -495,12 +601,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2516">
           <caret line="148" column="37" lean-forward="false" selection-start-line="148" selection-start-column="37" selection-end-line="148" selection-end-column="37" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#4654#4660#0" expanded="true" />
-            <element signature="e#5113#5119#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -512,6 +613,9 @@
             <element signature="e#310#878#0" expanded="false" />
             <element signature="e#919#2921#0" expanded="false" />
             <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -521,13 +625,10 @@
         <state relative-caret-position="4590">
           <caret line="270" column="2" lean-forward="false" selection-start-line="270" selection-start-column="2" selection-end-line="270" selection-end-column="2" />
           <folding>
-            <element signature="e#2024#2668#0" expanded="false" />
-            <element signature="e#4891#5897#0" expanded="false" />
-            <element signature="e#5974#7286#0" expanded="false" />
-            <element signature="e#7354#14174#0" expanded="false" />
-            <element signature="e#7394#7679#0" expanded="false" />
-            <element signature="e#8415#13359#0" expanded="false" />
-            <element signature="e#14216#15770#0" expanded="false" />
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -552,7 +653,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="149" lean-forward="false" selection-start-line="0" selection-start-column="149" selection-end-line="0" selection-end-column="149" />
-          <folding />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -632,14 +738,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="157" lean-forward="false" selection-start-line="0" selection-start-column="157" selection-end-line="0" selection-end-column="157" />
-          <folding />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="4" lean-forward="true" selection-start-line="0" selection-start-column="25" selection-end-line="9" selection-end-column="4" />
+          <caret line="9" column="4" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="9" selection-end-column="4" />
           <folding />
         </state>
       </provider>
@@ -656,38 +767,33 @@
         <state relative-caret-position="748">
           <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
           <folding>
-            <element signature="e#2024#2668#0" expanded="false" />
-            <element signature="e#4891#5897#0" expanded="false" />
-            <element signature="e#5974#7286#0" expanded="false" />
-            <element signature="e#7354#14174#0" expanded="false" />
-            <element signature="e#7394#7679#0" expanded="false" />
-            <element signature="e#8415#13359#0" expanded="false" />
-            <element signature="e#14216#15770#0" expanded="false" />
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" column="20" lean-forward="false" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#a#0;n#div#0;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#4654#4660#0" expanded="true" />
-            <element signature="e#5113#5119#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="786">
-          <caret line="336" column="13" lean-forward="false" selection-start-line="336" selection-start-column="13" selection-end-line="336" selection-end-column="13" />
+        <state relative-caret-position="300">
+          <caret line="429" column="13" lean-forward="false" selection-start-line="429" selection-start-column="13" selection-end-line="429" selection-end-column="13" />
           <folding>
             <element signature="e#310#878#0" expanded="false" />
             <element signature="e#919#2921#0" expanded="false" />
             <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
           </folding>
         </state>
       </provider>

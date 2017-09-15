@@ -14,6 +14,8 @@ $path=$path."/bipo/services/";
 //para pruebas/produccion
 //$path=$path."/services/";
 require($path."libs/Slim/Slim.php");
+require_once $path ."libs/Facebook/autoload.php";
+require_once $path ."libs/twitter-api-php/TwitterAPIExchange.php";
 require($path."include/config.php");
 require($path."include/utilities.php");
 require($path."include/encrypt.php");
