@@ -334,16 +334,24 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 	}
 })
-.controller('homeCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager) {
+.controller('homeCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports) {
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 	$scope.islogged=false;
 	$scope.nickname;
+	$scope.reports={}
 	 $scope.checkLogin=function(){
     	if(CookieManager.login){
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
-    	}else{
+    		Reports.getLastReports()
+    			.then(function(data){
+					$scope.reports=data.reports;
+					console.log($scope.reports[0].bikePhotos[0].url);
+    			});
+    			
+
+	    	}else{
     		$window.location.href='inicio';
     	}
     }

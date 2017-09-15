@@ -195,7 +195,7 @@ class Reports{
                 INNER JOIN tb_colors c on b.idColor=c.id
                 INNER JOIN tb_brands br on b.idBrand=br.id
                 INNER JOIN tb_bikeType t on b.idType=t.id
-                INNER JOIN tb_users bo on b.idUser=bo.id order by r.fhUpdated desc LIMIT 10 ");
+                INNER JOIN tb_users bo on b.idUser=bo.id WHERE r.idReportType!=3 order by r.fhUpdated desc LIMIT 10 ");
             $stmt->execute();
             $result = $stmt->get_result();        
             $reports = $result->fetch_all(MYSQLI_ASSOC);

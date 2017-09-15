@@ -246,6 +246,31 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }      } 
 })
+//OBTENER ESTADOS DE BICICLETA
+.factory('Reports',function($http,$q){
+    //pruebas
+    var url="http://localhost/bipo/services/v1/";
+    //produccion
+    //var url="http://www.bipoapp.com/services/v1/";
+    //login
+    var reports={};
+    reports.getLastReports=function(){
+        var serviceUrl=url+"lastReports"
+        var result=null;
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.get(serviceUrl)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    return reports; 
+})
 //INICIO DE SESION
 .factory('setPreferences',function($http,$q){
     //pruebas
