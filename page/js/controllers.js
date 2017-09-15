@@ -347,7 +347,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		Reports.getLastReports()
     			.then(function(data){
 					$scope.reports=data.reports;
-					console.log($scope.reports[0].bikePhotos[0].url);
+					console.log($scope.reports);
     			});
     			
 

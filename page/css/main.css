@@ -808,7 +808,12 @@ input.search-form:hover {
   background: #fff;
   color: #858586;
 }
+.heading-report{
+  color:#fff;
+  background-color: #283593;
+  border-radius: 1px;
 
+}
 .panel-body{
   padding: 20px 20px 10px;
 }
