@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="bipoApp" id="ng-app">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +7,17 @@
     <meta name="author" content="">
     <title>Bienvenido a bipo</title>
 	
-	<!-- core CSS -->
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="css/animate.min.css" rel="stylesheet">
     <link href="css/prettyPhoto.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/loading.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen" href="css/bootstrap-datetimepicker.min.css" />    
+    <link href="css/upload-photo.css" rel="stylesheet">
+    <link href="css/loading.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -24,11 +27,17 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="images/ico/favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.js"></script>
+    <script src="js/bower_components/ngmap/build/scripts/ng-map.js"></script>
 </head><!--/head-->
 
-<body class="homepage">
+<body class="homepage" ng-controller="indexCtrl as $ctrl">
     <header id="header">
-        <nav class="navbar navbar-inverse" role="banner">
+        <nav data-ng-init="checkLogin()" class="navbar navbar-inverse" role="banner">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -45,8 +54,8 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="inicio">Inicio</a></li>
-                        <li><a href="registro">Registrate</a></li>
+                        <li><a href="inicio">Inicio</a></li>
+                        <li ng-show="!islogged"><a href="registro">Registrate</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -54,10 +63,16 @@
                                 <li><a href="#">Bicicletas encontradas</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Zónas seguras</a></li>                       
+                        <li><a href="insecureZones">Zónas seguras</a></li>                       
                         <li><a href="#">Contáctanos</a></li>                       
-                        <li><a href="https://play.google.com/store">Bipo en Android</a></li>  
-                        <li class="btn-slide"><a href="login">Iniciar Sesión</a></li>                                             
+                        <li><a href="https://play.google.com/store">Bipo en Android</a></li>                       
+                        <li ng-show="!islogged" class="active"><a href="login">Iniciar Sesión</a></li>
+                        <li ng-show="islogged" class="btn-slide dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{nickname}} <i class="fa fa-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li class="btn btn-primary" ng-click="logout()">cerrar sesión</li>
+                            </ul>
+                        </li>                            
                     </ul>
                 </div>
             </div><!--/.container-->
@@ -210,7 +225,14 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/jquery.isotope.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script> 
+    <script src="js/locales/bootstrap-datetimepicker.es.js"></script>
+    <script src="js/ui-bootstrap-tpls-2.5.0.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/wow.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/routes.js"></script>
+    <script src="js/services.js"></script>
 </body>
 </html>

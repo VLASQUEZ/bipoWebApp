@@ -73,7 +73,14 @@ hr {
   border:none;
   margin-top: 10px;
 }
-
+.btn-danger {
+  padding: 8px 20px;
+  background: #CE1D1D;
+  color: #fff;
+  border-radius: 4px;
+  border:none;
+  margin-top: 10px;
+}
 
 .btn-primary:hover, 
 .btn-primary:focus{
@@ -2567,6 +2574,8 @@ shortcodes page css
  margin: 0 auto;
 }
 
-
+#content{
+height: 100%
+}
 
 

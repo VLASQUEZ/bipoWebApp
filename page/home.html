@@ -39,17 +39,6 @@
 </head><!--/head-->
 
 <body class="homepage" ng-controller="homeCtrl as $ctrl">
-    <script type="text/ng-template" id="modal.html">
-        <div class="modal-demo" data-backdrop="static" data-keyboard="false" id="myModal">
-            <div class="modal-body" id="modal-body">
-               <section class="loaders loaders-bg-3"><span class="loader loader-circles"></span></section>
-               <h4 class="loading-text">{{$ctrl.message}}</h4>
-            </div>
-
-        </div>
-    </script>
-
-
     <header id="header">
         <nav data-ng-init="checkLogin()" class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -77,14 +66,14 @@
                                 <li><a href="#">Bicicletas encontradas</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">Zónas seguras</a></li>                       
+                        <li><a href="insecureZones">Zónas seguras</a></li>                       
                         <li><a href="#">Contáctanos</a></li>                       
                         <li><a href="https://play.google.com/store">Bipo en Android</a></li>                       
                         <li ng-show="!islogged" class="active"><a href="login">Iniciar Sesión</a></li>
                         <li ng-show="islogged" class="btn-slide dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{nickname}} <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
-                                <li ><a href="#" ng-click="logout()">cerrar sesión</a></li>
+                                <li class="btn btn-primary" ng-click="logout()">cerrar sesión</li>
                             </ul>
                         </li>                            
                     </ul>
@@ -98,41 +87,42 @@
                 <h2>Últimos reportes</h2>
                 <p class="lead">Bipo te muestra los últimos 10 reportes registrados en nuestra plataforma.</p>
                 <!-- PANEL DE REPORTES-->
-                <div class="panel panel-default col-sm-9 col-sm-offset-2">
+                <div class="panel panel-default col-sm-9 col-sm-offset-2" ng-repeat="report in reports">
                     <div class="panel-body">
-                        <div class="panel-heading heading-report">{{reports[0].reportType}}</div>
-                         <div class="col-md-4">   
-                           <div class="panel-heading"><img ng-src="../{{reports[0].bikePhotos[3].url}}" class="img-thumbnail img-responsive"></div>
-                            </div>
+                        <div class="panel-heading heading-report">{{report.reportType}}</div>
+                        <div class="col-md-4">   
+                           <div class="panel-heading"><img ng-src="../{{report.bikePhotos[3].url}}" class="img-thumbnail img-responsive">
+                           </div>
+                        </div>
                            <div class="col-md-8 " style="padding:10px 15px">
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <div class="row">
                                             <span>Marca:</span>
-                                            <span>{{reports[0].brand}}</span>
+                                            <span>{{report.brand}}</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <span>Color:</span>
-                                            <span>{{reports[0].color}}</span>
+                                            <span>{{report.color}}</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <span>Tipo:</span>
-                                            <span>{{reports[0].type}}</span>
+                                            <span>{{report.type}}</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
-                                            <span>Ubicacion:</span>
-                                            <iframe frameborder="0" style="border:0" ng-src="https://www.google.com/maps/embed/v1/view?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U&center={{reports[0].color}}">
-                                            </iframe>
+                                            <span>Detalles:</span>
+                                            <span >{{report.reportDetails}}</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
-                                        <button><a href="#">Ver más...</a></button>
+                                        <button class="btn btn-primary">Ver más...</button>
+                                        <button class="btn btn-danger">He visto esta bicicleta</button>
                                     </li>
                                 </ul>
                             </div>

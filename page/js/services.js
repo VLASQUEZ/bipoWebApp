@@ -1,12 +1,8 @@
 angular.module('bipoApp.services', [])
 
-
+.value('url', "http://localhost/bipo/services/v1/")
 //REGISTRO DE USUARIO
-.factory('Register',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('Register',function($http,$q,url){
     //REGISTRO DE USUARIO
     return{
         register: function(data){
@@ -35,11 +31,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //INICIO DE SESION
-.factory('Login',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('Login',function($http,$q,url){
     //login
     return{
         login: function(data){
@@ -63,11 +55,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //RECUPERAR CONTRASEÑA
-.factory('RecoverPass',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('RecoverPass',function($http,$q,url){
     //login
     return{
         RecoverPass: function(data){
@@ -90,11 +78,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //ACTUALIZAR CONTRASEÑA
-.factory('UpdatePass',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('UpdatePass',function($http,$q,url){
     //login
     return{
         UpdatePass: function(data){
@@ -119,11 +103,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //SET CONTRASEÑA
-.factory('setPass',function($http,$q){
-    //pruebas
-    //var url="http://localhost/bipo/services/v1/";
-    //produccion
-    var url="http://www.bipoapp.com/services/v1/";
+.factory('setPass',function($http,$q,url){
     //login
     return{
         setPass: function(data){
@@ -147,11 +127,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //OBTENER MARCAS DE BICICLETA
-.factory('Brands',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('Brands',function($http,$q,url){
     //login
     return{
         brands: function(data){
@@ -172,11 +148,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //OBTENER COLORES DE BICICLETA
-.factory('Colors',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('Colors',function($http,$q,url){
     //login
     return{
         colors: function(data){
@@ -197,11 +169,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //OBTENER TIPOS DE BICICLETA
-.factory('bikeTypes',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('bikeTypes',function($http,$q,url){
     //login
     return{
         bikeTypes: function(data){
@@ -222,11 +190,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //OBTENER ESTADOS DE BICICLETA
-.factory('bikeStates',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('bikeStates',function($http,$q,url){
     //login
     return{
         colors: function(data){
@@ -247,11 +211,7 @@ angular.module('bipoApp.services', [])
     }      } 
 })
 //OBTENER ESTADOS DE BICICLETA
-.factory('Reports',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('Reports',function($http,$q,url){
     //login
     var reports={};
     reports.getLastReports=function(){
@@ -272,11 +232,7 @@ angular.module('bipoApp.services', [])
     return reports; 
 })
 //INICIO DE SESION
-.factory('setPreferences',function($http,$q){
-    //pruebas
-    var url="http://localhost/bipo/services/v1/";
-    //produccion
-    //var url="http://www.bipoapp.com/services/v1/";
+.factory('setPreferences',function($http,$q,url){
     //login
     return{
         setPreferences: function(data){
@@ -306,34 +262,34 @@ angular.module('bipoApp.services', [])
 //INICIO DE SESION
 .factory('CookieManager',function($cookies,$cookieStore){
     var cookieManager={};
-
     cookieManager.writeCookie=function(data){
+        console.log(data);
         $cookieStore.put('nickname',data.nickname);
         $cookieStore.put('name',data.name);
-        $cookieStore.put('lastName',data.lastName);
+        $cookieStore.put('lastName',data.lastname);
         $cookieStore.put('id',data.id);
         $cookieStore.put('email',data.email);
         $cookieStore.put('token',data.token);  
 
     }
     cookieManager.remove=function(){
-        $cookieStore.remove("nickname"),
-        $cookieStore.remove("name"),
-        $cookieStore.remove("lastName"),
-        $cookieStore.remove("id"),
-        $cookieStore.remove("email"),
+        $cookieStore.remove("nickname");
+        $cookieStore.remove("name");
+        $cookieStore.remove("lastName");
+        $cookieStore.remove("id");
+        $cookieStore.remove("email");
         $cookieStore.remove("token");
         return true;
     }
 
     cookieManager.login=function(){
-
         if(($cookieStore.get('nickname')!=undefined && $cookieStore.get('nickname')!=null)&&
            ($cookieStore.get('name')!=undefined && $cookieStore.get('name')!=null)&&
            ($cookieStore.get('lastName')!=undefined && $cookieStore.get('lastName')!=null)&&
            ($cookieStore.get('id')!=undefined && $cookieStore.get('id')!=null)&&
            ($cookieStore.get('email')!=undefined && $cookieStore.get('email')!=null)&&
            ($cookieStore.get('token')!=undefined && $cookieStore.get('token')!=null)){
+
             return true
         }
         else{
@@ -579,10 +535,6 @@ angular.module('bipoApp.services', [])
     
 })
     .factory('heatMapResource',function($http,$q){
-        //pruebas
-        var url="http://www.bipoapp.com/services/v1/";
-        //produccion
-        //var url="http://www.bipoapp.com/services/v1/";
         //login
         return{
             getReports: function(data){
