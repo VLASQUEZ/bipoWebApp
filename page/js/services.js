@@ -534,7 +534,7 @@ angular.module('bipoApp.services', [])
         };
     
 })
-    .factory('heatMapResource',function($http,$q){
+    .factory('heatMapResource',function($http,$q,url){
         //login
         return{
             getReports: function(data){
