@@ -1,6 +1,6 @@
 angular.module('bipoApp.services', [])
 
-.value('url', "http://localhost/bipo/services/v1/")
+.value('url', "http://www.bipoapp.com/services/v1/")
 //REGISTRO DE USUARIO
 .factory('Register',function($http,$q,url){
     //REGISTRO DE USUARIO
@@ -263,7 +263,7 @@ angular.module('bipoApp.services', [])
 .factory('CookieManager',function($cookies,$cookieStore){
     var cookieManager={};
     cookieManager.writeCookie=function(data){
-        console.log(data);
+
         $cookieStore.put('nickname',data.nickname);
         $cookieStore.put('name',data.name);
         $cookieStore.put('lastName',data.lastname);
