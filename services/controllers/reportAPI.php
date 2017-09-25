@@ -53,13 +53,16 @@ class ReportAPI {
 	        	if($reportType==1){
 	    			$bike->updateBikeState('1',$idBike);
 	    			CreateTweet("Bicicleta robada!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
+	    			CreateFacebookPost('Bicicleta robada!! #Policianacionaldeloscolombianos','http://www.bipoapp.com/page/report?reportId='.$reportId[0]["LAST_INSERT_ID()"]);
 	        	}
 	        	else if($reportType== 2){
 					$bike->updateBikeState('2',$idBike);
 					CreateTweet("Bicicleta recuperada!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
+					CreateFacebookPost('Bicicleta recuperada!!','http://www.bipoapp.com/page/report?reportId='.$reportId[0]["LAST_INSERT_ID()"]);
 	        	}
 	        	else if($idReportType=4){
 					CreateTweet("Bicicleta vista!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
+					CreateFacebookPost('Bicicleta vista!! #Policianacionaldeloscolombianos','http://www.bipoapp.com/page/report?reportId='.$reportId[0]["LAST_INSERT_ID()"]);
 
 	        	}
 	   		}

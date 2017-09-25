@@ -3,7 +3,6 @@ header('Access-Control-Allow-Credentials: true');
 header("Access-Control-Allow-Headers: X-Requested-With");
 header('Content-Type: text/html; charset=utf-8');
 header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
-
 require("../models/requires.php");
 $app->get('/login','authenticate', function() {
    try{
@@ -612,6 +611,28 @@ $app->get('/twitter', function() {
       $reportResponse=new ReportAPI();
       
       $response=CreateTweet($_GET["content"]);
+
+      if($response["error"]==false){
+        echoResponse(200,$response);
+      }
+      else{
+        echoResponse(400,$response);
+      }
+    
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage()." ".$e->getTraceAsString());
+    echoResponse(500,$response);  
+  }
+  
+});
+//Facebook
+$app->get('/facebook', function() {
+  try{
+      $reportResponse=new ReportAPI();
+      
+      $response=CreateFacebookPost($_GET["content"]);
 
       if($response["error"]==false){
         echoResponse(200,$response);
