@@ -1,6 +1,7 @@
 angular.module('bipoApp.services', [])
 
-.value('url', "http://www.bipoapp.com/services/v1/")
+//.value('url', "http://www.bipoapp.com/services/v1/")
+.value('url', "http://localhost/bipo/services/v1/")
 //REGISTRO DE USUARIO
 .factory('Register',function($http,$q,url){
     //REGISTRO DE USUARIO
@@ -37,7 +38,6 @@ angular.module('bipoApp.services', [])
         login: function(data){
         //postAjax.user={}
         var serviceUrl=url+"login"
-        var result=null;
         var params={email:data.email.data,
                     password:data.password.data
                 };
@@ -216,7 +216,6 @@ angular.module('bipoApp.services', [])
     var reports={};
     reports.getLastReports=function(){
         var serviceUrl=url+"lastReports"
-        var result=null;
         var dfd = $q.defer();
         //console.log(params);
         $http.get(serviceUrl)
@@ -229,6 +228,35 @@ angular.module('bipoApp.services', [])
             
         return dfd.promise;
     }
+    reports.getReports=function(reportType,fhInicio,fhFin){
+        var serviceUrl=url+"reports/"+reportType;
+        var dfd = $q.defer();
+        var params={fhInicio:fhInicio,fhFin:fhFin}
+        //console.log(params);
+        $http.get(serviceUrl,{params:params})
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    reports.getReportById=function(reportId){
+    var serviceUrl=url+"report/"+reportId;
+    var dfd = $q.defer();
+    //console.log(params);
+    $http.get(serviceUrl)
+        .then(function successCallback(response){
+            dfd.resolve(response.data);   
+        },
+        function errorCallback(error){
+            dfd.resolve(error.data); 
+        });
+        
+    return dfd.promise;
+}
     return reports; 
 })
 //INICIO DE SESION
@@ -312,6 +340,9 @@ angular.module('bipoApp.services', [])
                 birthdate:{
                     error:"Debes ser mayor de 18 años para registrarte"
                 },
+                datetime:{
+                    error:"Fecha no valida"
+                },
                 checkbox:{
                     error:"Debes aceptar los terminos y condiciones"
                 },
@@ -325,7 +356,7 @@ angular.module('bipoApp.services', [])
 			}
 	validate.fmFields=[];
 	validate.fmValid=function(data){
-		
+		  console.log(data);
 		for (var key in data) {
   			if (data.hasOwnProperty(key)) {
     			var field = data[key];
@@ -398,6 +429,18 @@ angular.module('bipoApp.services', [])
                                     error:error.birthdate.error
                                     };
                             }
+                        }
+                    break;
+                    case 'datetime':
+                        if (field.data==""){
+
+                            validate.fmFields[field.name]={
+                                    valid:false,
+                                    error:error.datetime.error
+                                    };
+                        }
+                        else{
+                                validate.fmFields[field.name]={valid:true};
                         }
                     break;
                     case 'checkbox':
@@ -534,7 +577,7 @@ angular.module('bipoApp.services', [])
         };
     
 })
-    .factory('heatMapResource',function($http,$q,url){
+.factory('heatMapResource',function($http,$q,url){
         //login
         return{
             getReports: function(data){

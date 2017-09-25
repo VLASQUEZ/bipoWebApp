@@ -278,22 +278,6 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	if(CookieManager.login()){
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
-    		Colors.colors()
-				.then(function(data){
-					console.log(data);
-					$scope.colors=data.bikeColor;
-				});
-    		Brands.brands()
-				.then(function(data){
-					console.log(data);
-					$scope.brands=data.brands;
-			});
-    		bikeTypes.bikeTypes()
-				.then(function(data){
-					console.log(data);
-					$scope.bikeTypes=data.biketypes;
-			});
-
     	}else{
     		$window.location.href='inicio';
     	}
@@ -372,6 +356,237 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	 	{
 	 		$window.location.href='inicio';
 	 	}
+    }
+
+})
+.controller('reportCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,getParams) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.nickname;
+	$scope.report={}
+	var reportId=getParams().reportId;
+	$scope.taxiData;
+	 $scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
+    		if(reportId!=undefined){
+    			Reports.getReportById(reportId)
+    			.then(function(data){
+					$scope.report=data.reports;
+					if($scope.report!=undefined){
+						var coordinates= $scope.report.googlemapscoordinate.split(',');
+						$scope.report.latitude=coordinates[0];
+						$scope.report.longitude=coordinates[1];
+					}
+					else{
+						$scope.error.errorState=true;
+						$scope.error.message=data.message;
+					}
+
+				});	
+    		}
+    		else{
+    			
+    			$scope.error.errorState=true;
+    			$scope.error.message="Ocurrió un error al cargar el reporte";
+    			console.log($scope.error);
+    		}    			
+    	}
+    	else{
+		$window.location.href='inicio';
+    	}
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }
+
+})
+.controller('stolenBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.nickname;
+	$scope.reports={};
+	var date=new Date();
+	date=date.setDate(date.getDate()+1);
+	var today=$filter('date')(date,'yyyy-M-dd');
+	var year=new Date().getFullYear();
+	$scope.fmFilter={fhInicio:{name:"fhInicio",data:null,type:"datetime"},
+				   fhFinal:{name:"fhFinal",data:null,type:"datetime"}
+				};
+
+	 $scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');	
+	   	}
+	   	console.log(today);
+	   	Reports.getReports(1,year+"-01-01",today)
+    			.then(function(data){
+					$scope.reports=data.reports;
+					if($scope.reports==undefined){
+			    		$scope.error.message=data.message;
+    					$scope.error.errorState=true;
+					}
+				});
+
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }
+    $scope.filter=function(){
+    	$scope.fmFilter.fhInicio.data=document.getElementById('fhInicio').value;
+    	$scope.fmFilter.fhFinal.data=document.getElementById('fhFinal').value;
+	    $scope.errors=ValidateForm.fmValid($scope.fmFilter);
+		$scope.formState=ValidateForm.formState($scope.errors);
+			
+		if($scope.formState){
+    		$scope.error.errorState=false;
+    		Reports.getReports(1,$scope.fmFilter.fhInicio.data,$scope.fmFilter.fhFinal.data)
+    			.then(function(data){
+					$scope.reports=data.reports;
+					if($scope.reports==undefined){
+			    		$scope.error.message=data.message;
+    					$scope.error.errorState=true;
+					}
+				});
+    	}
+    	else{
+    		$scope.error.message="Debes seleccionar las fechas de busqueda";
+    		$scope.error.errorState=true;
+    		console.log($scope.error);
+
+    	}
+    }
+
+})
+.controller('recoveredBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.nickname;
+	$scope.reports={};
+	var date=new Date();
+	date=date.setDate(date.getDate()+1);
+	var today=$filter('date')(date,'yyyy-M-dd');
+	var year=new Date().getFullYear();
+	$scope.fmFilter={fhInicio:{name:"fhInicio",data:null,type:"datetime"},
+				   fhFinal:{name:"fhFinal",data:null,type:"datetime"}
+				};
+
+	 $scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');	
+	   	}
+	   	Reports.getReports(2,year+"-01-01",today)
+    			.then(function(data){
+					$scope.reports=data.reports;
+					if($scope.reports==undefined){
+			    		$scope.error.message=data.message;
+    					$scope.error.errorState=true;
+					}
+				});
+
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }
+    $scope.filter=function(){
+    	$scope.fmFilter.fhInicio.data=document.getElementById('fhInicio').value;
+    	$scope.fmFilter.fhFinal.data=document.getElementById('fhFinal').value;
+	    $scope.errors=ValidateForm.fmValid($scope.fmFilter);
+		$scope.formState=ValidateForm.formState($scope.errors);
+			
+		if($scope.formState){
+    		$scope.error.errorState=false;
+    		Reports.getReports(2,$scope.fmFilter.fhInicio.data,$scope.fmFilter.fhFinal.data)
+    			.then(function(data){
+					$scope.reports=data.reports;
+					if($scope.reports==undefined){
+			    		$scope.error.message=data.message;
+    					$scope.error.errorState=true;
+					}
+				});
+    	}
+    	else{
+    		$scope.error.message="Debes seleccionar las fechas de busqueda";
+    		$scope.error.errorState=true;
+    		console.log($scope.error);
+
+    	}
+    }
+
+})
+.controller('foundBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.nickname;
+	$scope.reports={};
+	var date=new Date();
+	date=date.setDate(date.getDate()+1);
+	var today=$filter('date')(date,'yyyy-M-dd');
+	var year=new Date().getFullYear();
+	$scope.fmFilter={fhInicio:{name:"fhInicio",data:null,type:"datetime"},
+				   fhFinal:{name:"fhFinal",data:null,type:"datetime"}
+				};
+
+	 $scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');	
+	   	}
+	   	Reports.getReports(4,year+"-01-01",today)
+    			.then(function(data){
+					$scope.reports=data.reports;
+					if($scope.reports==undefined){
+			    		$scope.error.message=data.message;
+    					$scope.error.errorState=true;
+					}
+				});
+
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }
+    $scope.filter=function(){
+    	$scope.fmFilter.fhInicio.data=document.getElementById('fhInicio').value;
+    	$scope.fmFilter.fhFinal.data=document.getElementById('fhFinal').value;
+	    $scope.errors=ValidateForm.fmValid($scope.fmFilter);
+		$scope.formState=ValidateForm.formState($scope.errors);
+			
+		if($scope.formState){
+    		$scope.error.errorState=false;
+    		Reports.getReports(4,$scope.fmFilter.fhInicio.data,$scope.fmFilter.fhFinal.data)
+    			.then(function(data){
+					$scope.reports=data.reports;
+					if($scope.reports==undefined){
+			    		$scope.error.message=data.message;
+    					$scope.error.errorState=true;
+					}
+				});
+    	}
+    	else{
+    		$scope.error.message="Debes seleccionar las fechas de busqueda";
+    		$scope.error.errorState=true;
+    		console.log($scope.error);
+
+    	}
     }
 
 })

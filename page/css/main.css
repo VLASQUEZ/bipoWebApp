@@ -818,7 +818,19 @@ input.search-form:hover {
 .heading-report{
   color:#fff;
   background-color: #283593;
-  border-radius: 1px;
+  border-radius: 4px;
+
+}
+.heading-report-stolen{
+  color:#fff;
+  background-color: #CE1D1D;
+  border-radius: 4px;
+
+}
+.heading-report-recovered{
+  color:#fff;
+  background-color: #36B10B;
+  border-radius: 4px;
 
 }
 .panel-body{

@@ -436,6 +436,27 @@ $app->get('/report/:token/:reportName','authenticate', function($token,$reportNa
   }
   
 });
+// fachada para obtener un reporte por id
+$app->get('/report/:reportId', function($id) {
+  try{
+    $reportResponse=new ReportAPI();
+    $response=array();
+    $response=$reportResponse->getReportById($id);
+
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
 //fachada para almacenar la foto del reporte en el servidor
 $app->post('/reportPhoto','authenticate', function() {
   try{

@@ -10,4 +10,8 @@ RewriteRule ^insecureZones$ zoneContainer.html
 RewriteRule ^terminos$ terms.html
 RewriteRule ^home$ home.html
 RewriteRule ^recoverPass$ recoverPass.html
+RewriteRule ^foundBikes$ foundBikes.html
+RewriteRule ^stolenBikes$ stolenBikes.html
+RewriteRule ^recoveredBikes$ recoveredBikes.html
+RewriteRule ^report$ report.html
 ErrorDocument 404 /bipo/page/404.html

@@ -45,20 +45,21 @@ class ReportAPI {
    				
 	  			$db=new Reports();
 	   			$this->response["error"]=false;
-	            $this->response["message"] = $db->insertReport($tokenUser,$reportName,$reportType,
+	            $reportId = $db->insertReport($tokenUser,$reportName,$reportType,
 	            	$coordinates,$idBike,$ReportDetails);
+	            $this->response["message"]="Reporte generado satisfactoriamente";
             	//Actualizar estado de bicicleta
 	        	$bike=new BikeAPI();
 	        	if($reportType==1){
 	    			$bike->updateBikeState('1',$idBike);
-	    			CreateTweet("Bicicleta robada!! \n https://www.google.com/maps/dir/Current+Location/".$coordinates);
+	    			CreateTweet("Bicicleta robada!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
 	        	}
 	        	else if($reportType== 2){
 					$bike->updateBikeState('2',$idBike);
-					CreateTweet("Bicicleta recuperada!! \n https://www.google.com/maps/dir/Current+Location/".$coordinates);
+					CreateTweet("Bicicleta recuperada!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
 	        	}
 	        	else if($idReportType=4){
-					CreateTweet("Bicicleta vista!! \n https://www.google.com/maps/dir/Current+Location/".$coordinates);
+					CreateTweet("Bicicleta vista!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
 
 	        	}
 	   		}
@@ -209,7 +210,48 @@ class ReportAPI {
 		}
 		              
     }
+	//Obtiene un reporte por Nombre y dueño del reporte
+	function getReportById($id){
+		try{
+			$error="";
+			if($id==null || $id<=0){
+				$error="No se pudo verificar la autenticidad de la consulta /n";
+				
+			}
+			if(strcasecmp($error,"")==0)
+			{
+				$db = new Reports();
+		        $this->response["error"]=false;
+		        $reports = $db->getReportById($id);
 
+		        if(count($reports)){
+		        			        
+		        foreach ($reports as $pos => $report) {
+		        		$bike=new Bikes();
+		        		$reports[$pos]["bikePhotos"]=$bike->getBikePhotos($reports[$pos]["idBike"]);
+	        			$db = new Reports();	
+			        	$reports[$pos]["reportPhotos"]=$db->getPhotoReport($report["id"]);
+		        	}
+		        $this->response["reports"]=$reports[0];
+			    }
+			    else
+			    {
+			    	$this->response["message"]="No se encontraron registros";
+			    }
+			}
+	   		else
+	   		{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+		              
+    }
     //Obtiene todos los reportes por tipo
     function getReports($idReportType,$fhInicio=null,$fhFinal=null){
 		try{

@@ -37,7 +37,9 @@ class Reports{
 
 	        $stmt=$this->mysqcon->query("call sp_insertReport(@tokenUser,@reportType,@coordinates,@idBike,@ReportDetails,@ReportName)");
 	        
-	        return $stmt;
+            $bikes = $stmt->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+            return $bikes; 
 	    }
 	    catch(Exception $e){
 	     	return $e;
@@ -112,6 +114,27 @@ class Reports{
         $bikes = $stmt->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
         return $bikes;              
+
+    }
+    //Obtiene un reporte por id
+    public function getReportById($id){ 
+        try{
+        //$stmt = $this->mysqcon->open();
+        $stmt=$this->mysqcon;
+        $stmt=$this->mysqcon->prepare('SET @id := ?');
+        $stmt->bind_param('s', $id);
+        $stmt->execute();
+        $stmt=$this->mysqcon->query("call sp_getReportById(@id)");
+        //print_r($stmt);
+        $report = $stmt->fetch_all(MYSQLI_ASSOC);
+        $stmt->close();
+        return $report;
+        }
+       catch(Exception $e)
+        {
+            print_r($e->getMessage());
+            return $e->getMessage();
+        }             
 
     }
     //Obtiene los tipos de reporte
