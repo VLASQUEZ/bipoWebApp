@@ -126,11 +126,10 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }      } 
 })
-//OBTENER MARCAS DE BICICLETA
-.factory('Brands',function($http,$q,url){
-    //login
-    return{
-        brands: function(data){
+.factory('Bikes', function($http,$q,url){
+    var bikes={};
+
+    bikes.brands=function(){
         //postAjax.user={}
         var serviceUrl=url+"brands"
         var result=null;
@@ -145,13 +144,8 @@ angular.module('bipoApp.services', [])
             });
             
         return dfd.promise;
-    }      } 
-})
-//OBTENER COLORES DE BICICLETA
-.factory('Colors',function($http,$q,url){
-    //login
-    return{
-        colors: function(data){
+    }
+    bikes.colors= function(){
         //postAjax.user={}
         var serviceUrl=url+"bikeColors"
         var result=null;
@@ -166,13 +160,8 @@ angular.module('bipoApp.services', [])
             });
             
         return dfd.promise;
-    }      } 
-})
-//OBTENER TIPOS DE BICICLETA
-.factory('bikeTypes',function($http,$q,url){
-    //login
-    return{
-        bikeTypes: function(data){
+    }
+    bikes.bikeTypes= function(){
         //postAjax.user={}
         var serviceUrl=url+"bikeTypes"
         var result=null;
@@ -187,13 +176,8 @@ angular.module('bipoApp.services', [])
             });
             
         return dfd.promise;
-    }      } 
-})
-//OBTENER ESTADOS DE BICICLETA
-.factory('bikeStates',function($http,$q,url){
-    //login
-    return{
-        colors: function(data){
+    }
+    bikes.bikeStates= function(){
         //postAjax.user={}
         var serviceUrl=url+"bikeStates"
         var result=null;
@@ -208,9 +192,55 @@ angular.module('bipoApp.services', [])
             });
             
         return dfd.promise;
-    }      } 
+    }
+    bikes.insertBike= function(data,user){
+        //postAjax.user={}
+        var serviceUrl=url+"bike"
+        var result=null;
+        var dfd = $q.defer();
+        var params={bikeName:data.bikeName.data,
+            idBrand:data.brand.data.id,
+            idColor:data.color.data.id,
+            idFrame:data.idFrame.data,
+            idType:data.bikeType.data.id,
+            bikeFeatures:data.bikeFeatures.data,
+            idBikeState:data.bikeState.data,
+            token:user
+        };
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    bikes.bikeByUser= function(user,bikeName){
+    //postAjax.user={}
+    var serviceUrl=url+"bike/"+user+"/"+bikeName;
+    var result=null;
+    var dfd = $q.defer();
+
+    //console.log(params);
+    $http.get(serviceUrl)
+        .then(function successCallback(response){
+            dfd.resolve(response.data);   
+        },
+        function errorCallback(error){
+            dfd.resolve(error.data); 
+        });
+        
+    return dfd.promise;
+    }
+
+    return bikes;
+
+
 })
-//OBTENER ESTADOS DE BICICLETA
+//REPORTES
 .factory('Reports',function($http,$q,url){
     //login
     var reports={};
@@ -352,11 +382,17 @@ angular.module('bipoApp.services', [])
                 password:{
                     error:"Contraseña no valida, debe contener una letra mayúscula,"+
                             "\n una letra minúscula, un número y minimo 6 carácteres."
+                },
+                text:{
+                    error:"El campo no puede ir vacio"
+                },
+                select:{
+                    error:"Debes seleccionar un elemento"
                 }
 			}
 	validate.fmFields=[];
 	validate.fmValid=function(data){
-		  console.log(data);
+		  //console.log(data);
 		for (var key in data) {
   			if (data.hasOwnProperty(key)) {
     			var field = data[key];
@@ -462,7 +498,25 @@ angular.module('bipoApp.services', [])
                                 error:error.publish.error};
                         }
                     break;
-                        
+                    case 'text':
+                        if(field.data!=null){
+                             validate.fmFields[field.name]={valid:true};
+                        }
+                        else{
+                            validate.fmFields[field.name]={
+                                valid:false,
+                                error:error.text.error};
+                        }
+                    case 'select':
+                        if(field.data!=null){
+                             validate.fmFields[field.name]={valid:true};
+                        }
+                        else{
+                            validate.fmFields[field.name]={
+                                valid:false,
+                                error:error.select.error};
+                        }
+                    break;
                     case 'password':
                         if(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(field.data)){
                             validate.fmFields[field.name]={

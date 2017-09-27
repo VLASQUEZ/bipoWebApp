@@ -95,18 +95,14 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	}
 
 })
-.controller('registerBikeCtrl',function ($scope,ValidateForm,$uibModal, $log, $document,$interval,fileReader,CookieManager,$cookieStore,$cookies,$window,Colors,Brands,bikeTypes,bikeStates) {
-	$scope.register={bikeName:{name:"name",data:null,type:"alpha"},
+.controller('registerBikeCtrl',function ($scope,ValidateForm,$uibModal, $log, $document,$interval,fileReader,CookieManager,$cookieStore,$cookies,$window,Bikes) {
+	$scope.bikeRegister={bikeName:{name:"name",data:null,type:"alpha"},
 				brand:{name:"brand",data:null,type:"select"},
 				color:{name:"color",data:null,type:"select"},
 				bikeType:{name:"bikeType",data:null,type:"select"},
-				bikeState:{name:"bikeState",data:null,type:"select"},
-				document:{name:"document",data:null,type:"number"},
-				email:{name:"email",data:null,type:"email"},
-				cellphone:{name:"cellphone",data:null,type:"number"},
-				password:{name:"password",data:null,type:"password"},
-				confirmPass:{name:"confirmPass",data:null,type:"comparePass"},
-				terms:{name:"terms",data:null,type:"checkbox"}
+				bikeState:{name:"bikeState",data:3,type:"select"},
+				bikeFeatures:{name:"bikeFeatures",data:null,type:"text"},
+				idFrame:{name:"idFrame",data:null,type:"text"},
 				};
     $scope.islogged=false;
 	$scope.nickname;
@@ -117,22 +113,18 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	if(CookieManager.login()){
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
-    		Colors.colors()
+    		Bikes.colors()
 				.then(function(data){
-					console.log(data);
 					$scope.colors=data.bikeColor;
 				});
-    		Brands.brands()
+    		Bikes.brands()
 				.then(function(data){
-					console.log(data);
 					$scope.brands=data.brands;
 			});
-    		bikeTypes.bikeTypes()
+    		Bikes.bikeTypes()
 				.then(function(data){
-					console.log(data);
 					$scope.bikeTypes=data.biketypes;
 			});
-
     	}else{
     		$window.location.href='inicio';
     	}
@@ -144,16 +136,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	 	}
     }	
     $scope.getFile = function () {
-        $scope.progress = 0;                                                                  
         fileReader.readAsDataUrl($scope.file, $scope)
                       .then(function(result) {
                           $scope.imageSrc = result;
+                          var elem=angular.element(document.querySelector('.file-upload-content'));
+                          elem.css('display','inline');
+                          var div=angular.element(document.querySelector('.image-upload-wrap'));
+                          div.css('display','none');
                       });
     };
-
-    $scope.$on("fileProgress", function(e, progress) {
-        $scope.progress = progress.loaded / progress.total;
-    });
 
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
@@ -161,38 +152,20 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 
 	$scope.registerBike=function(isValid){
-		console.log($scope.register);
 		if(isValid){
-			$ctrl.message="Cargando...";	
-			$scope.register.birthdate.data=document.getElementById('fh2').value;
 			$scope.errors=ValidateForm.fmValid($scope.register);
-			$scope.errors.confirmPass=ValidateForm.comparePass($scope.register.password.data,$scope.register.confirmPass.data);
 			$scope.formState=ValidateForm.formState($scope.errors);
 			
 			if($scope.formState){
-				$ctrl.message="Registrando...";
-				
-				$ctrl.open('sm');
-				$scope.error.errorState=false;
 				try{
-					$scope.response=PostAjax.registerUser($scope.register);
-					if(!$scope.response.error){
-						//mostrar modal y pasar al formulario de registro de
-						//bicicletas
-						$ctrl.message="Iniciando Sesión...";
-						$scope.response=PostAjax.loginUser($scope.register);
-						$interval(function() {
-	      					$scope.modalInstance.close();
-	      					//Inicio de Sesion
+					Bikes.insertBike($scope.bikeRegister,$cookieStore.get('token'))
+						.then(function(data){
+							Bikes.bikeByUser($cookieStore.get('token'),$scope.bikeRegister.bikeName.data)
+								.then(function(data){
+									console.log(data);
 
-	      					//Redireccion a registro de bicicletas
-						}, 3000,1);
-					}
-					else
-					{
-						$scope.error.errorState=$scope.response.error;
-						$scope.error.message=$scope.response.message;
-					}
+								})
+						});
 				}
 				catch(e)
 				{
