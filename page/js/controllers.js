@@ -129,7 +129,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$window.location.href='inicio';
     	}
     }
-	 $scope.logout=function(){
+	$scope.logout=function(){
 	 	if(CookieManager.remove())
 	 	{
 	 		$window.location.href='inicio';
@@ -138,6 +138,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     $scope.getFile = function () {
         fileReader.readAsDataUrl($scope.file, $scope)
                       .then(function(result) {
+                      	console.log($scope.file)
                           $scope.imageSrc = result;
                           var elem=angular.element(document.querySelector('.file-upload-content'));
                           elem.css('display','inline');
@@ -148,8 +149,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
-
-
+	$scope.bike;
 
 	$scope.registerBike=function(isValid){
 		if(isValid){
@@ -162,8 +162,8 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 						.then(function(data){
 							Bikes.bikeByUser($cookieStore.get('token'),$scope.bikeRegister.bikeName.data)
 								.then(function(data){
-									console.log(data);
-
+									$scope.bike=data.bikes[0]
+								
 								})
 						});
 				}
@@ -173,16 +173,24 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				}
 				
 			}
-			else{
+			else{		
 				$scope.error.errorState=true;
 				$scope.error.message="Datos incompletos";
 			}
 		}
 		else{
+
 			$scope.error.errorState=true;
 			$scope.error.message="Datos incompletos";
 		}
 
+	}
+
+	$scope.uploadPhoto=function(){
+		Bikes.bikePhoto("BICICLETA DE PRUEBA WEB",$cookieStore.get('token'),$scope.file)
+			.then(function(data){
+				console.log(data)
+			});
 	}
 
 })

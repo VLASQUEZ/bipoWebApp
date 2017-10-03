@@ -365,11 +365,10 @@ class BikeAPI {
 
 	}
 	//Almacena una foto de la bicicleta
-	function savephoto($bikeName=null,$file=null,$token=null){
+	function savephoto($bikeName=null,$token=null,$file=null){
 		try{
 			//$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
 			//$path="bipo/public/bikeImages/";
-
 			//Produccion
 			$path="../../public/bikeImages/";
 			$error="";
@@ -390,10 +389,7 @@ class BikeAPI {
 				//throw new Exception($userName["message"], 1);
 								
 			}
-			//print_r($userName["user"][0]["nickname"]);
-			//exit(0);
 			if(strcasecmp($error,"")==0){
-				//print_r($file);
 		      	$errors= array();
 		    	$file_name = $file['name'];
 			  	$file_size =$file['size'];

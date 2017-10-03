@@ -195,8 +195,8 @@ angular.module('bipoApp.services', [])
     }
     bikes.insertBike= function(data,user){
         //postAjax.user={}
+
         var serviceUrl=url+"bike"
-        var result=null;
         var dfd = $q.defer();
         var params={bikeName:data.bikeName.data,
             idBrand:data.brand.data.id,
@@ -207,8 +207,39 @@ angular.module('bipoApp.services', [])
             idBikeState:data.bikeState.data,
             token:user
         };
-        //console.log(params);
         $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    bikes.bikePhoto= function(data,user,photo){
+        //postAjax.user={}
+        //console.log(photo)
+        var serviceUrl=url+"bikePhoto"
+        var dfd = $q.defer();
+        var params={bikeName:data,
+            token:user,
+            file:photo,
+        };
+        var form= new FormData();
+        form.append("bikeName", data);
+        form.append("token", user);
+        form.append("file", photo);
+        $http({
+        url: serviceUrl,
+        method: 'POST',
+        data: form,
+        //assign content-type as undefined, the browser
+        //will assign the correct boundary for us
+        headers: { 'Content-Type': undefined},
+        //prevents serializing payload.  don't do it.
+        transformRequest: angular.identity
+        })
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
             },
@@ -622,7 +653,6 @@ angular.module('bipoApp.services', [])
              
             var reader = fileReader.getReader(deferred, scope);         
             reader.readAsDataURL(file);
-             console.log(reader);
             return deferred.promise;
         };
  

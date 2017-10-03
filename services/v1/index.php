@@ -308,7 +308,7 @@ $app->post('/bikePhoto','authenticate', function() {
   try{
       $bikeResponse=new bikeAPI();
       
-      $response=$bikeResponse->savephoto($_POST['bikeName'],$_FILES['file'],$_POST['token']);
+      $response=$bikeResponse->savephoto($_POST['bikeName'],$_POST['token'],$_FILES['file']);
 
       if($response["error"]==false){
         echoResponse(200,$response);

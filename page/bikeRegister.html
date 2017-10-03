@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-sm-7 form-group">
                             <label>Tipo de bicicleta: </label>
-                            <select class="form-control" placeholder="Tipo de bicicleta" ng-options="bikeType as bikeType.type for bikeType in bikeTypes track by bikeType.id" ng-model="register.bikeType.data">
+                            <select class="form-control" placeholder="Tipo de bicicleta" ng-options="bikeType as bikeType.type for bikeType in bikeTypes track by bikeType.id" ng-model="bikeRegister.bikeType.data">
                             </select>
                             <h5 style="color:#ef473a" ng-show="!errors.bikeType.valid">{{errors.bikeType.error}}</h5>
                         </div>
@@ -143,10 +143,10 @@
                                 <div class="panel panel-info ">
                                     <div class="panel-body">
                                         <div class="file-upload col-sm-8 col-md-5">
-                                          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Subir imagen</button>
+                                          <button class="file-upload-btn" type="button" onclick="$('#img1').trigger( 'click' )">Subir imagen</button>
 
                                           <div class="image-upload-wrap" ng-style="invisible(black)">
-                                            <input class="file-upload-input" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
+                                            <input class="file-upload-input" id="img1" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
                                             <div class="drag-text">
                                               <h3>Imagen</h3>
                                             </div>
@@ -159,10 +159,10 @@
                                           </div>
                                         </div>
                                         <div class="file-upload col-sm-8 col-md-5">
-                                          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Subir imagen</button>
+                                          <button class="file-upload-btn" type="button" onclick="$('#img2').trigger( 'click' )">Subir imagen</button>
 
                                           <div class="image-upload-wrap">
-                                            <input class="file-upload-input" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
+                                            <input class="file-upload-input" type='file' id="img2" ng-file-select="onFileSelect($files)" accept="image/*" />
                                             <div class="drag-text">
                                               <h3>Imagen</h3>
                                             </div>
@@ -175,10 +175,10 @@
                                           </div>
                                         </div>
                                         <div class="file-upload col-sm-8 col-md-5">
-                                          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Subir imagen</button>
+                                          <button class="file-upload-btn" type="button" onclick="$('#img3').trigger( 'click' )">Subir imagen</button>
 
                                           <div class="image-upload-wrap">
-                                            <input class="file-upload-input" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
+                                            <input class="file-upload-input" id="img3" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
                                             <div class="drag-text">
                                               <h3>Imagen</h3>
                                             </div>
@@ -191,10 +191,10 @@
                                           </div>
                                         </div>
                                         <div class="file-upload col-sm-8 col-md-5">
-                                          <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Subir imagen</button>
+                                          <button class="file-upload-btn" type="button" onclick="$('#img4').trigger( 'click' )">Subir imagen</button>
 
                                           <div class="image-upload-wrap">
-                                            <input class="file-upload-input" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
+                                            <input class="file-upload-input" id="img4" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
                                             <div class="drag-text">
                                               <h3>Imagen</h3>
                                             </div>
@@ -205,6 +205,9 @@
                                               <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded Image</span></button>
                                             </div>
                                           </div>
+                                        </div>
+                                        <div class="col-sm-8 col-md-5">
+                                            <button type="button" class="btn btn-primary btn-lg" ng-click="uploadPhoto()" ng-show="imageSrc!=undefined">Subir fotos</button>
                                         </div>
                                     </div>
                             </div>
