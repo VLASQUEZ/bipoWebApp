@@ -109,6 +109,8 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	$scope.brands;
 	$scope.colors;
 	$scope.bikeTypes;
+	$scope.files=[];
+	$scope.images=[];
 	 $scope.checkLogin=function(){
     	if(CookieManager.login()){
     		$scope.islogged=true;
@@ -136,15 +138,13 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	 	}
     }	
     $scope.getFile = function () {
-        fileReader.readAsDataUrl($scope.file, $scope)
-                      .then(function(result) {
-                      	console.log($scope.file)
-                          $scope.imageSrc = result;
-                          var elem=angular.element(document.querySelector('.file-upload-content'));
-                          elem.css('display','inline');
-                          var div=angular.element(document.querySelector('.image-upload-wrap'));
-                          div.css('display','none');
-                      });
+	        fileReader.readAsDataUrl($scope.files, $scope)
+          		.then(function(result) {
+          			$scope.images=result;
+         	 });
+
+
+		
     };
 
 	var $ctrl = this;

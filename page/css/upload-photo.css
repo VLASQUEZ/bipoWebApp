@@ -2,21 +2,21 @@
 .file-upload {
   background-color: #ffffff;
   margin: 0 auto;
-  padding: 20px;
 }
 
 .file-upload-btn {
   width: 100%;
-  margin: 0;
+  margin-top: 10px;
   color: #3e3985;
   background: #d6ce00;
   border: none;
-  padding: 10px;
+  padding: 8px 20px;
   border-radius: 4px;
   transition: all .2s ease;
   outline: none;
   text-transform: uppercase;
   font-weight: 700;
+  line-height: 1.42857143;
 }
 
 .file-upload-btn:hover {
@@ -32,7 +32,6 @@
 }
 
 .file-upload-content {
-  display: none;
   text-align: center;
 }
 

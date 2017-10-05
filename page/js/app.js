@@ -24,9 +24,7 @@ angular.module('bipoApp',['bipoApp.controllers','bipoApp.routes','bipoApp.servic
     link: function($scope,el){
       
       el.bind("change", function(e){
-      
-        $scope.file = (e.srcElement || e.target).files[0];
-        console.log($scope.file)
+        $scope.files.push((e.srcElement || e.target).files[0]);
         $scope.getFile();
       })
       

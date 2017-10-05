@@ -613,11 +613,12 @@ angular.module('bipoApp.services', [])
 }])
 .factory('fileReader', function($q,$log){
     var fileReader ={};
-
+    var img=[];
     fileReader.onLoad = function(reader, deferred, scope) {
             return function () {
                 scope.$apply(function () {
-                    deferred.resolve(reader.result);
+                    img.push(reader.result);
+                    deferred.resolve(img);
                 });
             };
         };
@@ -625,7 +626,7 @@ angular.module('bipoApp.services', [])
     fileReader.onError = function (reader, deferred, scope) {
             return function () {
                 scope.$apply(function () {
-                    deferred.reject(reader.result);
+                    deferred.reject(files);
                 });
             };
         };
@@ -648,11 +649,13 @@ angular.module('bipoApp.services', [])
             return reader;
         };
  
-    fileReader.readAsDataURL = function (file, scope) {
+    fileReader.readAsDataURL = function (files, scope) {
+        img=[];
             var deferred = $q.defer();
-             
-            var reader = fileReader.getReader(deferred, scope);         
-            reader.readAsDataURL(file);
+                angular.forEach(files,function(file){   
+                var reader = fileReader.getReader(deferred, scope);
+                reader.readAsDataURL(file);
+            });
             return deferred.promise;
         };
  
