@@ -203,22 +203,6 @@ class Users{
             return $r;    
     }
 
-    /**
-     * Actualiza registro dado su ID
-     * @param int $id Description
-     */
-    public function update($id, $newName) {
-        
-        	$stmt = $this->mysqcon;
-            $stmt->open();    
-            $stmt ->prepare("UPDATE tb_users SET name=? WHERE id = ? ; ");
-            $stmt->bind_param('ss', $newName,$id);
-            $r = $stmt->execute(); 
-            $stmt->close();
-            return $r;    
-        
-        return false;
-    }
 
     /**
      * verifica si un ID existe

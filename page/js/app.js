@@ -24,13 +24,22 @@ angular.module('bipoApp',['bipoApp.controllers','bipoApp.routes','bipoApp.servic
     link: function($scope,el){
       
       el.bind("change", function(e){
-        $scope.files.push((e.srcElement || e.target).files[0]);
-        $scope.getFile();
-      })
-      
+        for(var i=0; i<=$scope.files.length;i++){
+          var indx = $scope.files.findIndex(i => i.name === (e.srcElement || e.target).files[0].name);
+          if($scope.files.length==0)
+          {
+            $scope.files.push((e.srcElement || e.target).files[0]);
+            $scope.getFile();
+          }
+          else if(indx=== -1) {
+            $scope.files.push((e.srcElement || e.target).files[0]);
+            $scope.getFile();
+          }
+         i++;  
+        }
+      });
+
     }
-    
   }
-  
-  
+    
 });

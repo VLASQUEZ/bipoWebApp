@@ -217,17 +217,17 @@ angular.module('bipoApp.services', [])
             
         return dfd.promise;
     }
-    bikes.bikePhoto= function(data,user,photo){
+    bikes.bikePhoto= function(bikeName,user,photo){
         //postAjax.user={}
         //console.log(photo)
         var serviceUrl=url+"bikePhoto"
         var dfd = $q.defer();
-        var params={bikeName:data,
+        var params={bikeName:bikeName,
             token:user,
             file:photo,
         };
         var form= new FormData();
-        form.append("bikeName", data);
+        form.append("bikeName", bikeName);
         form.append("token", user);
         form.append("file", photo);
         $http({
@@ -317,7 +317,63 @@ angular.module('bipoApp.services', [])
         });
         
     return dfd.promise;
-}
+    }
+    reports.insertReport= function(data,user){
+        //postAjax.user={}
+
+        var serviceUrl=url+"bike"
+        var dfd = $q.defer();
+        var params={bikeName:data.bikeName.data,
+            idBrand:data.brand.data.id,
+            idColor:data.color.data.id,
+            idFrame:data.idFrame.data,
+            idType:data.bikeType.data.id,
+            bikeFeatures:data.bikeFeatures.data,
+            idBikeState:data.bikeState.data,
+            token:user
+        };
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    reports.reportPhoto= function(bikeName,user,photo){
+        //postAjax.user={}
+        //console.log(photo)
+        var serviceUrl=url+"bikePhoto"
+        var dfd = $q.defer();
+        var params={bikeName:bikeName,
+            token:user,
+            file:photo,
+        };
+        var form= new FormData();
+        form.append("bikeName", bikeName);
+        form.append("token", user);
+        form.append("file", photo);
+        $http({
+        url: serviceUrl,
+        method: 'POST',
+        data: form,
+        //assign content-type as undefined, the browser
+        //will assign the correct boundary for us
+        headers: { 'Content-Type': undefined},
+        //prevents serializing payload.  don't do it.
+        transformRequest: angular.identity
+        })
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }  
     return reports; 
 })
 //INICIO DE SESION

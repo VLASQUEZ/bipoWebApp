@@ -124,7 +124,8 @@
                     <div class="panel-body">
                         <div class="panel-heading heading-report-stolen">{{report.reportType}}</div>
                         <div class="col-md-4">   
-                           <div class="panel-heading"><img ng-src="../{{report.bikePhotos[0].url}}" class="img-thumbnail img-responsive">
+                           <div class="panel-heading">
+                                <img  ng-repeat="bikePhoto in report.bikePhotos" width="100 px" height="60px" class="img-thumbnail img-responsive" ng-src="../{{bikePhoto.url}}">
                            </div>
                         </div>
                            <div class="col-md-8 " style="padding:10px 15px">
@@ -167,7 +168,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <a href="report?reportId={{report.id}}" class="btn btn-primary">Ver más...</a>
-                                        <button ng-show="report.idreportType==1" class="btn btn-danger">He visto esta bicicleta</button>
+                                        <button ng-show="report.idreportType==1" ng-click="setNewReport(report.idBike)" class="btn btn-danger">He visto esta bicicleta</button>
                                     </li>
                                 </ul>
                             </div>

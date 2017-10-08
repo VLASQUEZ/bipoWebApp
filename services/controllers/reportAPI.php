@@ -414,17 +414,6 @@ class ReportAPI {
 			$this->response["message"] = $e->getMessage();
     	}
     }
-    function Facebook($content){
-    	try{
 
-			$error="";
-			CreateFacebookPublication($content);
-		    return $this->response;
-    	}
-    	catch(exception $e){
-			$this->response["error"]=true;
-			$this->response["message"] = $e->getMessage();
-    	}
-    }
 }
 ?>

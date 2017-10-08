@@ -153,7 +153,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 	$scope.registerBike=function(isValid){
 		if(isValid){
-			$scope.errors=ValidateForm.fmValid($scope.register);
+			$scope.errors=ValidateForm.fmValid($scope.bikeRegister);
 			$scope.formState=ValidateForm.formState($scope.errors);
 			
 			if($scope.formState){
@@ -162,9 +162,11 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 						.then(function(data){
 							Bikes.bikeByUser($cookieStore.get('token'),$scope.bikeRegister.bikeName.data)
 								.then(function(data){
-									$scope.bike=data.bikes[0]
-								
-								})
+
+				                angular.forEach($scope.files,function(photo){   
+					                Bikes.bikePhoto(data.bikes[0].bikename,$cookieStore.get('token'),photo);
+					            });								
+							});
 						});
 				}
 				catch(e)
@@ -185,14 +187,109 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 		}
 
 	}
+})
+.controller('newReportCtrl',function($scope,ValidateForm,$log,$document,fileReader,CookieManager,$cookieStore,$cookies,$window,Reports,getParams) {
+	$scope.Report={title:"",lead:""}
+	$scope.newReport={reportDetails:{name:"reportDetails",data:null,type:"alpha"},
+			coordinates:{name:"coordinates",data:null,type:"coordinates"},
+			};
+    $scope.islogged=false;
+	$scope.nickname;
+	$scope.files=[];
+	$scope.images=[];
+	
+	 $scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
 
-	$scope.uploadPhoto=function(){
-		Bikes.bikePhoto("BICICLETA DE PRUEBA WEB",$cookieStore.get('token'),$scope.file)
-			.then(function(data){
-				console.log(data)
-			});
+    		var bikeId=getParams().bikeId;
+			var reportType=getParams().reportType;
+
+			$scope.setTitles(reportType);
+
+    	}else{
+    		$window.location.href='inicio';
+    	}
+    }
+	$scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }	
+    $scope.getFile = function () {
+	        fileReader.readAsDataUrl($scope.files, $scope)
+          		.then(function(result) {
+          			$scope.images=result;
+         	 });
+
+
+		
+    };
+
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.bike;
+
+	$scope.createReport=function(isValid){
+		if(isValid){
+			$scope.errors=ValidateForm.fmValid($scope.newReport);
+			$scope.formState=ValidateForm.formState($scope.errors);
+			
+			if($scope.formState){
+				try{
+					Reports.insertReport($scope.newReport,$cookieStore.get('token'))
+						.then(function(data){
+							Bikes.bikeByUser($cookieStore.get('token'),$scope.newReport.bikeName.data)
+								.then(function(data){
+
+				                angular.forEach($scope.files,function(photo){   
+					                Bikes.bikePhoto(data.bikes[0].bikename,$cookieStore.get('token'),photo);
+					            });								
+							});
+						});
+				}
+				catch(e)
+				{
+					$ctrl.message="e";
+				}
+				
+			}
+			else{		
+				$scope.error.errorState=true;
+				$scope.error.message="Datos incompletos";
+			}
+		}
+		else{
+
+			$scope.error.errorState=true;
+			$scope.error.message="Datos incompletos";
+		}
+
 	}
+	$scope.getCoordinates=function(event){
+		$scope.newReport.coordinates.data=event.latLng.lat()+","+event.latLng.lng()
+		console.log(event.latLng.lat())
+	}
+	$scope.setTitles=function(reportType){
+		switch(reportType){
+			case "1":
+				$scope.Report.title="Te robaron la bicicleta?";
+				$scope.Report.lead="Reportala con bipo y tendrás más posibilidades de encontrarla";
+			break;
 
+			case "2":
+				$scope.Report.title="Super, recuperaste la bicicleta!";
+				$scope.Report.lead="Cuentanos como la recuperaste?";
+			break;
+
+			case "3":
+				$scope.Report.title="Ayudanos a reportar las bicicletas robadas";
+				$scope.Report.lead="Si viste una bicicleta robada, cuentanos donde la viste?";
+			break;	
+		}
+	}
 })
 .controller('loginUserCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager) {
 	var $ctrl = this;
@@ -360,6 +457,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 						var coordinates= $scope.report.googlemapscoordinate.split(',');
 						$scope.report.latitude=coordinates[0];
 						$scope.report.longitude=coordinates[1];
+
 					}
 					else{
 						$scope.error.errorState=true;
@@ -385,6 +483,9 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	 		$window.location.href='inicio';
 	 	}
     }
+    $scope.setNewReport=function(){
+    	$window.location.href='newReport?idBike='+$scope.report.idBike+'&reportType=3';
+    }
 
 })
 .controller('stolenBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter) {
@@ -406,7 +507,6 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');	
 	   	}
-	   	console.log(today);
 	   	Reports.getReports(1,year+"-01-01",today)
     			.then(function(data){
 					$scope.reports=data.reports;
@@ -446,6 +546,9 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		console.log($scope.error);
 
     	}
+    }
+    $scope.setNewReport=function(idBike){
+    	$window.location.href='newReport?idBike='+idBike+'&reportType=3';
     }
 
 })
@@ -571,6 +674,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
 
 })
+
 .controller('indexCtrl', function($scope,Login,$window,$cookies,$cookieStore,CookieManager,$document){
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};

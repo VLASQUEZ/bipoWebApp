@@ -152,75 +152,73 @@
 	}
 
 	function CreateFacebookPost($content,$link){
-    $config = array();
-    $config['appId'] = '1734546943514239';
-    $config['secret'] = '9ce5d149a777bef76dfd55c012ecff84';
-    $config['fileUpload'] = false; // optional
-     
-    $fb = new Facebook\Facebook ([
-    'app_id' => '1734546943514239',
-    'app_secret' => '9ce5d149a777bef76dfd55c012ecff84',
-    'default_graph_version' => 'v2.4'
-    ]);
-     
-    // define your POST parameters (replace with your own values)
-    $params = array(
-      "access_token" => "EAAYpj65qFn8BADfZBuO7WlalDNbyIYfsdouPmsh0y75ZB38iqmRV1sT7rUaTVPGsQPbhIegL5ixZAMhkxB6qlgpjD3V1i3wVlX5h6PUuOZCfloavnCfEBQUCePTwUAjJZBuVaeCFIk9ZBZBZB1bBkbPDHfXdJmoqxFWOZCF0BhBvxWeK6EKpYSE6GlGxIbI6pZCZATYgVQ5DHc1NwZDZD", // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
-      "message" => $content,
-      "tags"=>"Policianacionaldeloscolombianos",
-      "link" => $link,
-      "name" => 'Reporte generado en la plataforma bipo',
-      "caption" => "www.bipoapp.com",
-      "description" => "Ingresa a nuesta pagina para más información"
-    );
-     
-    // post to Facebook
-    // see: https://developers.facebook.com/docs/reference/php/facebook-api/
-    try {
-      	$ret = $fb->post('/me/feed', $params);
-    	$fb->sendRequest('POST', "109837433020784/feed",$params );
+	    $config = array();
+	    $config['appId'] = '1734546943514239';
+	    $config['secret'] = '9ce5d149a777bef76dfd55c012ecff84';
+	    $config['fileUpload'] = false; // optional
+	     
+	    $fb = new Facebook\Facebook ([
+	    'app_id' => '1734546943514239',
+	    'app_secret' => '9ce5d149a777bef76dfd55c012ecff84',
+	    'default_graph_version' => 'v2.4'
+	    ]);
+	     
+	    // define your POST parameters (replace with your own values)
+	    $params = array(
+	      "access_token" => "EAAYpj65qFn8BADfZBuO7WlalDNbyIYfsdouPmsh0y75ZB38iqmRV1sT7rUaTVPGsQPbhIegL5ixZAMhkxB6qlgpjD3V1i3wVlX5h6PUuOZCfloavnCfEBQUCePTwUAjJZBuVaeCFIk9ZBZBZB1bBkbPDHfXdJmoqxFWOZCF0BhBvxWeK6EKpYSE6GlGxIbI6pZCZATYgVQ5DHc1NwZDZD", // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
+	      "message" => $content,
+	      "tags"=>"Policianacionaldeloscolombianos",
+	      "link" => $link,
+	      "name" => 'Reporte generado en la plataforma bipo',
+	      "caption" => "www.bipoapp.com",
+	      "description" => "Ingresa a nuesta pagina para más información"
+	    );
+	     
+	    // post to Facebook
+	    // see: https://developers.facebook.com/docs/reference/php/facebook-api/
+	    try {
+	      	$ret = $fb->post('/me/feed', $params);
+	    	$fb->sendRequest('POST', "109837433020784/feed",$params );
 
-      return true;
-    } catch(Exception $e) {
-      echo $e->getMessage();
-    }
+	      return true;
+	    } catch(Exception $e) {
+	      echo $e->getMessage();
+	    }
 
 
 	}
-		function CreateTweet($content){
-			try{
+	function CreateTweet($content){
+		try{
 
 
-			$settings = array(
-				'oauth_access_token' => '906614341671284736-mTLSK7EKLOx65ZjtwlPYfyXooIBAeDM',
-				'oauth_access_token_secret' => 'DNosGYTwRfrnjFt0HZsnN1xzeDqZdO0URlEdkLcooUGEE',
-				'consumer_key' => 'yB29f3JCLbblHgoUbrKCSjueg',
-				'consumer_secret' => '5EkjtWVe5K2kbBpUY0LMYW5STsGtUHsIvKG2cgfSnUvWtlWPfs',
-			);
+		$settings = array(
+			'oauth_access_token' => '906614341671284736-mTLSK7EKLOx65ZjtwlPYfyXooIBAeDM',
+			'oauth_access_token_secret' => 'DNosGYTwRfrnjFt0HZsnN1xzeDqZdO0URlEdkLcooUGEE',
+			'consumer_key' => 'yB29f3JCLbblHgoUbrKCSjueg',
+			'consumer_secret' => '5EkjtWVe5K2kbBpUY0LMYW5STsGtUHsIvKG2cgfSnUvWtlWPfs',
+		);
 
-			// url
-			$url = "https://api.twitter.com/1.1/statuses/update.json";
+		// url
+		$url = "https://api.twitter.com/1.1/statuses/update.json";
 
-			// tipo de metodo
-			$requestMethod = 'POST';
+		// tipo de metodo
+		$requestMethod = 'POST';
 
-			//tweet
-			$postfields = array('status' => $content." ".'@AndreyVlasquez');
+		//tweet
+		$postfields = array('status' => $content." ".'@AndreyVlasquez');
 
-			// instancia de la conexion con twitter
-			$twitter = new TwitterAPIExchange ($settings);
+		// instancia de la conexion con twitter
+		$twitter = new TwitterAPIExchange ($settings);
 
-			// enviamos el tweet
-			$response = $twitter->buildOauth($url, $requestMethod)
-								->setPostfields($postfields)
-								->performRequest();
+		// enviamos el tweet
+		$response = $twitter->buildOauth($url, $requestMethod)
+							->setPostfields($postfields)
+							->performRequest();
 
-								return true;
-			}catch(exception $e)
-			{
-				return $e->getTraceAsString();
-			}
-
-
+							return true;
+		}catch(exception $e)
+		{
+			return $e->getTraceAsString();
+		}
 	}
 	?>

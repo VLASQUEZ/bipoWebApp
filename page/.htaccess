@@ -14,4 +14,5 @@ RewriteRule ^foundBikes$ foundBikes.html
 RewriteRule ^stolenBikes$ stolenBikes.html
 RewriteRule ^recoveredBikes$ recoveredBikes.html
 RewriteRule ^report$ report.html
+RewriteRule ^newReport$ newReport.html
 ErrorDocument 404 /bipo/page/404.html

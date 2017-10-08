@@ -62,22 +62,6 @@ class Reports{
             return $e->getMessage();
         }
     }
-        //Almacena la foto del reporte
-    public function InsertFacebookToken($token){ 
-        try{
-        //$stmt = $this->mysqcon->open();
-            $stmt=$this->mysqcon->prepare("insert into tb_facebook(token)values(?)");
-            $thumb=$url;
-            $stmt->bind_param('s',$token);
-            $r = $stmt->execute(); 
-            $stmt->close();
-            return $r;
-        }
-        catch(Exception $e)
-        {
-            return $e->getMessage();
-        }
-    }
     //Obtiene todas las fotos asociadas al reporte
     public function getPhotoReport($idReport){
         try{
