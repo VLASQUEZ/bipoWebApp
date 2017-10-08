@@ -250,21 +250,21 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.bikeByUser= function(user,bikeName){
-    //postAjax.user={}
-    var serviceUrl=url+"bike/"+user+"/"+bikeName;
-    var result=null;
-    var dfd = $q.defer();
+            //postAjax.user={}
+            var serviceUrl=url+"bike/"+user+"/"+bikeName;
+            var result=null;
+            var dfd = $q.defer();
 
-    //console.log(params);
-    $http.get(serviceUrl)
-        .then(function successCallback(response){
-            dfd.resolve(response.data);   
-        },
-        function errorCallback(error){
-            dfd.resolve(error.data); 
-        });
-        
-    return dfd.promise;
+            //console.log(params);
+            $http.get(serviceUrl)
+                .then(function successCallback(response){
+                    dfd.resolve(response.data);   
+                },
+                function errorCallback(error){
+                    dfd.resolve(error.data); 
+                });
+                
+            return dfd.promise;
     }
 
     return bikes;
@@ -272,7 +272,7 @@ angular.module('bipoApp.services', [])
 
 })
 //REPORTES
-.factory('Reports',function($http,$q,url){
+.factory('Reports',function($http,$q,url,$filter){
     //login
     var reports={};
     reports.getLastReports=function(){
@@ -305,34 +305,10 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     reports.getReportById=function(reportId){
-    var serviceUrl=url+"report/"+reportId;
-    var dfd = $q.defer();
-    //console.log(params);
-    $http.get(serviceUrl)
-        .then(function successCallback(response){
-            dfd.resolve(response.data);   
-        },
-        function errorCallback(error){
-            dfd.resolve(error.data); 
-        });
-        
-    return dfd.promise;
-    }
-    reports.insertReport= function(data,user){
-        //postAjax.user={}
-
-        var serviceUrl=url+"bike"
+        var serviceUrl=url+"report/"+reportId;
         var dfd = $q.defer();
-        var params={bikeName:data.bikeName.data,
-            idBrand:data.brand.data.id,
-            idColor:data.color.data.id,
-            idFrame:data.idFrame.data,
-            idType:data.bikeType.data.id,
-            bikeFeatures:data.bikeFeatures.data,
-            idBikeState:data.bikeState.data,
-            token:user
-        };
-        $http.post(serviceUrl,params)
+        //console.log(params);
+        $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
             },
@@ -342,19 +318,43 @@ angular.module('bipoApp.services', [])
             
         return dfd.promise;
     }
-    reports.reportPhoto= function(bikeName,user,photo){
+    reports.insertReport= function(data,user){
+        var serviceUrl=url+"report"
+        var dfd = $q.defer();
+        var params={reportType:data.reportType.data,
+            coordinates:data.coordinates.data,
+            idBike:data.idBike.data,
+            reportDetails:data.reportDetails.data,
+            reportName:data.reportName.data,
+            token:user
+        };
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);
+
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    reports.setReportName=function(idBike,username){
+        var date=new Date();
+        date=date.setDate(date.getDate());
+        var today=$filter('date')(date,'yyyyMdd');
+        var reportName=today+"_"+username+"_"+idBike;
+        return  reportName;
+    }
+    reports.reportPhoto= function(reportName,user,photo){
         //postAjax.user={}
         //console.log(photo)
-        var serviceUrl=url+"bikePhoto"
+        var serviceUrl=url+"reportPhoto"
         var dfd = $q.defer();
-        var params={bikeName:bikeName,
-            token:user,
-            file:photo,
-        };
         var form= new FormData();
-        form.append("bikeName", bikeName);
+        form.append("reportName", reportName);
         form.append("token", user);
-        form.append("file", photo);
+        form.append("image", photo);
         $http({
         url: serviceUrl,
         method: 'POST',
@@ -369,6 +369,7 @@ angular.module('bipoApp.services', [])
                 dfd.resolve(response.data);   
             },
             function errorCallback(error){
+                console.log(error.data)
                 dfd.resolve(error.data); 
             });
             
@@ -475,6 +476,9 @@ angular.module('bipoApp.services', [])
                 },
                 select:{
                     error:"Debes seleccionar un elemento"
+                },
+                coordinates:{
+                    error:"Debes seleccionar una ubicación"
                 }
 			}
 	validate.fmFields=[];
@@ -594,6 +598,17 @@ angular.module('bipoApp.services', [])
                                 valid:false,
                                 error:error.text.error};
                         }
+                    break;
+                    case 'coordinates':
+                        if(field.data!=null){
+                             validate.fmFields[field.name]={valid:true};
+                        }
+                        else{
+                            validate.fmFields[field.name]={
+                                valid:false,
+                                error:error.coordinates.error};
+                        }
+                    break;
                     case 'select':
                         if(field.data!=null){
                              validate.fmFields[field.name]={valid:true};

@@ -4,7 +4,22 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 .controller('registerCtrl',function ($scope,ValidateForm,Register,Login,setPreferences,CookieManager, $log, $document,$interval,$window,$cookies,$cookieStore){
 	
 	$scope.error={errorState:false,message:""};
-	
+	$scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
+    		$window.location.href='home';
+    	}else{
+    		$window.location.href='inicio';
+    	}
+    }
+	$scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }	
+
 	$scope.register={name:{name:"name",data:null,type:"alpha"},
 					lastName:{name:"lastName",data:null,type:"alpha"},
 					birthdate:{name:"birthdate",data:null,type:"birthdate"},
@@ -111,7 +126,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	$scope.bikeTypes;
 	$scope.files=[];
 	$scope.images=[];
-	 $scope.checkLogin=function(){
+	$scope.checkLogin=function(){
     	if(CookieManager.login()){
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
@@ -190,8 +205,11 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 })
 .controller('newReportCtrl',function($scope,ValidateForm,$log,$document,fileReader,CookieManager,$cookieStore,$cookies,$window,Reports,getParams) {
 	$scope.Report={title:"",lead:""}
-	$scope.newReport={reportDetails:{name:"reportDetails",data:null,type:"alpha"},
+	$scope.newReport={reportType:{name:"reportType",data:null,type:"integer"},
 			coordinates:{name:"coordinates",data:null,type:"coordinates"},
+			idBike:{name:"idBike",data:null,type:"integer"},
+			reportDetails:{name:"reportDetails",data:null,type:"text"},
+			reportName:{name:"reportName",data:null,type:"string"},
 			};
     $scope.islogged=false;
 	$scope.nickname;
@@ -203,8 +221,11 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
 
-    		var bikeId=getParams().bikeId;
+    		var bikeId=getParams().idBike;
 			var reportType=getParams().reportType;
+			$scope.newReport.reportType.data=reportType;
+			$scope.newReport.idBike.data=bikeId;
+			$scope.newReport.reportName.data=Reports.setReportName(bikeId,$scope.nickname);
 
 			$scope.setTitles(reportType);
 
@@ -222,10 +243,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	        fileReader.readAsDataUrl($scope.files, $scope)
           		.then(function(result) {
           			$scope.images=result;
-         	 });
-
-
-		
+         	 });		
     };
 
 	var $ctrl = this;
@@ -236,18 +254,18 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 		if(isValid){
 			$scope.errors=ValidateForm.fmValid($scope.newReport);
 			$scope.formState=ValidateForm.formState($scope.errors);
-			
+
+			//console.log($scope.newReport)
 			if($scope.formState){
 				try{
 					Reports.insertReport($scope.newReport,$cookieStore.get('token'))
 						.then(function(data){
-							Bikes.bikeByUser($cookieStore.get('token'),$scope.newReport.bikeName.data)
-								.then(function(data){
+							angular.forEach($scope.files,function(photo){   
+					                Reports.reportPhoto($scope.newReport.reportName.data,$cookieStore.get('token'),photo);
+					            });
 
-				                angular.forEach($scope.files,function(photo){   
-					                Bikes.bikePhoto(data.bikes[0].bikename,$cookieStore.get('token'),photo);
-					            });								
-							});
+					            $scope.error.errorState=true;
+					            $scope.error.message=data.message;	
 						});
 				}
 				catch(e)
@@ -270,7 +288,6 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	}
 	$scope.getCoordinates=function(event){
 		$scope.newReport.coordinates.data=event.latLng.lat()+","+event.latLng.lng()
-		console.log(event.latLng.lat())
 	}
 	$scope.setTitles=function(reportType){
 		switch(reportType){
@@ -284,7 +301,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				$scope.Report.lead="Cuentanos como la recuperaste?";
 			break;
 
-			case "3":
+			case "4":
 				$scope.Report.title="Ayudanos a reportar las bicicletas robadas";
 				$scope.Report.lead="Si viste una bicicleta robada, cuentanos donde la viste?";
 			break;	
@@ -298,7 +315,21 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
   	$scope.login={email:{name:"email",data:null,type:"email"},
 				password:{name:"password",data:null,type:"password"}
 				};
-
+	$scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
+    		$window.location.href='home';
+    	}else{
+    		$window.location.href='inicio';
+    	}
+    }
+	$scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }			
 	$scope.loginUser=function(isValid){
 		
 		if(isValid){
@@ -429,12 +460,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$window.location.href='inicio';
     	}
     }
-	 $scope.logout=function(){
+	$scope.logout=function(){
 	 	if(CookieManager.remove())
 	 	{
 	 		$window.location.href='inicio';
 	 	}
     }
+    $scope.setNewReport=function(idBike){
+    	$window.location.href='newReport?idBike='+idBike+'&reportType=4';
+    }
+
 
 })
 .controller('reportCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,getParams) {
@@ -484,7 +519,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	 	}
     }
     $scope.setNewReport=function(){
-    	$window.location.href='newReport?idBike='+$scope.report.idBike+'&reportType=3';
+    	$window.location.href='newReport?idBike='+$scope.report.idBike+'&reportType=4';
     }
 
 })
@@ -548,7 +583,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
     $scope.setNewReport=function(idBike){
-    	$window.location.href='newReport?idBike='+idBike+'&reportType=3';
+    	$window.location.href='newReport?idBike='+idBike+'&reportType=4';
     }
 
 })

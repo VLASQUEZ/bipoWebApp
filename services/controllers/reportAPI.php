@@ -44,26 +44,19 @@ class ReportAPI {
    				$reportName=$currentDate."_".$id["user"][0]["nickname"]."_".$idBike;
    				
 	  			$db=new Reports();
-	   			$this->response["error"]=false;
+	   			
 	            $reportId = $db->insertReport($tokenUser,$reportName,$reportType,
 	            	$coordinates,$idBike,$ReportDetails);
+	            $this->response["error"]=false;
 	            $this->response["message"]="Reporte generado satisfactoriamente";
             	//Actualizar estado de bicicleta
 	        	$bike=new BikeAPI();
-	        	if($reportType==1){
-	    			$bike->updateBikeState('1',$idBike);
-	    			CreateTweet("Bicicleta robada!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
-	    			CreateFacebookPost('Bicicleta robada!! #Policianacionaldeloscolombianos','http://www.bipoapp.com/page/report?reportId='.$reportId[0]["LAST_INSERT_ID()"]);
-	        	}
-	        	else if($reportType== 2){
-					$bike->updateBikeState('2',$idBike);
-					CreateTweet("Bicicleta recuperada!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
-					CreateFacebookPost('Bicicleta recuperada!!','http://www.bipoapp.com/page/report?reportId='.$reportId[0]["LAST_INSERT_ID()"]);
-	        	}
-	        	else if($idReportType=4){
-					CreateTweet("Bicicleta vista!! \n http://www.bipoapp.com/page/report?reportId=".$reportId[0]["LAST_INSERT_ID()"]);
-					CreateFacebookPost('Bicicleta vista!! #Policianacionaldeloscolombianos','http://www.bipoapp.com/page/report?reportId='.$reportId[0]["LAST_INSERT_ID()"]);
+	        	$bike->updateBikeState($reportType,$idBike);
 
+	        	$network=$this->publishNetwork($reportType,$reportId[0]["LAST_INSERT_ID()"]);
+	        	if (!strcmp($error,"")==0) {
+	        		$this->response["error"]=true;
+	        		$this->response["message"]="Reporte generado satisfactoriamente \n".$error;
 	        	}
 	   		}
 	   		else{
@@ -78,6 +71,39 @@ class ReportAPI {
 			$this->response["message"] = $e->getMessage();
 		}
 		              
+    }
+
+    //Crea publicaciones de robos en las redes sociales
+    function publishNetwork($reportType,$reportId){
+
+    	$reportUrl="http://www.bipoapp.com/page/report?reportId=".$reportId;
+    	$Text="";
+    	$error="";
+    	switch ($reportType) {
+    		case '1':	
+    			$Text="#BicicletaRobada \n ";
+			break;
+    		case '2':
+    			$Text="#BicicletaRecuperada \n ";
+    			break;
+			case '4':
+    			$Text="#BicicletaVista \n ";
+    			break;
+    		default:
+    			# code...
+    			break;
+    	}
+		$ResultTwitter=CreateTweet($Text.$reportUrl);
+		$ResultFacebook=CreateFacebookPost($Text.' @Policianacionaldeloscolombianos',$reportUrl);
+		if(!$ResultFacebook){
+			$error.=$ResultFacebook."\n";
+		}
+		if(!$ResultTwitter){
+			$error.=$ResultTwitter."\n";
+		}
+
+		return $error;
+
     }
     //Almacena una foto del reporte
 	function savephoto($reportName=null,$file=null,$token=null){

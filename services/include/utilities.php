@@ -165,9 +165,9 @@
 	     
 	    // define your POST parameters (replace with your own values)
 	    $params = array(
-	      "access_token" => "EAAYpj65qFn8BADfZBuO7WlalDNbyIYfsdouPmsh0y75ZB38iqmRV1sT7rUaTVPGsQPbhIegL5ixZAMhkxB6qlgpjD3V1i3wVlX5h6PUuOZCfloavnCfEBQUCePTwUAjJZBuVaeCFIk9ZBZBZB1bBkbPDHfXdJmoqxFWOZCF0BhBvxWeK6EKpYSE6GlGxIbI6pZCZATYgVQ5DHc1NwZDZD", // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
+	      "access_token" => "EAAYpj65qFn8BAKVQYmBQF8sUgDR4jO6Vq7u5zOBqfcrLJyH9ZCd51OYOMZBiRZALF0XqwtPW39gnb3IA2rWag3n18lkunWQFhtV0QnD6fRBQWKWLBfnrlixIycI2PC8Jz2LG72HcZCf3Gis5txjMjlybtXW1ZBALiHCfdakMOcrd6PV7OVfDtrxvcfOwHXkZB24xZCSkjB4qQZDZD", // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
 	      "message" => $content,
-	      "tags"=>"Policianacionaldeloscolombianos",
+	      "tags"=>"115144905195604",
 	      "link" => $link,
 	      "name" => 'Reporte generado en la plataforma bipo',
 	      "caption" => "www.bipoapp.com",
@@ -182,7 +182,7 @@
 
 	      return true;
 	    } catch(Exception $e) {
-	      echo $e->getMessage();
+	      return $e->getMessage();
 	    }
 
 
