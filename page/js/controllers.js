@@ -9,8 +9,6 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
     		$window.location.href='home';
-    	}else{
-    		$window.location.href='inicio';
     	}
     }
 	$scope.logout=function(){
@@ -143,7 +141,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 					$scope.bikeTypes=data.biketypes;
 			});
     	}else{
-    		$window.location.href='inicio';
+    		$window.location.href='login';
     	}
     }
 	$scope.logout=function(){
@@ -177,9 +175,9 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 						.then(function(data){
 							Bikes.bikeByUser($cookieStore.get('token'),$scope.bikeRegister.bikeName.data)
 								.then(function(data){
-
+								console.log(data.bikes[0].id)
 				                angular.forEach($scope.files,function(photo){   
-					                Bikes.bikePhoto(data.bikes[0].bikename,$cookieStore.get('token'),photo);
+					                Bikes.bikePhoto(data.bikes[0].id,$cookieStore.get('token'),photo);
 					            });								
 							});
 						});
@@ -230,7 +228,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 			$scope.setTitles(reportType);
 
     	}else{
-    		$window.location.href='inicio';
+    		$window.location.href='login';
     	}
     }
 	$scope.logout=function(){
@@ -260,8 +258,8 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				try{
 					Reports.insertReport($scope.newReport,$cookieStore.get('token'))
 						.then(function(data){
-							angular.forEach($scope.files,function(photo){   
-					                Reports.reportPhoto($scope.newReport.reportName.data,$cookieStore.get('token'),photo);
+							angular.forEach($scope.files,function(photo){
+					                Reports.reportPhoto(data.reportId,$cookieStore.get('token'),photo);
 					            });
 
 					            $scope.error.errorState=true;
@@ -320,8 +318,6 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
     		$window.location.href='home';
-    	}else{
-    		$window.location.href='inicio';
     	}
     }
 	$scope.logout=function(){
@@ -375,6 +371,9 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 		}
 
 	}
+	$scope.forgetPass=function(){
+		$window.location.href='forgetPass';
+	}
 })
 .controller('recoverPassCtrl', function ($scope,ValidateForm,setPass, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,$window,getParams) {
 	var $ctrl = this;
@@ -388,7 +387,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
     	}else{
-    		$window.location.href='inicio';
+    		//$window.location.href='login';
     	}
     }
 	 $scope.logout=function(){
@@ -439,6 +438,71 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 	}
 })
+.controller('forgetPassCtrl', function ($scope,ValidateForm,RecoverPass, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,$window,getParams) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+
+  	$scope.recover={email:{name:"email",data:null,type:"email"}
+				};
+	 $scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
+    	}else{
+    		$window.location.href='home';
+    	}
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }	
+	$scope.forgetPass=function(isValid){
+		console.log(isValid)
+
+		if(isValid){
+
+			$scope.errors=ValidateForm.fmValid($scope.recover);
+			$scope.formState=ValidateForm.formState($scope.errors);
+			if($scope.formState){
+				try{
+					console.log("1")
+					RecoverPass.recoverPass($scope.recover)
+						.then(function(data){
+							if(!data.error){
+								console.log("2")
+								$scope.error.message="Se ha enviado un correo con las instrucciones para reestablecer tu contraseña ";
+								$scope.error.errorState=true;
+
+							}
+							else
+							{
+								console.log("3")
+								$scope.error.errorState=true;
+								$scope.error.message=data.message;
+							}
+							});
+
+				}
+				catch(e)
+				{
+					$scope.error.errorState=true;
+					$scope.error.message=e;
+				}
+			}
+			else{
+				$scope.error.errorState=true;
+				$scope.error.message="Datos incompletos";
+			}
+		}
+		else{
+			$scope.error.errorState=true;
+			$scope.error.message="Datos incompletos";
+		}
+
+	}
+})
 .controller('homeCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports) {
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
@@ -452,12 +516,11 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		Reports.getLastReports()
     			.then(function(data){
 					$scope.reports=data.reports;
-					console.log(data.reports);
-				});
+					});
     			
 
 	    	}else{
-    		$window.location.href='inicio';
+    		$window.location.href='login';
     	}
     }
 	$scope.logout=function(){
@@ -471,6 +534,64 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
 
 
+})
+.controller('profileCtrl', function($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,Bikes){
+	var $ctrl = this;
+		var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.userName;
+	$scope.nickname;
+	$scope.reports={};
+	$scope.user={name:null,
+			lastName:null,
+			email:null,
+			document:null,
+			cellphone:null,
+			nickname:null
+		}
+	$scope.bikes={};
+	$scope.checkLogin=function(){
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.userName=$cookieStore.get('name')+" "+$cookieStore.get('lastName');
+    		$scope.nickname=$cookieStore.get('nickname');
+			
+			$scope.getUserInfo();  			
+
+	    	}else{
+    		$window.location.href='login';
+    	}
+    }
+	$scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }
+    $scope.getUserInfo=function(){
+    	$scope.user.name=$cookieStore.get('name');
+    	$scope.user.lastName=$cookieStore.get('lastName');
+    	$scope.user.document=$cookieStore.get('document');
+    	$scope.user.email=$cookieStore.get('email');
+    	$scope.user.cellphone=$cookieStore.get('cellphone');
+    	$scope.user.nickname=$cookieStore.get('nickname');
+    }
+    $scope.getBikes=function(){
+    	Bikes.bikesByUser($cookieStore.get('token'))
+    			.then(function(data){
+					$scope.bikes=data.bikes;
+					});
+    }
+    $scope.showBike=function(bikename){
+    	$window.location.href='bike?bikename='+bikename+'&user='+$cookieStore.get('token');
+    }
+    $scope.addNewBike=function(){
+    	$window.location.href='registroBicicleta';
+    }
+    $scope.UpdatePass=function(){
+    	$window.location.href='recoverPass?uid='+$cookieStore.get('token');
+    }
 })
 .controller('reportCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,getParams) {
 	var $ctrl = this;
@@ -509,7 +630,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		}    			
     	}
     	else{
-		$window.location.href='inicio';
+		$window.location.href='login';
     	}
     }
 	 $scope.logout=function(){
@@ -520,6 +641,63 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
     $scope.setNewReport=function(){
     	$window.location.href='newReport?idBike='+$scope.report.idBike+'&reportType=4';
+    }
+
+})
+.controller('bikeCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Bikes,getParams) {
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.nickname;
+	$scope.bike={}
+	$scope.taxiData;
+	var user=getParams().user;
+	 $scope.checkLogin=function(){
+ 		var bikename=getParams().bikename;
+ 		
+
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
+    		if(bikename!=undefined && user!=undefined){
+    			Bikes.bikeByUser(user,bikename)
+    			.then(function(data){
+					if(data.bikes!= undefined){
+						$scope.bike=data.bikes[0];
+					}
+					else{
+						$scope.error.errorState=true;
+						$scope.error.message=data.message;
+
+					}
+
+				});	
+    		}
+    		else{
+    			
+    			$scope.error.errorState=true;
+    			$scope.error.message="Ocurrió un error al cargar la bicicleta";
+    		}    			
+    	}
+    	else{
+		$window.location.href='login';
+    	}
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }
+    $scope.setNewReport=function(){
+    	$window.location.href='newReport?idBike='+$scope.report.idBike+'&reportType=4';
+    }
+    $scope.setBikeDefault=function(id){
+    	Bikes.setBikeDefault(id,user)
+    		.then(function(data){
+    			$scope.error.errorState=true;
+    			$scope.error.message=data.message;
+    		});
     }
 
 })
@@ -732,6 +910,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
 })
 .controller('zoneContainerCtrl', function(NgMap,heatMapResource,$scope,Login,$window,$cookies,$cookieStore,CookieManager,$document){
+
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 	$scope.islogged=false;

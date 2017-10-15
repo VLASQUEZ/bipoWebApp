@@ -34,23 +34,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js""></script>
     <script src="js/bower_components/ngmap/build/scripts/ng-map.js"></script>
-
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U&libraries=placeses,visualization,drawing,geometry,places"></script>
     
 </head><!--/head-->
 
-<body class="homepage" ng-controller="newReportCtrl as $ctrl">
-    <script type="text/ng-template" id="modal.html">
-        <div class="modal-demo" data-backdrop="static" data-keyboard="false" id="myModal">
-            <div class="modal-body" id="modal-body">
-               <section class="loaders loaders-bg-3"><span class="loader loader-circles"></span></section>
-               <h4 class="loading-text">{{$ctrl.message}}</h4>
-            </div>
-
-        </div>
-    </script>
-    <header data-ng-init="checkLogin()" id="header">
+<body class="homepage" ng-controller="forgetPassCtrl as $ctrl">
+    <header id="header">
         <nav class="navbar navbar-inverse" role="banner">
             <div class="container">
                 <div class="navbar-header">
@@ -72,7 +62,7 @@
                             <a ng-show="!islogged" href="inicio">Inicio</a>
                             <a ng-show="islogged" href="home">Inicio</a>
                         </li>
-                        <li ng-show="!islogged" class="active"><a href="registro">Registrate</a></li>
+                        <li ng-show="!islogged()"><a href="registro">Registrate</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -84,67 +74,30 @@
                         <li><a href="insecureZones">Zónas seguras</a></li>                       
                         <li><a href="#">Contáctanos</a></li>                       
                         <li><a href="https://play.google.com/store">Bipo en Android</a></li>                       
-                        <li ng-show="!islogged" class="btn-slide"><a href="login">Iniciar Sesión</a></li>
-                        <li ng-show="islogged" class="btn-slide dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{nickname}} <i class="fa fa-angle-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="myProfile">Mi perfil</a></li>
-                                <li ng-click="logout()"><a href="#">cerrar sesión</a></li>
-                            </ul>
-                        </li>                              
+                        <li ng-show="!islogged()" class="active"><a href="login">Iniciar Sesión</a></li>                            
                     </ul>
                 </div>
             </div><!--/.container-->
         </nav><!--/nav-->
     </header><!--/header-->
     <section id="feature" >
-        <div  class="container">
+        <div class="container">
            <div class="center wow fadeInDown">
-                <h2>{{Report.title}}</h2>
-                <p class="lead">{{Report.lead}}</p>
+                <h2>¿Olvidaste tu contraseña?</h2>
+
             </div>
             <div class="row contact-wrap"> 
                 <div class="status alert alert-success" style="display: none"></div>
-                <form id="main-contact-form" class="contact-form" name="fmNewReport" novalidate>
+                <form id="main-contact-form" class="contact-form" name="fmRecover" novalidate>
                     <div class="col-lg-12 col-md-10 col-lg-offset-2 col-sm-offset-2">
                         <div class="col-sm-7 form-group">
-                            <label>Descripción de los hechos:</label>
-                            <textarea class="form-control" placeholder="Escribe brevemente los que ocurrió" ng-model="newReport.reportDetails.data" rows="10" required></textarea>
-                            <h5 style="color:#ef473a" ng-show="!errors.documento.valid">{{errors.reportDetails.error}}</h5>
+                            <label>Correo electrónico: </label>
+                            <input type="email" name="email" class="col-sm-5 form-control" placeholder="Escribe tu correo electronico" ng-model="recover.email.data" required>
+                            <h5 style="color:#ef473a" ng-show="fmRecover.email.$invalid && !fmRecover.email.$pristine ">Debes ingresar tu correo electrónico</h5>
+                            <h5 style="color:#ef473a" ng-show="!errors.email.valid">{{errors.email.error}}</h5>
                         </div>
                         <div class="col-sm-7 form-group">
-                            <label>Ubicacion:</label>
-                            <div map-lazy-load-params="{{googleMapsUrl}}">
-                                <ng-map zoom="13" center="4.710838, -74.072495" map-type-id="ROADMAP" style="height: 300px;" on-click="getCoordinates($event)">
-                                    <marker position="{{newReport.coordinates.data}}" on-dragend="getCoordinates($event)">
-                                    </marker>
-                                </ng-map>
-                            <h5 style="color:#ef473a" ng-show="!errors.bikeBrand.valid">{{errors.coordinates.error}}</h5>
-                            </div>
-                        </div>
-                        <div class="panel panel-default col-sm-7 ">
-                            <div class="panel-heading">Agrega fotos para completar el reporte</div>
-                            <div class="panel-body">
-                                <div class="panel panel-info ">
-                                    <div class="panel-body">
-                                        <div class="file-upload-content" ng-repeat="image in images">
-                                            <div class="col-sm-8 col-md-6">
-                                                <img  width="200 px" height="150 px" ng-src="{{image}}" />
-                                                <div class="image-title-wrap">
-                                                  <button type="button" ng-click="removeImage(image)" class="remove-image">Quitar foto</button>
-                                                </div>
-                                            </div>
-                                          </div>
-                                    </div>
-                                    <div class="file-upload col-sm-8 col-md-5">
-                                            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Subir foto</button>
-                                            <input class="file-upload-input" id="img1" type='file' ng-file-select="onFileSelect($files)" accept="image/*" />
-                                    </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-7 form-group">
-                            <button type="button" class="btn btn-primary btn-lg" ng-click="createReport(fmNewReport.$valid)">Registrar</button>
+                            <button type="button" class="btn btn-primary btn-lg" ng-click="forgetPass(fmRecover.$valid)">Enviar</button>
                         </div>
                         <div class="col-sm-7 form-group" style="width: 100%; height: 25px;">
                             <h5 style="color:#ef473a" ng-show="error.errorState">{{error.message}}</h5>

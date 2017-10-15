@@ -48,7 +48,7 @@ class ReportAPI {
 	            $reportId = $db->insertReport($tokenUser,$reportName,$reportType,
 	            	$coordinates,$idBike,$ReportDetails);
 	            $this->response["error"]=false;
-	            $this->response["message"]="Reporte generado satisfactoriamente";
+	            $this->response["reportId"]=(int)$reportId[0]["LAST_INSERT_ID()"];
             	//Actualizar estado de bicicleta
 	        	$bike=new BikeAPI();
 	        	$bike->updateBikeState($reportType,$idBike);
@@ -106,7 +106,7 @@ class ReportAPI {
 
     }
     //Almacena una foto del reporte
-	function savephoto($reportName=null,$file=null,$token=null){
+	function savephoto($reportId=null,$file=null,$token=null){
 		try{
 						//$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
 			//$path="bipo/public/reports/";
@@ -117,7 +117,7 @@ class ReportAPI {
 			if($token==null){
 			$error.="Falta token de acceso \n";
 			}
-			if($reportName==null){
+			if($reportId==null){
 				$error.="No se encontró el reporte asociado \n";
 			}
 			if($file==null){
@@ -147,8 +147,9 @@ class ReportAPI {
 			    if(empty($errors)==true){
 
 		    		$db=new Reports();
-	    			$report=$db->getReportByName($reportName,$token);
+	    			$report=$db->getReportById($reportId);
 	    			if(count($report,0)>0){
+	    				$reportName=$report[0]["reportName"];
 				    	$errors=createReportDirectory($reportName);
 		    			if(!$errors["error"]){
 		    				$imagePath=$path.$reportName."/".$file_name;

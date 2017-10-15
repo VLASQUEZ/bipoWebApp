@@ -87,6 +87,20 @@ class Bikes{
         return $bikes;              
 
     }
+        //Obtiene una bicicleta por id
+    public function getBikeById($bikeId,$userName){ 
+
+        $stmt=$this->mysqcon->prepare("SELECT * FROM tb_bikes where id =?");
+        $stmt->bind_param('i',$bikeId);
+        $stmt->execute();
+        $result = $stmt->get_result();        
+        $bikeColors = $result->fetch_all(MYSQLI_ASSOC);
+        //print_r($bikeStates);         //  $bikeState["type"]=utf8_encode($item);
+        $stmt->close();
+        
+        return $bikeColors;               
+
+    }
     //Elimina una bicicleta
     public function deleteBike($bikeId,$token){ 
 
@@ -170,9 +184,10 @@ class Bikes{
         $bikeName=strtoupper($bikeName);
         $bikeFeatures=strtoupper($bikeFeatures);
         $stmt->bind_param('siiisisi', $bikeName,$idUser,$idBrand,$idColor,$idFrame,$idType,$bikeFeatures,$idBikeState);
-        $r = $stmt->execute(); 
+        $r = $stmt->execute();
+        $bikes = $stmt->insert_id;
         $stmt->close();
-        return $r;        
+        return $bikes;        
     }
     //Actualiza los datos de la bicicleta
     public function updateBike($token,$bikeId,$idColor,$bikeFeatures){

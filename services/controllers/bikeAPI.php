@@ -348,7 +348,8 @@ class BikeAPI {
 	  		if(strcmp($error,"")==0){
 	  			$db=new Bikes();
 	   			$this->response["error"]=false;
-	            $this->response["message"] = $db->registerBike($bikeName,$idBrand,$idColor,$idFrame,$idType,$bikeFeatures,$idBikeState,$id["user"][0]["id"]);
+	   			$bikeId=$db->registerBike($bikeName,$idBrand,$idColor,$idFrame,$idType,$bikeFeatures,$idBikeState,$id["user"][0]["id"]);
+	            $this->response["bikeId"] = $bikeId;
 	   		}
 	   		else{
 	   			$this->response["error"]=true;
@@ -365,7 +366,7 @@ class BikeAPI {
 
 	}
 	//Almacena una foto de la bicicleta
-	function savephoto($bikeName=null,$token=null,$file=null){
+	function savephoto($bikeId=null,$token=null,$file=null){
 		try{
 			//$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
 			//$path="bipo/public/bikeImages/";
@@ -375,8 +376,8 @@ class BikeAPI {
 			if($token==null){
 			$error.="Falta token de acceso \n";
 			}
-			if($bikeName==null){
-				$error.="El nombre de la bicicleta es obligatorio \n";
+			if($bikeId==null){
+				$error.="El id es obligatorio \n";
 			}
 			if($file==null){
 				$error.="Debe incluir una imagen \n";
@@ -412,7 +413,7 @@ class BikeAPI {
 			    		chmod($imagePath,0766);
 
 		    			$db=new Bikes();
-		    			$bike=$db->getBikeByUser($bikeName,$token);
+		    			$bike=$db->getBikeById($bikeId,$token);
 		    			if(count($bike,0)>0){
 		    				$db=new Bikes();
 		    				$imagePath="public/bikeImages/".$userName["user"][0]["nickname"]."/".$file_name;

@@ -38,7 +38,7 @@
     
 </head><!--/head-->
 
-<body class="homepage" ng-controller="homeCtrl as $ctrl">
+<body class="homepage" ng-controller="profileCtrl as $ctrl">
     <header id="header">
         <nav data-ng-init="checkLogin()" class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -86,11 +86,91 @@
             </div><!--/.container-->
         </nav><!--/nav-->
     </header><!--/header-->
-    <section id="feature" >
+    <section id="content" >
         <div class="container">
            <div class="center wow fadeInDown">
-                <h2>Perfil de {{nickname}}</h2>
-                <p class="lead">Aquí podrás configurar tu cuenta y agregar más bicicletas.</p>
+                <h2>Perfil de {{userName}}</h2>
+                <p class="lead">Aquí podrás configurar tu cuenta agregar o editar tus bicicletas.</p>
+                            <div class="row">
+                <div class="col-sm-12 wow fadeInDown">
+                   <div class="tab-wrap"> 
+                        <div class="media">
+                            <div class="parrent pull-left">
+                                <ul class="nav nav-tabs nav-stacked">
+                                    <li class="active "><a href="#myProfile" ng-click="getUserInfo()"="" data-toggle="tab" class="">Mi Perfil</a></li>
+                                    <li class=""><a href="#myBikes" ng-click="getBikes()" data-toggle="tab" class="">Mis Bicicletas</a></li>
+                                    <li class=""><a href="#myReports" data-toggle="tab" class="analistic-02">Mis Reportes</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-pane active media-body">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade active in" id="myProfile">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <div class="form-group">
+                                                    <span>Nombre: </span><span>{{user.name}}</span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span>Apellidos: </span><span>{{user.lastName}}</span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <span>Documento: </span><span>{{user.document}}</span>
+                                                </div>
+                                                 <div class="form-group">
+                                                    <span>Email: </span><span>{{user.email}}</span>
+                                                 </div>
+                                                 <div class="form-group">
+                                                     <span>Teléfono: </span><span>{{user.cellphone}}</span>
+                                                 </div> 
+                                                 <div class="form-group">
+                                                     <span>Nickname: </span><span>{{user.nickname}}</span>
+                                                 </div>
+                                                <div class="col-sm-7 form-group">
+                                                    <button type="button" class="btn btn-primary btn-lg" ng-click="UpdatePass()">Cambiar mi contraseña</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                     <div class="tab-pane fade" id="myBikes">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <p>Haz click en la foto de la bicicleta para más información</p>
+                                                 <div ng-repeat="bike in bikes">
+                                                    <div class="panel panel-default col-sm-5 col-sm-offset-4">
+                                                        <div class="panel-heading">{{bike.bikename}}</div>
+                                                    <div class="panel-body">
+                                                            <img class="img-thumbnail img-responsive col-sm-8 col-sm-offset-2" style="cursor:pointer;" ng-click="showBike(bike.bikename)" ng-src="../{{bike.bikePhotos[0].url}}">
+                                                            <span class="btn btn-success" ng-show="bike.isDefault==1">Esta es tu bicicleta principal</span>
+                                                    </div>
+                                                    </div><!--FIN PANEL DE BICICLETAS-->
+                                                 </div>
+                                                <div class="col-sm-7 form-group">
+                                                    <button ng-show="bikes.length<3" type="button" class="btn btn-primary btn-lg" ng-click="addNewBike()">Agregar Bicicleta</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+
+                                     <div class="tab-pane fade" id="myReports">
+                                        <p>Histórico de reportes</p>
+                                     </div>
+                                     
+                                     <div class="tab-pane fade" id="tab4">
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words</p>
+                                     </div>
+
+                                     <div class="tab-pane fade" id="tab5">
+                                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures,</p>
+                                     </div>
+                                </div> <!--/.tab-content-->  
+                            </div> <!--/.media-body--> 
+                        </div> <!--/.media-->     
+                    </div><!--/.tab-wrap-->               
+                </div><!--/.col-sm-6-->
+            </div><!--/.row-->
+        </div><!--/.container-->
             </div>
             <div class="row contact-wrap"> 
                 <div class="status alert alert-success" style="display: none"></div>

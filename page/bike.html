@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Bienvenido a bipo</title>
+    <title>Últimos reportes generados.</title>
 	
 	<!-- core CSS -->
 <!-- Latest compiled and minified CSS -->
@@ -31,14 +31,16 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/favicon.ico">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-resource.js"></script>
     <script src="js/bower_components/ngmap/build/scripts/ng-map.js"></script>
+
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U&libraries=placeses,visualization,drawing,geometry,places"></script>
     
 </head><!--/head-->
 
-<body class="homepage" ng-controller="recoveredBikesCtrl as $ctrl">
+<body class="homepage" ng-controller="bikeCtrl as $ctrl">
     <header id="header">
         <nav data-ng-init="checkLogin()" class="navbar navbar-inverse" role="banner">
             <div class="container">
@@ -89,95 +91,62 @@
     <section id="feature" >
         <div class="container">
            <div class="center wow fadeInDown">
-                <h2>Reportes de bicicletas recuperadas</h2>
-                <p class="lead">Filtrar por fecha del reporte</p>
-                 <form id="main-contact-form" class="form-inline" name="fmFilterReport" novalidate>
-                    <div class="form-group">
-                        <label>Fecha inicial:</label>
-                        <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                            <input class="form-control" id="fhInicio" type="text" name="fhInicio" value=""  +
-                            readonly ng-model="fmFilter.fhInicio.data">
-                            
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </div>
-                        <h5 style="color:#ef473a" ng-show="!errors.fhInicio.valid">{{errors.fhInicio.error}}</h5>
-                        <input type="hidden"  value="" />
-                    </div>
-                    <div class="form-group">
-                        <label>Fecha final:</label>
-                        <div class="input-group date form_date" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                            <input class="form-control" id="fhFinal" type="text" name="fhFinal" value=""  +
-                            readonly ng-model="fmFilter.fhFinal.data">
-                            
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                        </div>
-                        <h5 style="color:#ef473a" ng-show="!errors.fhFinal.valid">{{errors.fhFinal.error}}</h5>
-                        <input type="hidden"  value="" />
-                    </div>
-                    <div class="form-group">
-                      <button type="button" ng-click="filter()" style="margin-bottom: 20px" class="btn btn-primary">Filtrar</button>
-                    </div>
-                    <div class="form-group" style="width: 100%; height: 25px;">
-                            <h5 style="color:#ef473a" ng-show="error.errorState">{{error.message}}</h5>
-                        </div> 
-                 </form>
                 <!-- PANEL DE REPORTES-->
-                <div class="panel col-sm-12 col-sm-offset-2" ng-repeat="report in reports">
+                <div class="panel col-sm-12 ">
                     <div class="panel-body">
-                        <div class="panel-heading heading-report-recovered">{{report.reportType}}</div>
-                        <div class="col-md-4">   
-                           <div class="panel-heading">
-                               <img  ng-repeat="bikePhoto in report.bikePhotos" width="100 px" height="60px" class="img-thumbnail img-responsive" ng-src="../{{bikePhoto.url}}">
-
-                           </div>
-                        </div>
-                           <div class="col-md-8 " style="padding:10px 15px">
+                        <div class="panel-heading heading-report">{{bike.bikename}}</div>
+                           <div class="col-md-12 " style="padding:10px 15px">
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <div class="row">
-                                            <span>Fecha del reporte:</span>
-                                            <span>{{report.fhUpdated}}</span>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <span>Usuario:</span>
-                                            <span>{{report.report_owner}}</span>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
                                             <span>Marca:</span>
-                                            <span>{{report.brand}}</span>
+                                            <span>{{bike.brand}}</span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <span>Id del marco:</span>
+                                            <span>{{bike.idframe}}</span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <span>Estado de la bicicleta:</span>
+                                            <span>{{bike.bikestate}}</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <span>Color:</span>
-                                            <span>{{report.color}}</span>
+                                            <span>{{bike.color}}</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <span>Tipo:</span>
-                                            <span>{{report.type}}</span>
+                                            <span>{{bike.type}}</span>
                                         </div>
                                     </li>
                                     <li class="list-group-item">
                                         <div class="row">
                                             <span>Detalles:</span>
-                                            <span >{{report.reportDetails}}</span>
+                                            <span >{{bike.bikefeatures}}</span>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item" ng-show="bike.bikePhotos.length>0">
+                                        <div class="row">
+                                            <span>Fotos de la bicicleta:<br></span>
+                                                <img ng-repeat="bikePhotos in bike.bikePhotos" width="150px" height="150px" class="img-thumbnail img-responsive col-sm-3" ng-src="../{{bikePhotos.url}}">
                                         </div>
                                     </li>
                                     <li class="list-group-item">
-                                        <a href="report?reportId={{report.id}}" class="btn btn-primary">Ver más...</a>
-                                        <button ng-show="report.idreportType==1" class="btn btn-danger">He visto esta bicicleta</button>
+                                        <button  ng-click="setBikeDefault(bike.id)" class="btn btn-success">Establecer como bicicleta principal </button>
                                     </li>
                                 </ul>
                             </div>
-
+                            <div class="col-sm-7 form-group" style="width: 100%; height: 25px;">
+                                <h5 style="color:#ef473a" ng-show="error.errorState">{{error.message}}</h5>
+                        </div>
                     </div>
                 </div><!--FIN PANEL DE REPORTES-->
             </div>

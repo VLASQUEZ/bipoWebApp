@@ -801,14 +801,17 @@ input.search-form:hover {
 }
 
 .panel-default{
-  border-color: #283593;
+  border-color: #283593 !important; 
+  border:1px solid transparent ;
+  padding: 0px;
 }
 
 
 .panel{
   background-color:#fff; 
-  border:1px solid transparent;
   box-shadow:none;
+  margin-left:10px;
+  margin-right:10px;
 }
 
 .panel-default>.panel-heading+.panel-collapse .panel-body{
@@ -847,7 +850,6 @@ input.search-form:hover {
 }
 
 .panel-default>.panel-heading{
-  border-radius: 1px;
   background-color:#283593;
   color:#fff;
 }
@@ -921,7 +923,7 @@ a.accordion-toggle  i{
 }
 
 .nav-tabs>li>a:hover{
-  background: #1f1f20;
+  background: #283593;
   color:#fff;
 }
 
@@ -930,7 +932,7 @@ a.accordion-toggle  i{
 .nav-tabs>li.active>a:focus {
   border: 0;
   color:#fff;
-  background: #1f1f20;
+  background: #283593;
   position: relative;
 }
 
@@ -940,7 +942,7 @@ a.accordion-toggle  i{
   width: auto;
   height: auto;
   border-style:solid;
-  border-color: transparent transparent transparent #1f1f20;
+  border-color: transparent transparent transparent #283593;
   border-width: 25px 22px;
   right: -44px;
   top:0;

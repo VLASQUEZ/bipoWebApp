@@ -56,9 +56,10 @@ angular.module('bipoApp.services', [])
 })
 //RECUPERAR CONTRASEÑA
 .factory('RecoverPass',function($http,$q,url){
+    var recoverPass={};
     //login
-    return{
-        RecoverPass: function(data){
+    
+    recoverPass.recoverPass= function(data){
         //postAjax.user={}
         var serviceUrl=url+"recoverPass"
         var result=null;
@@ -75,7 +76,8 @@ angular.module('bipoApp.services', [])
             });
             
         return dfd.promise;
-    }      } 
+    }
+    return recoverPass;
 })
 //ACTUALIZAR CONTRASEÑA
 .factory('UpdatePass',function($http,$q,url){
@@ -222,12 +224,12 @@ angular.module('bipoApp.services', [])
         //console.log(photo)
         var serviceUrl=url+"bikePhoto"
         var dfd = $q.defer();
-        var params={bikeName:bikeName,
+        var params={bikeId:bikeName,
             token:user,
             file:photo,
         };
         var form= new FormData();
-        form.append("bikeName", bikeName);
+        form.append("bikeId", bikeName);
         form.append("token", user);
         form.append("file", photo);
         $http({
@@ -241,10 +243,13 @@ angular.module('bipoApp.services', [])
         transformRequest: angular.identity
         })
             .then(function successCallback(response){
-                dfd.resolve(response.data);   
+                dfd.resolve(response.data);  
+                console.log(response.data)
+ 
             },
             function errorCallback(error){
                 dfd.resolve(error.data); 
+                console.log(error.data)
             });
             
         return dfd.promise;
@@ -266,7 +271,43 @@ angular.module('bipoApp.services', [])
                 
             return dfd.promise;
     }
+    bikes.bikesByUser= function(token){
+        //postAjax.user={}
+        var serviceUrl=url+"bikes/"+token;
+        var result=null;
+        var dfd = $q.defer();
 
+        //console.log(params);
+        $http.get(serviceUrl)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    bikes.setBikeDefault= function(id,token){
+        //postAjax.user={}
+        var serviceUrl=url+"defaultBike";
+        var result=null;
+        var dfd = $q.defer();
+        var params={
+            bikeId:id,
+            token:token
+        }
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
     return bikes;
 
 
@@ -352,7 +393,7 @@ angular.module('bipoApp.services', [])
         var serviceUrl=url+"reportPhoto"
         var dfd = $q.defer();
         var form= new FormData();
-        form.append("reportName", reportName);
+        form.append("reportId", reportName);
         form.append("token", user);
         form.append("image", photo);
         $http({
@@ -416,6 +457,8 @@ angular.module('bipoApp.services', [])
         $cookieStore.put('id',data.id);
         $cookieStore.put('email',data.email);
         $cookieStore.put('token',data.token);  
+        $cookieStore.put('cellphone',data.cellphone);  
+        $cookieStore.put('document',data.documentid);  
 
     }
     cookieManager.remove=function(){
@@ -425,6 +468,8 @@ angular.module('bipoApp.services', [])
         $cookieStore.remove("id");
         $cookieStore.remove("email");
         $cookieStore.remove("token");
+        $cookieStore.remove("document");
+        $cookieStore.remove("cellphone");
         return true;
     }
 
@@ -434,7 +479,9 @@ angular.module('bipoApp.services', [])
            ($cookieStore.get('lastName')!=undefined && $cookieStore.get('lastName')!=null)&&
            ($cookieStore.get('id')!=undefined && $cookieStore.get('id')!=null)&&
            ($cookieStore.get('email')!=undefined && $cookieStore.get('email')!=null)&&
-           ($cookieStore.get('token')!=undefined && $cookieStore.get('token')!=null)){
+           ($cookieStore.get('token')!=undefined && $cookieStore.get('token')!=null)&&
+           ($cookieStore.get('cellphone')!=undefined && $cookieStore.get('cellphone')!=null)&&
+           ($cookieStore.get('document')!=undefined && $cookieStore.get('document')!=null)){
 
             return true
         }

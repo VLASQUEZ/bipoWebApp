@@ -308,7 +308,7 @@ $app->post('/bikePhoto','authenticate', function() {
   try{
       $bikeResponse=new bikeAPI();
       
-      $response=$bikeResponse->savephoto($_POST['bikeName'],$_POST['token'],$_FILES['file']);
+      $response=$bikeResponse->savephoto($_POST['bikeId'],$_POST['token'],$_FILES['file']);
 
       if($response["error"]==false){
         echoResponse(200,$response);
@@ -461,7 +461,7 @@ $app->post('/reportPhoto','authenticate', function() {
   try{
       $reportResponse=new ReportAPI();
       
-      $response=$reportResponse->savephoto($_POST['reportName'],$_FILES['image'],$_POST['token']);
+      $response=$reportResponse->savephoto($_POST['reportId'],$_FILES['image'],$_POST['token']);
 
       if($response["error"]==false){
         echoResponse(200,$response);
