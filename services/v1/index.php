@@ -435,6 +435,27 @@ $app->get('/report/:token/:reportName','authenticate', function($token,$reportNa
   }
   
 });
+// fachada para obtener todos los reportes de un usuario
+$app->get('/reportsUser/:token','authenticate', function($token) {
+  try{
+    $reportResponse=new ReportAPI();
+    $response=array();
+    $response=$reportResponse->getReportsByToken($token);
+
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
 // fachada para obtener un reporte por id
 $app->get('/report/:reportId', function($id) {
   try{

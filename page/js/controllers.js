@@ -581,6 +581,14 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	Bikes.bikesByUser($cookieStore.get('token'))
     			.then(function(data){
 					$scope.bikes=data.bikes;
+					console.log($scope.bikes);
+					});
+    }
+    $scope.getReports=function(){
+    	Reports.reportsByUser($cookieStore.get('token'))
+    			.then(function(data){
+					$scope.reports=data.reports;
+
 					});
     }
     $scope.showBike=function(bikename){
@@ -591,6 +599,9 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
     $scope.UpdatePass=function(){
     	$window.location.href='recoverPass?uid='+$cookieStore.get('token');
+    }
+    $scope.setNewReport=function(idBike,reportType){
+    	$window.location.href='newReport?idBike='+idBike+'&reportType='+reportType;
     }
 })
 .controller('reportCtrl',function ($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,getParams) {
@@ -694,6 +705,13 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
     $scope.setBikeDefault=function(id){
     	Bikes.setBikeDefault(id,user)
+    		.then(function(data){
+    			$scope.error.errorState=true;
+    			$scope.error.message=data.message;
+    		});
+    }
+    $scope.deleteBike=function(id){
+    	Bikes.deleteBike(id,user)
     		.then(function(data){
     			$scope.error.errorState=true;
     			$scope.error.message=data.message;
@@ -900,6 +918,26 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$scope.islogged=true;
     		$scope.nickname=$cookieStore.get('nickname');
 
+    	}
+    }
+	 $scope.logout=function(){
+	 	if(CookieManager.remove())
+	 	{
+	 		$window.location.href='inicio';
+	 	}
+    }
+})
+.controller('termsCtrl', function($scope,Login,$window,$cookies,$cookieStore,CookieManager,$document){
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.islogged=false;
+	$scope.nickname;
+	$scope.reports={}
+	 $scope.checkLogin=function(){
+
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
     	}
     }
 	 $scope.logout=function(){

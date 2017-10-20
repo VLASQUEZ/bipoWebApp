@@ -308,6 +308,26 @@ angular.module('bipoApp.services', [])
             
         return dfd.promise;
     }
+    bikes.deleteBike= function(id,token){
+        //postAjax.user={}
+        var serviceUrl=url+"deleteBike";
+        var result=null;
+        var dfd = $q.defer();
+        var params={
+            bikeId:id,
+            token:token
+        }
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
     return bikes;
 
 
@@ -411,6 +431,23 @@ angular.module('bipoApp.services', [])
             },
             function errorCallback(error){
                 console.log(error.data)
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
+    reports.reportsByUser= function(token){
+        //postAjax.user={}
+        var serviceUrl=url+"reportsUser/"+token;
+        var result=null;
+        var dfd = $q.defer();
+
+        //console.log(params);
+        $http.get(serviceUrl)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
                 dfd.resolve(error.data); 
             });
             

@@ -240,6 +240,59 @@ class ReportAPI {
 		}
 		              
     }
+    	//Obtiene un reporte por Nombre y dueño del reporte
+	function getReportsByToken($token){
+		try{
+
+			$error="";
+			if($token==null || $token==""){
+				$error="El token es obligatorio /n";
+				
+			}
+
+	   		$user=new UserAPI();
+	   		$id=$user->getUserIdByToken($token);
+   			if(count($id["user"])>0){
+   				if($id["user"][0]["id"]=="" ||$id["user"][0]["id"]==null ){
+				$error.="Token no valido \n";
+				}
+   			}
+   			else{
+   				$error.="Token no valido \n";
+   			}
+			if(strcasecmp($error,"")==0)
+			{
+				$db = new Reports();
+		        $this->response["error"]=false;
+		        $reports = $db->getReportsByToken($token);
+
+		        if(count($reports)){
+		        	foreach ($reports as $pos => $report) {
+		        		$bike=new Bikes();
+		        		$reports[$pos]["bikePhotos"]=$bike->getBikePhotos($reports[$pos]["idBike"]);
+	        			$db = new Reports();	
+			        	$reports[$pos]["reportPhotos"]=$db->getPhotoReport($report["id"]);
+			    	}
+			    	$this->response["reports"]=$reports;
+			    }
+			    else
+			    {
+			    	$this->response["message"]="No se encontraron registros";
+			    }
+			}
+	   		else
+	   		{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	        return $this->response; 
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+		}
+		              
+    }
 	//Obtiene un reporte por Nombre y dueño del reporte
 	function getReportById($id){
 		try{

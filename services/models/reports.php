@@ -160,6 +160,37 @@ class Reports{
             return $e->getMessage();
         }                         
     }
+        //Obtiene todos los reportes por nombre
+    public function getReportsByToken($token){
+        try{
+            $stmt=$this->mysqcon->prepare("SELECT r.id,r.reportName,u.nickname as 'report_owner',r.idreportType,
+                rt.reportType,r.fhReport,r.googlemapscoordinate,r.idBike,b.idFrame,
+                b.bikeName,c.color,br.brand,t.type, bo.nickname as 'bike_owner',r.reportDetails,r.fhUpdated
+                FROM tb_reports r 
+                INNER JOIN tb_users u on r.idUser=u.id
+                INNER JOIN tb_reportType rt on r.idReportType=rt.id
+                INNER JOIN tb_bikes b on r.idBike=b.id
+                INNER JOIN tb_colors c on b.idColor=c.id
+                INNER JOIN tb_brands br on b.idBrand=br.id
+                INNER JOIN tb_bikeType t on b.idType=t.id
+                INNER JOIN tb_users bo on b.idUser=bo.id
+                INNER JOIN tb_tokenUsers tu on u.id=tu.id
+                where tu.token like ? order by r.fhUpdated desc;");
+            $stmt->bind_param('s',$token);
+
+            $stmt->execute();
+            $result = $stmt->get_result();        
+            $reports = $result->fetch_all(MYSQLI_ASSOC);
+         //  $bikeState["type"]=utf8_encode($item);
+            $stmt->close();
+            
+            return $reports;
+        }
+        catch(Exception $e)
+        {
+            return $e->getMessage();
+        }                         
+    }
         //Obtiene todos los reportes asociados al tipo
     public function getReportsMaps(){
         try{
