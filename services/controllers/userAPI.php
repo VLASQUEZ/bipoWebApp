@@ -167,7 +167,7 @@ class UserAPI {
 	    }
     }
 
-	function login($email,$password){
+	function login($email,$password,$loggedWeb,$loggedMobile){
 		try{
 			$error="";
    	
@@ -188,7 +188,8 @@ class UserAPI {
 	   					$timezone = date("Y-m-d H:i:s");
 	   					
 	   					$token=createToken($email.$password.$timezone);
-	   					$db->setTokenByUser($email,$token);
+	   					$db->setTokenByUser($email,$token,$loggedWeb,$loggedMobile);
+
    						$this->response["error"]=false;
 	   					$this->response["user"]=$db->login($email);
 	   				}
@@ -202,6 +203,46 @@ class UserAPI {
 	   				$this->response["message"]="Usuario o contraseña no validos";
 	   			}
 	            //$response["user"] = decrypt($user["password"]);
+	   		}
+	   		else{
+	   			$this->response["error"]=true;
+	   			$this->response["message"]=$error;
+	   		}
+	   		return $this->response;
+		}
+		catch(exception $e){
+			$this->response["error"]=true;
+	        $this->response["message"] = $e->getmessage();
+	        return $this->response;
+		}
+
+    }
+	function logout($token,$loggedWeb,$loggedMobile){
+		try{
+			$error="";
+   	
+	   		if(strlen($token)<=1){
+	   			$error="El token es obligatorio\n ";
+	   		}
+	   		$db = new Users();
+	   		$id=$db->getUserId($token);
+
+   			if(count($id)>0){
+   				if($id[0]["id"]=="" ||$id[0]["id"]==null ){
+					$error.="Token no valido \n";
+				}
+   			}
+   			else{
+   				$error.="Token no valido \n";
+   			}
+	   		
+	   		if(strcmp($error,"")==0){
+	   			$db = new Users();
+	   			$response["error"]=false;
+	   			
+				$this->response["error"]=false;
+				$db->logout($token,$loggedWeb,$loggedMobile);	
+				$this->response["user"]="Tu sesión en Bipo ha finalizado.";
 	   		}
 	   		else{
 	   			$this->response["error"]=true;

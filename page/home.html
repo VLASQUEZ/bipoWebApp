@@ -71,7 +71,7 @@
                             </ul>
                         </li>
                         <li><a href="insecureZones">Zónas seguras</a></li>                       
-                        <li><a href="#">Contáctanos</a></li>                       
+                        <li><a href="contact">Contáctanos</a></li>                       
                         <li><a href="https://play.google.com/store">Bipo en Android</a></li>                       
                         <li ng-show="!islogged" class="active"><a href="login">Iniciar Sesión</a></li>
                         <li ng-show="islogged" class="btn-slide dropdown">
@@ -94,7 +94,7 @@
                 <!-- PANEL DE REPORTES-->
                 <div class="panel col-sm-12 " ng-repeat="report in reports">
                     <div class="panel-body">
-                        <div class="panel-heading heading-report">{{report.reportType}}</div>
+                        <div class="panel-heading heading-report">{{report.reportType}} <span ng-show="isMyBike(report.bike_owner)" class="mybike col-md-offset-2">Es tu bicicleta</span></div>
                         <div class="col-md-4">   
                            <div class="panel-heading">
                                 <img  ng-repeat="bikePhoto in report.bikePhotos" width="100 px" height="60px" class="img-thumbnail  img-responsive" ng-src="../{{bikePhoto.url}}">
@@ -140,6 +140,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <a href="report?reportId={{report.id}}" class="btn btn-primary">Ver más...</a>
+
                                         <button ng-show="report.idreportType==1" ng-click="setNewReport(report.idBike)" class="btn btn-danger">He visto esta bicicleta</button>
                                     </li>
                                 </ul>

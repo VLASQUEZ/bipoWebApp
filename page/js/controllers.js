@@ -12,11 +12,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
 	$scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
-    }	
+	 		Login.logout($cookieStore.get('token'))
+	 			.then(function(data){
+	 				if(data.error){
+	 					if(CookieManager.remove()){
+					 		$window.location.href='inicio';
+	 					}
+	 				}
+	 			})
+	 	
+    }
 
 	$scope.register={name:{name:"name",data:null,type:"alpha"},
 					lastName:{name:"lastName",data:null,type:"alpha"},
@@ -108,7 +113,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 	}
 
 })
-.controller('registerBikeCtrl',function ($scope,ValidateForm,$uibModal, $log, $document,$interval,fileReader,CookieManager,$cookieStore,$cookies,$window,Bikes) {
+.controller('registerBikeCtrl',function ($scope,ValidateForm,Login,$uibModal, $log, $document,$interval,fileReader,CookieManager,$cookieStore,$cookies,$window,Bikes) {
 	$scope.bikeRegister={bikeName:{name:"name",data:null,type:"alpha"},
 				brand:{name:"brand",data:null,type:"select"},
 				color:{name:"color",data:null,type:"select"},
@@ -145,11 +150,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
 	$scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
-    }	
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
+    }
     $scope.getFile = function () {
 	        fileReader.readAsDataUrl($scope.files, $scope)
           		.then(function(result) {
@@ -232,11 +242,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
 	$scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
-    }	
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
+    }
     $scope.getFile = function () {
 	        fileReader.readAsDataUrl($scope.files, $scope)
           		.then(function(result) {
@@ -321,10 +336,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
 	$scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }			
 	$scope.loginUser=function(isValid){
 		
@@ -337,7 +357,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				$ctrl.message="Iniciando Sesión...";
 				$scope.error.errorState=false;
 				try{
-					Login.login($scope.login)
+					Login.loginUser($scope.login)
 						.then(function(data){
 							if(!data.error){
 								CookieManager.writeCookie(data.user[0]);			
@@ -390,11 +410,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		//$window.location.href='login';
     	}
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }	
 	$scope.recoverPass=function(isValid){
 		if(isValid){
@@ -452,11 +477,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$window.location.href='home';
     	}
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }	
 	$scope.forgetPass=function(isValid){
 		console.log(isValid)
@@ -524,15 +554,29 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
 	$scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				console.log(data)
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
     $scope.setNewReport=function(idBike){
     	$window.location.href='newReport?idBike='+idBike+'&reportType=4';
     }
+    $scope.isMyBike=function(owner){
+    	if(owner===$scope.nickname){
+    		return true;
+    	}
+    	else{
+   			return false;
+    	}
 
+    }
 
 })
 .controller('profileCtrl', function($scope,ValidateForm,Login, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,Bikes){
@@ -564,10 +608,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	}
     }
 	$scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
     $scope.getUserInfo=function(){
     	$scope.user.name=$cookieStore.get('name');
@@ -644,11 +693,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 		$window.location.href='login';
     	}
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
     $scope.setNewReport=function(){
     	$window.location.href='newReport?idBike='+$scope.report.idBike+'&reportType=4';
@@ -694,11 +748,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 		$window.location.href='login';
     	}
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
     $scope.setNewReport=function(){
     	$window.location.href='newReport?idBike='+$scope.report.idBike+'&reportType=4';
@@ -748,11 +807,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				});
 
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
     $scope.filter=function(){
     	$scope.fmFilter.fhInicio.data=document.getElementById('fhInicio').value;
@@ -780,6 +844,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
     $scope.setNewReport=function(idBike){
     	$window.location.href='newReport?idBike='+idBike+'&reportType=4';
+    }
+    $scope.isMyBike=function(owner){
+    	if(owner===$scope.nickname){
+    		return true;
+    	}
+    	else{
+   			return false;
+    	}
+
     }
 
 })
@@ -812,11 +885,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				});
 
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
     $scope.filter=function(){
     	$scope.fmFilter.fhInicio.data=document.getElementById('fhInicio').value;
@@ -841,6 +919,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		console.log($scope.error);
 
     	}
+    }
+    $scope.isMyBike=function(owner){
+    	if(owner===$scope.nickname){
+    		return true;
+    	}
+    	else{
+   			return false;
+    	}
+
     }
 
 })
@@ -873,11 +960,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				});
 
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
     $scope.filter=function(){
     	$scope.fmFilter.fhInicio.data=document.getElementById('fhInicio').value;
@@ -903,6 +995,15 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
     	}
     }
+    $scope.isMyBike=function(owner){
+    	if(owner===$scope.nickname){
+    		return true;
+    	}
+    	else{
+   			return false;
+    	}
+
+    }
 
 })
 
@@ -920,11 +1021,16 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
     	}
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
 })
 .controller('termsCtrl', function($scope,Login,$window,$cookies,$cookieStore,CookieManager,$document){
@@ -940,57 +1046,50 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     		$scope.nickname=$cookieStore.get('nickname');
     	}
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
 })
-.controller('zoneContainerCtrl', function(NgMap,heatMapResource,$scope,Login,$window,$cookies,$cookieStore,CookieManager,$document){
+.controller('zoneContainerCtrl', function(NgMap,Reports,$scope,Login,$window,$cookies,$cookieStore,CookieManager,$document,$filter,ValidateForm){
 
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 	$scope.islogged=false;
 	$scope.nickname;
 	$scope.taxiData = [];
-    /*$scope.taxiData = [
-        new google.maps.LatLng(4.651006, -74.066541),
-        new google.maps.LatLng(4.677319, -74.110354),
-        new google.maps.LatLng(4.674245, -74.104251),
-        new google.maps.LatLng(4.689753, -74.068944),
-        new google.maps.LatLng(4.738853, -74.090383),
-        new google.maps.LatLng(4.739813, -74.087815),
-        new google.maps.LatLng(4.733947, -74.094018),
-        new google.maps.LatLng(4.734866, -74.097512),
-        new google.maps.LatLng(4.735668, -74.095999),
-        new google.maps.LatLng(4.738214, -74.099485)
-    ];*/
-    $scope.loadMaps=function(){
-		heatMapResource.getReports()
-        .then(function(data){
-        	console.log(data.reports);
-        	angular.forEach(data.reports,function (value, key) {
-				$scope.taxiData.push(new google.maps.LatLng(value.latitude, value.longitude));
-            });
-            var heatmap, vm = this;
-            vm.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U"
+	var date=new Date();
+	date=date.setDate(date.getDate()+1);
+	var today=$filter('date')(date,'yyyy-M-dd');
+	var year=new Date().getFullYear();
+	$scope.fmFilter={fhInicio:{name:"fhInicio",data:null,type:"datetime"},
+				   fhFinal:{name:"fhFinal",data:null,type:"datetime"}
+				};
+	var heatmap;
+            $ctrl.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZm14lpvD7-Pahl6cCSwIXAlquw1p46-U"
 
             NgMap.getMap().then(function(map) {
-                vm.map = map;
-                heatmap = vm.map.heatmapLayers.foo;
+                $ctrl.map = map;
+                heatmap = $ctrl.map.heatmapLayers.foo;
                 var center = map.getCenter();
  				google.maps.event.trigger(map, "resize");
  				map.setCenter(center);
-
- 				vm.changeRadius();
+ 				$ctrl.changeRadius();
+                heatmap.setMap(heatmap.getMap());
 
             });
-            vm.toggleHeatmap= function(event) {
-                heatmap.setMap(heatmap.getMap() ? null : vm.map);
-                vm.changeGradient();
+            $ctrl.toggleHeatmap= function(event) {
+                heatmap.setMap(heatmap.getMap() ? null : $ctrl.map);
+                $ctrl.changeGradient();
             };
-            vm.changeGradient = function() {
+            $ctrl.changeGradient = function() {
                 var gradient = [
                     'rgba(0, 255, 255, 0)',
                     'rgba(0, 255, 255, 1)',
@@ -1009,12 +1108,19 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
                 ]
                 heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
             }
-            vm.changeRadius = function() {
-                heatmap.set('radius', heatmap.get('radius') ? null : 30);
+            $ctrl.changeRadius = function() {
+                heatmap.set('radius', heatmap.get('radius') ? null : 20);
             }
-            vm.changeOpacity = function() {
+            $ctrl.changeOpacity = function() {
                 heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
             }
+    $scope.loadMaps=function(){
+		Reports.getReports(1,year+"-01-01",today)
+        .then(function(data){
+        	$scope.reports=data.reports;
+        	angular.forEach(data.reports,function (value, key) {
+				$scope.taxiData.push(new google.maps.LatLng(value.latitude, value.longitude));
+            });
         	//$scope.bikeTypes=data.biketypes;
         });
     }
@@ -1026,11 +1132,45 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
     	}
     }
-	 $scope.logout=function(){
-	 	if(CookieManager.remove())
-	 	{
-	 		$window.location.href='inicio';
-	 	}
+        $scope.filter=function(){
+    	$scope.fmFilter.fhInicio.data=document.getElementById('fhInicio').value;
+    	$scope.fmFilter.fhFinal.data=document.getElementById('fhFinal').value;
+	    $scope.errors=ValidateForm.fmValid($scope.fmFilter);
+		$scope.formState=ValidateForm.formState($scope.errors);
+			
+		if($scope.formState){
+    		$scope.error.errorState=false;
+    		Reports.getReports(1,$scope.fmFilter.fhInicio.data,$scope.fmFilter.fhFinal.data)
+    			.then(function(data){
+    				$scope.taxiData=[];
+					angular.forEach(data.reports,function (value, key) {
+						$scope.taxiData.push(new google.maps.LatLng(value.latitude, value.longitude));
+            		});
+	            NgMap.getMap().then(function(map) {
+                $ctrl.map = map;
+                heatmap = $ctrl.map.heatmapLayers.foo;
+                console.log("seeeet")
+                var center = map.getCenter();
+ 				google.maps.event.trigger(map, "resize");
+ 				map.setCenter(center);
+ 				$ctrl.changeRadius();
+                heatmap.setMap(heatmap.getMap());
+
+           		 });
+			});
+
+    	}
+	}
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
     }
 })
 .controller('HeatMapCtrl',function (NgMap,heatMapResource,$scope) {
@@ -1066,6 +1206,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
  				map.setCenter(center);
 
  				vm.changeRadius();
+				heatmap.setMap(heatmap.getMap() );
 
             });
             vm.toggleHeatmap= function(event) {

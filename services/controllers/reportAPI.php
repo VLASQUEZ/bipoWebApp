@@ -356,6 +356,9 @@ class ReportAPI {
 
 		        if(count($reports)){
 		        	foreach ($reports as $pos => $report) {
+		        		list($latitude,$longitude)=explode(",",$reports[$pos]["googlemapscoordinate"]);
+	        			$reports[$pos]["latitude"]=$latitude;
+	        			$reports[$pos]["longitude"]=$longitude;
 		        		$bike=new Bikes();
 		        		$reports[$pos]["bikePhotos"]=$bike->getBikePhotos($reports[$pos]["idBike"]);
 	        			$db = new Reports();	

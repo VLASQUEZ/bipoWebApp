@@ -8,7 +8,7 @@ $app->get('/login','authenticate', function() {
    try{
    	$userResponse=new UserAPI();
     $response=array();
-    $response=$userResponse->login($_GET["email"],$_GET["password"]);
+    $response=$userResponse->login($_GET["email"],$_GET["password"],$_GET["loggedWeb"],$_GET["loggedMobile"]);
     if($response["error"]==false){
     	echoResponse(200,$response);
     }
@@ -23,7 +23,25 @@ $app->get('/login','authenticate', function() {
   }
   
 });
-
+$app->post('/logout','authenticate', function() {
+   try{
+    $userResponse=new UserAPI();
+    $response=array();
+    $response=$userResponse->logout($_POST["token"],$_POST["loggedWeb"],$_POST["loggedMobile"]);
+    if($response["error"]==false){
+      echoResponse(200,$response);
+    }
+    else{
+      echoResponse(400,$response);
+    }
+  }
+  catch(exception $e)
+  {
+    $response=array('error' =>true,'message'=>$e->getMessage() );
+    echoResponse(500,$response);  
+  }
+  
+});
 $app->post('/register','authenticate', function() {
 	try{
 	    $userResponse=new UserAPI();

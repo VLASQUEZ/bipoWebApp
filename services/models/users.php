@@ -38,7 +38,7 @@ class Users{
         $stmt->close();
         return $peoples;              
     }
-    public function setTokenByUser($email,$token){ 
+    public function setTokenByUser($email,$token,$loggedWeb,$loggedMobile){ 
         //$stmt = $this->mysqcon->open();
         //$stmt=$this->mysqcon->open();
         $stmt = $this->mysqcon->prepare('SET @email := ?');
@@ -50,8 +50,41 @@ class Users{
         $stmt->bind_param('s', $token);
         $stmt->execute();
 
+        $stmt = $this->mysqcon->prepare('SET @loggedMobile := ?');
+        $stmt->bind_param('i', $loggedMobile);
+        $stmt->execute();
 
-        $stmt=$this->mysqcon->query("call sp_setTokenByUser(@email,@token)");
+        $stmt = $this->mysqcon->prepare('SET @loggedWeb := ?');
+        $stmt->bind_param('i', $loggedWeb);
+        $stmt->execute();
+
+        $stmt=$this->mysqcon->query("call sp_setTokenByUser(@email,@token,@loggedWeb,@loggedMobile)");
+              
+    }
+    public function logout($token,$loggedWeb,$loggedMobile){ 
+        try{
+           //$stmt = $this->mysqcon->open();
+            //$stmt=$this->mysqcon->open();
+
+            // bind the second parameter to the session variable @userCount
+            $stmt = $this->mysqcon->prepare('SET @token := ?');
+            $stmt->bind_param('s', $token);
+            $stmt->execute();
+
+            $stmt = $this->mysqcon->prepare('SET @loggedMobile := ?');
+            $stmt->bind_param('i', $loggedMobile);
+            $stmt->execute();
+
+            $stmt = $this->mysqcon->prepare('SET @loggedWeb := ?');
+            $stmt->bind_param('i', $loggedWeb);
+            $stmt->execute();
+
+            $stmt=$this->mysqcon->query("call sp_logout(@token,@loggedWeb,@loggedMobile)"); 
+        }
+        catch(Exception $e){
+            return $e->getmessage();
+        }
+
               
     }
     public function setTokenRecoverPass($token,$id){ 

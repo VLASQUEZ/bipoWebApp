@@ -205,7 +205,7 @@
 		$requestMethod = 'POST';
 
 		//tweet
-		$postfields = array('status' => $content." ".'@AndreyVlasquez');
+		$postfields = array('status' => $content." ".'@PoliciaColombia @PoliciaBogota ');
 
 		// instancia de la conexion con twitter
 		$twitter = new TwitterAPIExchange ($settings);

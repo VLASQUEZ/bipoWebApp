@@ -33,13 +33,17 @@ angular.module('bipoApp.services', [])
 })
 //INICIO DE SESION
 .factory('Login',function($http,$q,url){
+
+    var login={};
     //login
-    return{
-        login: function(data){
+    
+    login.loginUser = function(data){
         //postAjax.user={}
         var serviceUrl=url+"login"
         var params={email:data.email.data,
-                    password:data.password.data
+                    password:data.password.data,
+                    loggedWeb:1,
+                    loggedMobile:""
                 };
         var dfd = $q.defer();
         //console.log(params);
@@ -50,9 +54,30 @@ angular.module('bipoApp.services', [])
             function errorCallback(error){
                 dfd.resolve(error.data); 
             });
-            
+        return dfd.promise; 
+    }
+    login.logout=function(token){
+        
+        var serviceUrl=url+"logout"
+        var params={token:token,
+                    loggedWeb:1,
+                    loggedMobile:""
+                };
+        console.log(params)
+        var dfd = $q.defer();
+        //console.log(params);
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
         return dfd.promise;
-    }      } 
+    }
+
+    return login;
+        
 })
 //RECUPERAR CONTRASEÑA
 .factory('RecoverPass',function($http,$q,url){
