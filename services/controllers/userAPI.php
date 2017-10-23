@@ -191,7 +191,8 @@ class UserAPI {
 	   					$db->setTokenByUser($email,$token,$loggedWeb,$loggedMobile);
 
    						$this->response["error"]=false;
-	   					$this->response["user"]=$db->login($email);
+   						$user=$db->login($email);
+	   					$this->response["user"]=$user;
 	   				}
 	   				else{
 	   					$this->response["error"]=true;

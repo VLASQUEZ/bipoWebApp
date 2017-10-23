@@ -149,7 +149,7 @@
                                                     </div><!--FIN PANEL DE BICICLETAS-->
                                                  </div>
                                                 <div class="col-sm-7 form-group">
-                                                    <button ng-show="bikes.length<=3" type="button" class="btn btn-primary btn-md" ng-click="addNewBike()">Agregar Bicicleta</button>
+                                                    <button ng-show="bikes.length<=3 || bikes===undefined" type="button" class="btn btn-primary btn-md" ng-click="addNewBike()">Agregar Bicicleta</button>
                                                 </div>
                                             </div>
                                         </div>

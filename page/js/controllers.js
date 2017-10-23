@@ -183,13 +183,23 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				try{
 					Bikes.insertBike($scope.bikeRegister,$cookieStore.get('token'))
 						.then(function(data){
-							Bikes.bikeByUser($cookieStore.get('token'),$scope.bikeRegister.bikeName.data)
-								.then(function(data){
-								console.log(data.bikes[0].id)
+							if(!data.error)
+							{
 				                angular.forEach($scope.files,function(photo){   
-					                Bikes.bikePhoto(data.bikes[0].id,$cookieStore.get('token'),photo);
-					            });								
-							});
+					                Bikes.bikePhoto(data.bikeId,$cookieStore.get('token'),photo);
+					            });	
+
+					           $scope.error.errorState=true;
+					           $scope.error.message="Bicicleta agregada satisfactoriamente";
+					           $interval(function(){
+			           		         $window.history.back();
+					           },3000);
+							}
+							else{
+								$scope.error.errorState=true;
+					           $scope.error.message=data.message;
+							}
+ 							
 						});
 				}
 				catch(e)
@@ -211,7 +221,125 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 	}
 })
-.controller('newReportCtrl',function($scope,ValidateForm,$log,$document,fileReader,CookieManager,$cookieStore,$cookies,$window,Reports,getParams) {
+.controller('updateBikeCtrl',function ($scope,ValidateForm,Login,$uibModal, $log, $document,$interval,fileReader,CookieManager,$cookieStore,$cookies,$window,Bikes,getParams) {
+	$scope.bikeRegister={bikeId:{name:"bikeId",data:null,type:"integer"},
+				color:{name:"color",data:null,type:"select"},
+				bikeFeatures:{name:"bikeFeatures",data:null,type:"text"},
+				};
+    $scope.islogged=false;
+	$scope.bike={};
+	$scope.colors;
+	$scope.files=[];
+	$scope.images=[];
+	$scope.bikename="";
+	$scope.checkLogin=function(){
+		Bikes.colors()
+				.then(function(data){
+					$scope.colors=data.bikeColor;
+				});
+    	var bikename=getParams().idBike;
+    	var user=getParams().user;
+    	if(CookieManager.login()){
+    		$scope.islogged=true;
+    		$scope.nickname=$cookieStore.get('nickname');
+    		if(bikename!=undefined && user!=undefined){
+    			Bikes.bikeByUser(user,bikename)
+    			.then(function(data){
+					if(data.bikes!= undefined){
+						$scope.bike=data.bikes[0];
+						$scope.bikeRegister.bikeFeatures.data=$scope.bike.bikefeatures;
+						$scope.bikeRegister.color.data=$scope.bike.color;
+						$scope.bikeRegister.bikeId.data=$scope.bike.id;
+					}
+					else{
+						$scope.error.errorState=true;
+						$scope.error.message=data.message;
+					}
+
+				});	
+    		}
+    		else{
+    			
+    			$scope.error.errorState=true;
+    			$scope.error.message="Ocurrió un error al cargar la bicicleta";
+    		}    			
+    	}
+    	else{
+		$window.location.href='login';
+    	}
+    }
+	$scope.logout=function(){
+ 		Login.logout($cookieStore.get('token'))
+ 			.then(function(data){
+ 				if(!data.error){
+ 					if(CookieManager.remove()){
+				 		$window.location.href='inicio';
+ 					}
+ 				}
+ 			})
+	 	
+    }
+    $scope.getFile = function () {
+	        fileReader.readAsDataUrl($scope.files, $scope)
+          		.then(function(result) {
+          			$scope.images=result;
+         	 });
+
+
+		
+    };
+
+	var $ctrl = this;
+	$scope.error={errorState:false,message:""};
+	$scope.bike;
+
+	$scope.updateBike=function(isValid){
+		if(isValid){
+			$scope.errors=ValidateForm.fmValid($scope.bikeRegister);
+			$scope.formState=ValidateForm.formState($scope.errors);
+			
+			if($scope.formState){
+				try{
+					Bikes.updateBike($scope.bikeRegister,$cookieStore.get('token'))
+						.then(function(data){
+							console.log($scope.bike);
+							if(!data.error)
+							{
+				                angular.forEach($scope.files,function(photo){   
+					                Bikes.bikePhoto($scope.bike.id,$cookieStore.get('token'),photo);
+					            });
+				            	$scope.error.errorState=true;
+					            $scope.error.message=data.message;
+					            $interval(function(){
+			           		         $window.history.back();
+					           },3000)
+							}
+							else{
+							   $scope.error.errorState=true;
+					           $scope.error.message=data.message;
+							}
+						});
+				}
+				catch(e)
+				{
+					$ctrl.message="e";
+				}
+				
+			}
+			else{		
+				$scope.error.errorState=true;
+				$scope.error.message="Datos incompletos";
+			}
+		}
+		else{
+
+			$scope.error.errorState=true;
+			$scope.error.message="Datos incompletos";
+		}
+
+	}
+})
+.controller('newReportCtrl',function($scope,$interval,ValidateForm,$log,$document,fileReader,CookieManager,$cookieStore,$cookies,$window,Reports,getParams,Login) {
 	$scope.Report={title:"",lead:""}
 	$scope.newReport={reportType:{name:"reportType",data:null,type:"integer"},
 			coordinates:{name:"coordinates",data:null,type:"coordinates"},
@@ -278,7 +406,10 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 					            });
 
 					            $scope.error.errorState=true;
-					            $scope.error.message=data.message;	
+					            $scope.error.message="Reporte generado satisfactoriamente";	
+					            $interval(function(){
+			           		         $window.history.back();
+					            },3000);
 						});
 				}
 				catch(e)
@@ -359,6 +490,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 				try{
 					Login.loginUser($scope.login)
 						.then(function(data){
+							console.log(data);
 							if(!data.error){
 								CookieManager.writeCookie(data.user[0]);			
 								$scope.error.message="Inicio de sesión exitoso";
@@ -463,7 +595,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
 
 	}
 })
-.controller('forgetPassCtrl', function ($scope,ValidateForm,RecoverPass, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,$window,getParams) {
+.controller('forgetPassCtrl', function ($scope,ValidateForm,RecoverPass, $log, $document,$interval,$window,$cookies,$cookieStore,CookieManager,$window,getParams,Login) {
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 
@@ -630,7 +762,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     	Bikes.bikesByUser($cookieStore.get('token'))
     			.then(function(data){
 					$scope.bikes=data.bikes;
-					console.log($scope.bikes);
+					console.log(data);
 					});
     }
     $scope.getReports=function(){
@@ -776,9 +908,12 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     			$scope.error.message=data.message;
     		});
     }
+    $scope.updateBike=function(id){
+    	$window.location.href='updateBike?idBike='+id+'&user='+$cookieStore.get('token');
+    }
 
 })
-.controller('stolenBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter) {
+.controller('stolenBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter,Login) {
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 	$scope.islogged=false;
@@ -856,7 +991,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
 
 })
-.controller('recoveredBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter) {
+.controller('recoveredBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter,Login) {
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 	$scope.islogged=false;
@@ -931,7 +1066,7 @@ angular.module('bipoApp.controllers', ['ngAnimate', 'ngSanitize','ui.bootstrap']
     }
 
 })
-.controller('foundBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter) {
+.controller('foundBikesCtrl',function ($scope,$log,$document,$interval,$window,$cookies,$cookieStore,CookieManager,Reports,ValidateForm,$filter,Login) {
 	var $ctrl = this;
 	$scope.error={errorState:false,message:""};
 	$scope.islogged=false;

@@ -90,15 +90,23 @@ class Bikes{
         //Obtiene una bicicleta por id
     public function getBikeById($bikeId,$userName){ 
 
-        $stmt=$this->mysqcon->prepare("SELECT * FROM tb_bikes where id =?");
+        $stmt=$this->mysqcon->prepare("SELECT b.id,b.bikename,m.brand,c.color,c.hexcolor,
+            b.idframe,t.type,b.bikefeatures,s.bikestate,b.isDefault,u.email as 'owner_email',u.nickname as 'owner_nickname'
+            from tb_bikes b
+            inner join tb_brands m on b.idBrand=m.id
+            inner join tb_colors c on b.idColor=c.id
+            inner join tb_bikeType t on b.idType=t.id
+            inner join tb_bikeState s on b.idBikeState=s.id
+            inner join tb_users u on b.idUser=u.id
+            where b.id=? and b.state=1 and b.idBikeState!=6;");
         $stmt->bind_param('i',$bikeId);
         $stmt->execute();
         $result = $stmt->get_result();        
-        $bikeColors = $result->fetch_all(MYSQLI_ASSOC);
+        $bike = $result->fetch_all(MYSQLI_ASSOC);
         //print_r($bikeStates);         //  $bikeState["type"]=utf8_encode($item);
         $stmt->close();
         
-        return $bikeColors;               
+        return $bike;               
 
     }
     //Elimina una bicicleta

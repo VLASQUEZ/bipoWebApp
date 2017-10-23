@@ -106,7 +106,7 @@
 			return array("error"=>true,"message"=>$e->getMessage());
 		}
 	}
-	function sendEmail($to,$type,$Content=null){
+	function sendEmail($to,$type,$content){
 		try{
 			switch ($type) {
 			case 'changePassword':
@@ -115,7 +115,16 @@
 				$headers .= "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 				$subject='Cambio de contraseña';
-				$message="Tu contraseña ha sido cambiada satisfactoriamente";
+				$message="<html>
+							<head>
+							<title>Cambio de contraseña</title>
+							</head>
+							<body style=\"background-color:#d6ce00;width: 100%; height: 100%\">
+							    <div style=\"text-align: center; padding-bottom: 55px\">
+							        <h2 style=\"padding-top: 20px;\">Contraseña cambiada satisfactoriamente</h2>
+							    </div>
+						</body>
+						</html>";
 				mail($to,$subject,$message,$headers);
 				break;
 			
@@ -130,15 +139,40 @@
 				$subject='Solicitaste un cambio de contraseña';
 				$message="<html>
 							<head>
-							<title>Recuperación de contraseña</title>
+							<title>Recuperación de contrañseña</title>
 							</head>
-							<body>
-							<p>Ingresa al siguiente <a href=".$Content.">link</a> para continuar</p>
-							</body>
-							</html>";
+							<body style=\"background-color:#d6ce00;width: 100%; height: 100%\">
+							    <div style=\"text-align: center; padding-bottom: 55px\">
+							        <h2 style=\"padding-top: 20px;\">Solicitaste un cambio de contraseña</h2>
+							        <p class=\"lead\">Haz click en el botón para continuar </p>
+							        <a href=\"".$content."\" target=\"_blank\" style=\"background-color:#283593; text-decoration:none; padding:5px 12px; color:#FFF; width:50px; height:30px; text-align:center; border-radius:4px; line-height:24px;\">Cambiar mi contraseña</a>
+							    </div>
+						</body>
+						</html>";
 				mail($to,$subject,$message,$headers);
 				break;
-			
+			case 'foundBike':
+				$from='contacto@bipoapp.com'. "\r\n";
+				$headers="From:".$from;
+				$headers .= "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+				$subject='Alguien ha visto tu bicicleta!';
+				//$message=file_get_contents('../../page/email.php');
+
+				$message="<html>
+							<head>
+							<title>Han visto tu bicicleta</title>
+							</head>
+							<body style=\"background-color:#d6ce00;width: 100%; height: 100%\">
+							    <div style=\"text-align: center; padding-bottom: 55px\">
+							        <h2 style=\"padding-top: 20px;\">Alguien ha visto tu bicicleta robada</h2>
+							        <p class=\"lead\">Para ver toda la información del reporte presiona el logo de Bipo </p>
+							        <a href=\"".$content."\" target=\"_blank\"><img src=\"http://www.bipoapp.com/page/images/slider/bipo.png\" width=\"300 px\" height=\"300 px\" alt=\"bipo\"></a>
+							    </div>
+						</body>
+						</html>";
+				mail($to,$subject,$message,$headers);
+				break;
 			default:
 				# code...
 				break;

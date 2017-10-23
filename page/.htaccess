@@ -18,5 +18,6 @@ RewriteRule ^report$ report.html
 RewriteRule ^newReport$ newReport.html
 RewriteRule ^myProfile$ profile.html
 RewriteRule ^bike$ bike.html
+RewriteRule ^updateBike$ updateBike.html
 RewriteRule ^contact$ contact-us.html
 ErrorDocument 404 /bipo/page/404.html

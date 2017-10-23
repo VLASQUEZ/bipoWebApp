@@ -244,6 +244,26 @@ angular.module('bipoApp.services', [])
             
         return dfd.promise;
     }
+    bikes.updateBike= function(data,user){
+        //postAjax.user={}
+
+        var serviceUrl=url+"updateBike"
+        var dfd = $q.defer();
+        var params={bikeId:data.bikeId.data,
+            idColor:data.color.data.id,
+            bikeFeatures:data.bikeFeatures.data,
+            token:user
+        };
+        $http.post(serviceUrl,params)
+            .then(function successCallback(response){
+                dfd.resolve(response.data);   
+            },
+            function errorCallback(error){
+                dfd.resolve(error.data); 
+            });
+            
+        return dfd.promise;
+    }
     bikes.bikePhoto= function(bikeName,user,photo){
         //postAjax.user={}
         //console.log(photo)

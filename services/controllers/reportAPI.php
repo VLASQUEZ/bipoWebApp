@@ -50,10 +50,15 @@ class ReportAPI {
 	            $this->response["error"]=false;
 	            $this->response["reportId"]=(int)$reportId[0]["LAST_INSERT_ID()"];
             	//Actualizar estado de bicicleta
-	        	$bike=new BikeAPI();
-	        	$bike->updateBikeState($reportType,$idBike);
+	        	$UpdateBike=new BikeAPI();
+	        	$UpdateBike->updateBikeState($reportType,$idBike);
+				$bikeById=new BikeAPI();
+	        	$bike=$bikeById->getBikeById($idBike,null);
 
-	        	$network=$this->publishNetwork($reportType,$reportId[0]["LAST_INSERT_ID()"]);
+	        	$network=$this->publishNetwork($reportType,$reportId[0]["LAST_INSERT_ID()"],$bike["bikes"][0]["owner_email"]);
+	        	if(!$network){
+	        		$error.=$network;
+	        	}
 	        	if (!strcmp($error,"")==0) {
 	        		$this->response["error"]=true;
 	        		$this->response["message"]="Reporte generado satisfactoriamente \n".$error;
@@ -74,7 +79,7 @@ class ReportAPI {
     }
 
     //Crea publicaciones de robos en las redes sociales
-    function publishNetwork($reportType,$reportId){
+    function publishNetwork($reportType,$reportId,$owner_email){
 
     	$reportUrl="http://www.bipoapp.com/page/report?reportId=".$reportId;
     	$Text="";
@@ -85,9 +90,11 @@ class ReportAPI {
 			break;
     		case '2':
     			$Text="#BicicletaRecuperada \n ";
+				
     			break;
 			case '4':
     			$Text="#BicicletaVista \n ";
+    			sendEmail($owner_email,'foundBike',$reportUrl);
     			break;
     		default:
     			# code...

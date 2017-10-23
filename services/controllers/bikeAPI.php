@@ -87,7 +87,6 @@ class BikeAPI {
 			    }
 			}
 			else{
-				$db = new Bikes();
 		        $this->response["error"]=false;
 		        $this->response["bikes"] = "Usuario no valido";
 			}
@@ -100,6 +99,32 @@ class BikeAPI {
 			$this->response["message"] = $e->getMessage();
 		}
 		              
+    }
+    function getBikeById($bikeId,$userName){
+    	try{
+    		$db = new Bikes();
+        	$this->response["error"]=false;
+	        $bikes = $db->getBikeById($bikeId,$userName);
+
+	        if(count($bikes)){
+	    		$db = new Bikes();	
+	   			$this->response["error"]=false;
+
+		        $bikes[0]["bikePhotos"]=$db->getBikePhotos($bikes[0]["id"]);
+		        $this->response["bikes"]=$bikes;
+		    }
+		    else
+		    {
+		    	$this->response["error"]=true;
+		    	$this->response["message"]="No se encontraron registros";
+		    }
+		    return $this->response;
+    	}
+    	catch(Exception $e){
+    		$this->response["error"]=true;
+			$this->response["message"] = $e->getMessage();
+    	}
+		
     }
 	//Obtiene las bicicletas por usuario
 	function getBikeByUser($token,$bikeName){
