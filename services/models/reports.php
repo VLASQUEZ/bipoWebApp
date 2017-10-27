@@ -135,7 +135,7 @@ class Reports{
         try{
             $stmt=$this->mysqcon->prepare("SELECT r.id,r.reportName,u.nickname as 'report_owner',r.idreportType,
             	rt.reportType,r.fhReport,r.googlemapscoordinate,r.idBike,
-            	b.bikeName,c.color,br.brand,t.type, bo.nickname as 'bike_owner',r.reportDetails,r.fhUpdated
+            	b.bikeName,b.bikeFeatures,c.color,br.brand,t.type, bo.nickname as 'bike_owner',r.reportDetails,r.fhUpdated
         		FROM tb_reports r 
 		        INNER JOIN tb_users u on r.idUser=u.id
 		        INNER JOIN tb_reportType rt on r.idReportType=rt.id
@@ -165,7 +165,7 @@ class Reports{
         try{
             $stmt=$this->mysqcon->prepare("SELECT r.id,r.reportName,u.nickname as 'report_owner',r.idreportType,
                 rt.reportType,r.fhReport,r.googlemapscoordinate,r.idBike,b.idFrame,
-                b.bikeName,c.color,br.brand,t.type, bo.nickname as 'bike_owner',r.reportDetails,r.fhUpdated
+                b.bikeName,b.bikeFeatures,c.color,br.brand,t.type, bo.nickname as 'bike_owner',r.reportDetails,r.fhUpdated
                 FROM tb_reports r 
                 INNER JOIN tb_users u on r.idUser=u.id
                 INNER JOIN tb_reportType rt on r.idReportType=rt.id
@@ -225,7 +225,7 @@ class Reports{
         try{
             $stmt=$this->mysqcon->prepare("SELECT r.id,r.reportName,u.nickname as 'report_owner',r.idreportType,
                 rt.reportType,r.fhReport,r.googlemapscoordinate,r.idBike,
-                b.bikeName,c.color,br.brand,t.type, bo.nickname as 'bike_owner',r.reportDetails,r.fhUpdated
+                b.bikeName,b.bikeFeatures,c.color,br.brand,t.type, bo.nickname as 'bike_owner',r.reportDetails,r.fhUpdated
                 FROM tb_reports r 
                 INNER JOIN tb_users u on r.idUser=u.id
                 INNER JOIN tb_reportType rt on r.idReportType=rt.id
