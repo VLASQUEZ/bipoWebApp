@@ -54,14 +54,15 @@ class ReportAPI {
 	        	$UpdateBike->updateBikeState($reportType,$idBike);
 				$bikeById=new BikeAPI();
 	        	$bike=$bikeById->getBikeById($idBike,null);
-
+				echo "AVP-001";
 	        	$network=$this->publishNetwork($reportType,$reportId[0]["LAST_INSERT_ID()"],$bike["bikes"][0]["owner_email"]);
-	        	if(!$network){
+	        		echo $network;
+	        	if(!strcmp($network,"")==0){
 	        		$error.=$network;
 	        	}
 	        	if (!strcmp($error,"")==0) {
 	        		$this->response["error"]=true;
-	        		$this->response["message"]="Reporte generado satisfactoriamente \n".$error;
+	        		$this->response["message"]="Reporte generado satisfactoriamente \n ".$error;
 	        	}
 	   		}
 	   		else{
@@ -71,7 +72,7 @@ class ReportAPI {
 
 	        return $this->response;
 		}
-		catch(exception $e){
+		catch(Exception $e){
 			$this->response["error"]=true;
 			$this->response["message"] = $e->getMessage();
 		}
@@ -80,36 +81,46 @@ class ReportAPI {
 
     //Crea publicaciones de robos en las redes sociales
     function publishNetwork($reportType,$reportId,$owner_email){
+    	try{
+	    	$reportUrl="http://www.bipoapp.com/page/report?reportId=".$reportId;
+	    	$Text="";
+	    	$error="";
+	    	switch ($reportType) {
+	    		case '1':	
+	    			$Text="#BicicletaRobada \n ";
+				break;
+	    		case '2':
+	    			$Text="#BicicletaRecuperada \n ";
+					
+	    			break;
+				case '4':
+	    			$Text="#BicicletaVista \n ";
+	    			sendEmail($owner_email,'foundBike',$reportUrl);
+	    			break;
+	    		default:
+	    			# code...
+	    			break;
+	    	}
+	    			print_r("re puta mierda");
 
-    	$reportUrl="http://www.bipoapp.com/page/report?reportId=".$reportId;
-    	$Text="";
-    	$error="";
-    	switch ($reportType) {
-    		case '1':	
-    			$Text="#BicicletaRobada \n ";
-			break;
-    		case '2':
-    			$Text="#BicicletaRecuperada \n ";
-				
-    			break;
-			case '4':
-    			$Text="#BicicletaVista \n ";
-    			sendEmail($owner_email,'foundBike',$reportUrl);
-    			break;
-    		default:
-    			# code...
-    			break;
+			$ResultTwitter=CreateTweet($Text.$reportUrl);
+			$ResultFacebook=CreateFacebookPost($Text.' @Policianacionaldeloscolombianos',$reportUrl);
+
+
+			if(!$ResultFacebook){
+				$error.="Ocurrió un error al generar el reporte en Facebook"."\n";
+			}
+			if(!$ResultTwitter){
+				$error.="Ocurrió un error al generar el reporte en Twitter"."\n";
+			}
+			return $error;
     	}
-		$ResultTwitter=CreateTweet($Text.$reportUrl);
-		$ResultFacebook=CreateFacebookPost($Text.' @Policianacionaldeloscolombianos',$reportUrl);
-		if(!$ResultFacebook){
-			$error.=$ResultFacebook."\n";
-		}
-		if(!$ResultTwitter){
-			$error.=$ResultTwitter."\n";
-		}
+    	catch(Exception $e)
+    	{
+			$log = new Log();
+    		$log->writeLog('Reportes',$e->getTraceAsString());
+    	}
 
-		return $error;
 
     }
     //Almacena una foto del reporte

@@ -7,7 +7,6 @@ angular.module('bipoApp.services', [])
     //REGISTRO DE USUARIO
     return{
         register: function(data){
-        //postAjax.user={}
         var serviceUrl=url+"register"
         var result=null;
         var params={name:data.name.data,
@@ -19,7 +18,6 @@ angular.module('bipoApp.services', [])
                     password:data.password.data
                 };
         var dfd = $q.defer();
-        //console.log(params);
         $http.post(serviceUrl,params)
             .then(function successCallback(response){
                 dfd.resolve(response.data);             
@@ -38,7 +36,6 @@ angular.module('bipoApp.services', [])
     //login
     
     login.loginUser = function(data){
-        //postAjax.user={}
         var serviceUrl=url+"login"
         var params={email:data.email.data,
                     password:data.password.data,
@@ -46,7 +43,6 @@ angular.module('bipoApp.services', [])
                     loggedMobile:""
                 };
         var dfd = $q.defer();
-        //console.log(params);
         $http.get(serviceUrl,{params:params})
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -63,9 +59,7 @@ angular.module('bipoApp.services', [])
                     loggedWeb:1,
                     loggedMobile:""
                 };
-        console.log(params)
         var dfd = $q.defer();
-        //console.log(params);
         $http.post(serviceUrl,params)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -85,13 +79,11 @@ angular.module('bipoApp.services', [])
     //login
     
     recoverPass.recoverPass= function(data){
-        //postAjax.user={}
         var serviceUrl=url+"recoverPass"
         var result=null;
         var params={email:data.email.data
                 };
         var dfd = $q.defer();
-        //console.log(params);
         $http.post(serviceUrl,params)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -109,7 +101,6 @@ angular.module('bipoApp.services', [])
     //login
     return{
         UpdatePass: function(data){
-        //postAjax.user={}
         var serviceUrl=url+"updatePassword"
         var result=null;
         var params={email:data.email.data,
@@ -117,7 +108,6 @@ angular.module('bipoApp.services', [])
                     newPassword:data.newPassword.data,
                 };
         var dfd = $q.defer();
-        //console.log(params);
         $http.post(serviceUrl,params)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -134,7 +124,6 @@ angular.module('bipoApp.services', [])
     //login
     return{
         setPass: function(data){
-        //postAjax.user={}
         var serviceUrl=url+"setPassword"
         var result=null;
         var params={password:data.password.data,
@@ -157,11 +146,9 @@ angular.module('bipoApp.services', [])
     var bikes={};
 
     bikes.brands=function(){
-        //postAjax.user={}
         var serviceUrl=url+"brands"
         var result=null;
         var dfd = $q.defer();
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -173,11 +160,9 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.colors= function(){
-        //postAjax.user={}
         var serviceUrl=url+"bikeColors"
         var result=null;
         var dfd = $q.defer();
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -189,11 +174,9 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.bikeTypes= function(){
-        //postAjax.user={}
         var serviceUrl=url+"bikeTypes"
         var result=null;
         var dfd = $q.defer();
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -205,11 +188,9 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.bikeStates= function(){
-        //postAjax.user={}
         var serviceUrl=url+"bikeStates"
         var result=null;
         var dfd = $q.defer();
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -221,7 +202,6 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.insertBike= function(data,user){
-        //postAjax.user={}
 
         var serviceUrl=url+"bike"
         var dfd = $q.defer();
@@ -245,8 +225,6 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.updateBike= function(data,user){
-        //postAjax.user={}
-
         var serviceUrl=url+"updateBike"
         var dfd = $q.defer();
         var params={bikeId:data.bikeId.data,
@@ -265,8 +243,7 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.bikePhoto= function(bikeName,user,photo){
-        //postAjax.user={}
-        //console.log(photo)
+
         var serviceUrl=url+"bikePhoto"
         var dfd = $q.defer();
         var params={bikeId:bikeName,
@@ -289,23 +266,18 @@ angular.module('bipoApp.services', [])
         })
             .then(function successCallback(response){
                 dfd.resolve(response.data);  
-                console.log(response.data)
- 
             },
             function errorCallback(error){
                 dfd.resolve(error.data); 
-                console.log(error.data)
             });
             
         return dfd.promise;
     }
     bikes.bikeByUser= function(user,bikeName){
-            //postAjax.user={}
             var serviceUrl=url+"bike/"+user+"/"+bikeName;
             var result=null;
             var dfd = $q.defer();
 
-            //console.log(params);
             $http.get(serviceUrl)
                 .then(function successCallback(response){
                     dfd.resolve(response.data);   
@@ -317,12 +289,10 @@ angular.module('bipoApp.services', [])
             return dfd.promise;
     }
     bikes.bikesByUser= function(token){
-        //postAjax.user={}
         var serviceUrl=url+"bikes/"+token;
         var result=null;
         var dfd = $q.defer();
 
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -334,7 +304,6 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.setBikeDefault= function(id,token){
-        //postAjax.user={}
         var serviceUrl=url+"defaultBike";
         var result=null;
         var dfd = $q.defer();
@@ -342,7 +311,6 @@ angular.module('bipoApp.services', [])
             bikeId:id,
             token:token
         }
-        //console.log(params);
         $http.post(serviceUrl,params)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -354,7 +322,6 @@ angular.module('bipoApp.services', [])
         return dfd.promise;
     }
     bikes.deleteBike= function(id,token){
-        //postAjax.user={}
         var serviceUrl=url+"deleteBike";
         var result=null;
         var dfd = $q.defer();
@@ -362,7 +329,6 @@ angular.module('bipoApp.services', [])
             bikeId:id,
             token:token
         }
-        //console.log(params);
         $http.post(serviceUrl,params)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -384,7 +350,6 @@ angular.module('bipoApp.services', [])
     reports.getLastReports=function(){
         var serviceUrl=url+"lastReports"
         var dfd = $q.defer();
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -399,7 +364,6 @@ angular.module('bipoApp.services', [])
         var serviceUrl=url+"reports/"+reportType;
         var dfd = $q.defer();
         var params={fhInicio:fhInicio,fhFin:fhFin}
-        //console.log(params);
         $http.get(serviceUrl,{params:params})
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -413,7 +377,6 @@ angular.module('bipoApp.services', [])
     reports.getReportById=function(reportId){
         var serviceUrl=url+"report/"+reportId;
         var dfd = $q.defer();
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -453,8 +416,6 @@ angular.module('bipoApp.services', [])
         return  reportName;
     }
     reports.reportPhoto= function(reportName,user,photo){
-        //postAjax.user={}
-        //console.log(photo)
         var serviceUrl=url+"reportPhoto"
         var dfd = $q.defer();
         var form= new FormData();
@@ -465,8 +426,6 @@ angular.module('bipoApp.services', [])
         url: serviceUrl,
         method: 'POST',
         data: form,
-        //assign content-type as undefined, the browser
-        //will assign the correct boundary for us
         headers: { 'Content-Type': undefined},
         //prevents serializing payload.  don't do it.
         transformRequest: angular.identity
@@ -475,19 +434,15 @@ angular.module('bipoApp.services', [])
                 dfd.resolve(response.data);   
             },
             function errorCallback(error){
-                console.log(error.data)
                 dfd.resolve(error.data); 
             });
             
         return dfd.promise;
     }
     reports.reportsByUser= function(token){
-        //postAjax.user={}
         var serviceUrl=url+"reportsUser/"+token;
         var result=null;
         var dfd = $q.defer();
-
-        //console.log(params);
         $http.get(serviceUrl)
             .then(function successCallback(response){
                 dfd.resolve(response.data);   
@@ -505,10 +460,8 @@ angular.module('bipoApp.services', [])
     //login
     return{
         setPreferences: function(data){
-        //postAjax.user={}
         var serviceUrl=url+"setPreferences"
         var result=null;
-        console.log(data);
         var params={token:data.token,
                     emailReceiver:data.emailReceiver,
                     photoPublication:data.photoPublication,
@@ -516,7 +469,6 @@ angular.module('bipoApp.services', [])
                     enableLocationUbication:data.enableLocationUbication
                 };
         var dfd = $q.defer();
-        //console.log(params);
         $http.post(serviceUrl,params)
             .then(function successCallback(response){
                 dfd.resolve(response.data);
@@ -612,7 +564,6 @@ angular.module('bipoApp.services', [])
 			}
 	validate.fmFields=[];
 	validate.fmValid=function(data){
-		  //console.log(data);
 		for (var key in data) {
   			if (data.hasOwnProperty(key)) {
     			var field = data[key];
@@ -771,7 +722,6 @@ angular.module('bipoApp.services', [])
 
   			}
 		}
-		//console.log(validate);
 		return validate.fmFields;
 	}
 
@@ -868,11 +818,9 @@ angular.module('bipoApp.services', [])
         //login
         return{
             getReports: function(data){
-                //postAjax.user={}
                 var serviceUrl=url+"getReportsMaps"
                 var result=null;
                 var dfd = $q.defer();
-                //console.log(params);
                 $http.get(serviceUrl)
                     .then(function successCallback(response){
                             dfd.resolve(response.data);

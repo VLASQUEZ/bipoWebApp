@@ -199,9 +199,11 @@
 	     
 	    // define your POST parameters (replace with your own values)
 	    $params = array(
-	      "access_token" => "EAAYpj65qFn8BAKVQYmBQF8sUgDR4jO6Vq7u5zOBqfcrLJyH9ZCd51OYOMZBiRZALF0XqwtPW39gnb3IA2rWag3n18lkunWQFhtV0QnD6fRBQWKWLBfnrlixIycI2PC8Jz2LG72HcZCf3Gis5txjMjlybtXW1ZBALiHCfdakMOcrd6PV7OVfDtrxvcfOwHXkZB24xZCSkjB4qQZDZD", // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
+	      "access_token" => 'EAAYpj65qFn8BAK7YEYIHZBzFwkZCw8rLGSwMiuWDz5xv1sI7lsDrwXIaD4nITzZC0sHRQzNCUy3wLd96NjJTQTSCk9TyPpCoFdPCKcXsRVa48ZCh2qdEuNsZApCAAZAnDyD7qTUKPUQ3vNlYBMN1ZBHXcQtFMyQZClVba8u8KHvTtAZDZD', // see: https://developers.facebook.com/docs/facebook-login/access-tokens/
 	      "message" => $content,
+	      "to"=> "109837433020784",
 	      "tags"=>"115144905195604",
+	      "picture" =>"http://www.pontikis.net/blog/auto_post_on_facebook_with_php",
 	      "link" => $link,
 	      "name" => 'Reporte generado en la plataforma bipo',
 	      "caption" => "www.bipoapp.com",
@@ -211,20 +213,21 @@
 	    // post to Facebook
 	    // see: https://developers.facebook.com/docs/reference/php/facebook-api/
 	    try {
-	      	$ret = $fb->post('/me/feed', $params);
+			$fb->post('/me/feed', $params);
+			$fb->post('/109837433020784/feed', $params);
 	    	$fb->sendRequest('POST', "109837433020784/feed",$params );
 
 	      return true;
-	    } catch(Exception $e) {
-	      return $e->getMessage();
+	    } catch(Facebook\Exceptions\FacebookSDKException $e) {
+    		$log = new Log();
+    		$log->writeLog('Facebook',$e->getMessage());
+	      return false;
 	    }
 
 
 	}
 	function CreateTweet($content){
 		try{
-
-
 		$settings = array(
 			'oauth_access_token' => '906614341671284736-mTLSK7EKLOx65ZjtwlPYfyXooIBAeDM',
 			'oauth_access_token_secret' => 'DNosGYTwRfrnjFt0HZsnN1xzeDqZdO0URlEdkLcooUGEE',
@@ -248,11 +251,12 @@
 		$response = $twitter->buildOauth($url, $requestMethod)
 							->setPostfields($postfields)
 							->performRequest();
-
 							return true;
-		}catch(exception $e)
+		}catch(Exception $e)
 		{
-			return $e->getTraceAsString();
+			$log = new Log();
+    		$log->writeLog('Twitter',$e->getMessage());
+			return false;
 		}
 	}
 	?>
