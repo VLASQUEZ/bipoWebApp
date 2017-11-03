@@ -54,9 +54,7 @@ class ReportAPI {
 	        	$UpdateBike->updateBikeState($reportType,$idBike);
 				$bikeById=new BikeAPI();
 	        	$bike=$bikeById->getBikeById($idBike,null);
-				echo "AVP-001";
 	        	$network=$this->publishNetwork($reportType,$reportId[0]["LAST_INSERT_ID()"],$bike["bikes"][0]["owner_email"]);
-	        		echo $network;
 	        	if(!strcmp($network,"")==0){
 	        		$error.=$network;
 	        	}
@@ -101,7 +99,6 @@ class ReportAPI {
 	    			# code...
 	    			break;
 	    	}
-	    			print_r("re puta mierda");
 
 			$ResultTwitter=CreateTweet($Text.$reportUrl);
 			$ResultFacebook=CreateFacebookPost($Text.' @Policianacionaldeloscolombianos',$reportUrl);
