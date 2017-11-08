@@ -369,9 +369,13 @@ class BikeAPI {
    			else{
    				$error.="Token no valido \n";
    			}
-	   		
+	   		$db = new Bikes();
+	   		$dbIdFrame = $db->getBikeIdByFrameId($idFrame);
+	   		if(count($dbIdFrame)>0){
+	   			sendEmail($dbIdFrame[0]['owner_email'],'duplicateFrame',$idFrame);
+	   			$error.="No se pudo registrar la bicicleta, por favor verifica la información ingresada o contáctanos. \n";
+	   		}
 	  		if(strcmp($error,"")==0){
-	  			$db=new Bikes();
 	   			$this->response["error"]=false;
 	   			$bikeId=$db->registerBike($bikeName,$idBrand,$idColor,$idFrame,$idType,$bikeFeatures,$idBikeState,$id["user"][0]["id"]);
 	            $this->response["bikeId"] = $bikeId;

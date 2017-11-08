@@ -109,6 +109,21 @@ class Bikes{
         return $bike;               
 
     }
+        //Obtiene todas los estados de la bicicleta desde base de datos
+    public function getBikeIdByFrameId($frameId){ 
+        $stmt=$this->mysqcon->prepare("SELECT b.idFrame,u.email as 'owner_email' 
+            FROM tb_bikes b
+            INNER JOIN tb_users u on b.idUser = u.id
+            WHERE b.idFrame like ? and (b.idBikeState!=6 or b.idBikeState!=4 or b.idBikeState!=5);");
+        $stmt->bind_param('s',$frameId);
+
+        $stmt->execute();
+        $result = $stmt->get_result();        
+        $bikes = $result->fetch_all(MYSQLI_ASSOC); 
+        $stmt->close();
+
+        return $bikes;              
+    }
     //Elimina una bicicleta
     public function deleteBike($bikeId,$token){ 
 

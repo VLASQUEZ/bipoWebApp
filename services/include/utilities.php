@@ -173,6 +173,29 @@
 						</html>";
 				mail($to,$subject,$message,$headers);
 				break;
+			case 'duplicateFrame':
+				$from='contacto@bipoapp.com'. "\r\n";
+				$headers="From:".$from;
+				$headers .= "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+				$subject='Alguien ha intentado de registrar una de tus bicicletas!';
+				//$message=file_get_contents('../../page/email.php');
+
+				$message="<html>
+							<head>
+							<title>Un usuario ha intentado registrar una de tus bicicletas</title>
+							</head>
+							<body style=\"background-color:#d6ce00;width: 100%; height: 100%\">
+							    <div style=\"text-align: center; padding-bottom: 55px\">
+							        <h2 style=\"padding-top: 20px;\">Un usuario ha intentado registrar una de tus bicicletas.</h2>
+							        <p class=\"lead\">La bicicleta con el marco número: <span style=\"color:#283593\">".$content."</span> generó un evento de registro por otro usuario. Si tu bicicleta fue robada te invitamos a realizar un reporte de robo, de lo contrario omite este mensaje.</p>
+							        <span>Si quieres ingresar a bipo haz clic sobre la imagen</span>
+							        <a href=\"http://www.bipoapp.com\" target=\"_blank\"><img src=\"http://www.bipoapp.com/page/images/slider/bipo.png\" width=\"300 px\" height=\"300 px\" alt=\"bipo\"></a>
+							    </div>
+						</body>
+						</html>";
+				mail($to,$subject,$message,$headers);
+				break;
 			default:
 				# code...
 				break;
