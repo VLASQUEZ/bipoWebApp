@@ -1,0 +1,23 @@
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-d  
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^inicio$ index.html 
+RewriteRule ^registro$ register.html 
+RewriteRule ^registroBicicleta$ bikeRegister.html
+RewriteRule ^login$ login.html
+RewriteRule ^zones$ insecureZone.html
+RewriteRule ^insecureZones$ zoneContainer.html
+RewriteRule ^terminos$ terms.html
+RewriteRule ^home$ home.html
+RewriteRule ^recoverPass$ recoverPass.html
+RewriteRule ^forgetPass$ forgetPass.html
+RewriteRule ^foundBikes$ foundBikes.html
+RewriteRule ^stolenBikes$ stolenBikes.html
+RewriteRule ^recoveredBikes$ recoveredBikes.html
+RewriteRule ^report$ report.html
+RewriteRule ^newReport$ newReport.html
+RewriteRule ^myProfile$ profile.html
+RewriteRule ^bike$ bike.html
+RewriteRule ^updateBike$ updateBike.html
+RewriteRule ^contact$ contact-us.html
+ErrorDocument 404 /bipo/page/404.html

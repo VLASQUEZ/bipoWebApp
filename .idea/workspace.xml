@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="eaecb035-e8f7-4c5b-b271-ed8be68511f9" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/test/img.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/page/recoverPass.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Authentication/AccessToken.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Authentication/AccessTokenMetadata.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Authentication/OAuth2Client.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookAuthenticationException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookAuthorizationException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookClientException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookOtherException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookResponseException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookResumableUploadException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookSDKException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookServerException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Exceptions/FacebookThrottleException.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Facebook.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookApp.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookBatchRequest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookBatchResponse.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookRequest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FacebookResponse.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookFile.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookResumableUploader.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookTransferChunk.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/FacebookVideo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/FileUpload/Mimetypes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/Birthday.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/Collection.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphAchievement.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphAlbum.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphApplication.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphCoverPhoto.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphEdge.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphEvent.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphGroup.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphList.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphLocation.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphNode.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphNodeFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphObject.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphObjectFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphPage.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphPicture.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphSessionInfo.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/GraphNodes/GraphUser.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookCanvasHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookJavaScriptHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookPageTabHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookRedirectLoginHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Helpers/FacebookSignedRequestFromInputHelper.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/GraphRawResponse.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/RequestBodyInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/RequestBodyMultipart.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Http/RequestBodyUrlEncoded.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookCurl.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookCurlHttpClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookGuzzleHttpClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookHttpClientInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookStream.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/FacebookStreamHttpClient.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/HttpClientsFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/HttpClients/certs/DigiCertHighAssuranceEVRootCA.pem" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/FacebookMemoryPersistentDataHandler.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/FacebookSessionPersistentDataHandler.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/PersistentDataFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PersistentData/PersistentDataInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/McryptPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/OpenSslPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/PseudoRandomStringGeneratorFactory.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/PseudoRandomStringGeneratorInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/PseudoRandomStringGeneratorTrait.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/RandomBytesPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/PseudoRandomString/UrandomPseudoRandomStringGenerator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/SignedRequest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Url/FacebookUrlDetectionHandler.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Url/FacebookUrlManipulator.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/Url/UrlDetectionInterface.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/autoload.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/Facebook/polyfills.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/TwitterAPIExchange.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/index.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/phpunit.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/libs/twitter-api-php/test/TwitterAPIExchangeTest.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/v1/facebookIndex.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/v1/post.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/services/v1/twitter.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.htaccess" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page/template/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page/template/portfolio-single.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page/template/sendemail.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/.htaccess" afterPath="$PROJECT_DIR$/page/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/css/main.css" afterPath="$PROJECT_DIR$/page/css/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/home.html" afterPath="$PROJECT_DIR$/page/home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/insecureZone.html" afterPath="$PROJECT_DIR$/page/insecureZone.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/js/app.js" afterPath="$PROJECT_DIR$/page/js/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/js/controllers.js" afterPath="$PROJECT_DIR$/page/js/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page/js/services.js" afterPath="$PROJECT_DIR$/page/js/services.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/controllers/reportAPI.php" afterPath="$PROJECT_DIR$/services/controllers/reportAPI.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/controllers/userAPI.php" afterPath="$PROJECT_DIR$/services/controllers/userAPI.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/include/config.php" afterPath="$PROJECT_DIR$/services/include/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/include/utilities.php" afterPath="$PROJECT_DIR$/services/include/utilities.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/models/reports.php" afterPath="$PROJECT_DIR$/services/models/reports.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/models/requires.php" afterPath="$PROJECT_DIR$/services/models/requires.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/models/users.php" afterPath="$PROJECT_DIR$/services/models/users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/v1/.htaccess" afterPath="$PROJECT_DIR$/services/v1/.htaccess" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/services/v1/index.php" afterPath="$PROJECT_DIR$/services/v1/index.php" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="insecureZone.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="429" column="13" lean-forward="false" selection-start-line="429" selection-start-column="13" selection-end-line="429" selection-end-column="13" />
+              <folding>
+                <element signature="e#310#878#0" expanded="false" />
+                <element signature="e#919#2921#0" expanded="false" />
+                <element signature="e#3115#6305#0" expanded="false" />
+                <element signature="e#11568#11845#0" expanded="false" />
+                <element signature="e#11894#12012#0" expanded="false" />
+                <element signature="e#12057#12805#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/page/js/services.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="748">
+              <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+              <folding>
+                <element signature="e#17727#19281#0" expanded="false" />
+                <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+                <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+                <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="heatMapResource.service.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="4" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="9" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="headquartersResource.service.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../lokobingo/webApp/app/services/headquarters/headquartersResource.service.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="663">
+              <caret line="39" column="4" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="39" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/page/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="157" lean-forward="false" selection-start-line="0" selection-start-column="157" selection-end-line="0" selection-end-column="157" />
+              <folding>
+                <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+                <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+                <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+                <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bikeRegister.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/page/bikeRegister.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="680">
+              <caret line="40" column="64" lean-forward="false" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
+              <folding>
+                <marker date="1505082742077" expanded="true" signature="16948:17006" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="portfolio.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/page/portfolio.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js" />
+        <option value="$PROJECT_DIR$/page/js/heatMap/heatMapController.js" />
+        <option value="$PROJECT_DIR$/page/js/app.js" />
+        <option value="$PROJECT_DIR$/page/js/services.js" />
+        <option value="$PROJECT_DIR$/page/insecureZone.html" />
+        <option value="$PROJECT_DIR$/page/js/controllers.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>false</service-enabled>
+    <exe-path />
+    <annotation-enable>false</annotation-enable>
+    <other-services-enabled>false</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/page/js/bower_components/ngmap/node_modules" />
+  </component>
+  <component name="PhpServers">
+    <servers />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="676" />
+    <option name="width" value="697" />
+    <option name="height" value="745" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="bipoWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bipoWebApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bipoWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bipoWebApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="page" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bipoWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bipoWebApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="page" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bipoWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bipoWebApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="page" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="bower_components" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bipoWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bipoWebApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="page" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="bower_components" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="angular-resource" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="bipoWebApp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="bipoWebApp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="page" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="heatMap" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="eaecb035-e8f7-4c5b-b271-ed8be68511f9" name="Default" comment="" />
+      <created>1504846342509</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1504846342509</updated>
+      <workItem from="1504846346879" duration="11898000" />
+      <workItem from="1504894201885" duration="1317000" />
+      <workItem from="1505065936895" duration="15464000" />
+      <workItem from="1505444958987" duration="2312000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="30991000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26096824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3381877" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3381877" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1479">
+          <caret line="87" column="20" lean-forward="false" selection-start-line="87" selection-start-column="20" selection-end-line="87" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+          <folding>
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="4" lean-forward="true" selection-start-line="0" selection-start-column="25" selection-end-line="9" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lokobingo/webApp/app/services/headquarters/headquartersResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="4" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="39" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="157" lean-forward="false" selection-start-line="0" selection-start-column="157" selection-end-line="0" selection-end-column="157" />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/bikeRegister.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="64" lean-forward="false" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
+          <folding>
+            <marker date="1505082742077" expanded="true" signature="16948:17006" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/portfolio.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5678">
+          <caret line="334" column="13" lean-forward="false" selection-start-line="334" selection-start-column="13" selection-end-line="334" selection-end-column="13" />
+          <folding>
+            <element signature="e#310#878#0" expanded="false" />
+            <element signature="e#919#2921#0" expanded="false" />
+            <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2516">
+          <caret line="148" column="42" lean-forward="false" selection-start-line="148" selection-start-column="42" selection-end-line="148" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="79" lean-forward="false" selection-start-line="0" selection-start-column="79" selection-end-line="0" selection-end-column="79" />
+          <folding>
+            <element signature="e#310#878#0" expanded="false" />
+            <element signature="e#919#2921#0" expanded="false" />
+            <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="78" lean-forward="false" selection-start-line="12" selection-start-column="78" selection-end-line="12" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4590">
+          <caret line="270" column="2" lean-forward="false" selection-start-line="270" selection-start-column="2" selection-end-line="270" selection-end-column="2" />
+          <folding>
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lokobingo/webApp/app/services/headquarters/headquartersResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="4" lean-forward="true" selection-start-line="1" selection-start-column="28" selection-end-line="39" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/bikeRegister.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="64" lean-forward="false" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="64" />
+          <folding>
+            <marker date="1505082742077" expanded="true" signature="16948:17006" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/portfolio.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="50" lean-forward="false" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2516">
+          <caret line="148" column="37" lean-forward="false" selection-start-line="148" selection-start-column="37" selection-end-line="148" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="79" lean-forward="false" selection-start-line="0" selection-start-column="79" selection-end-line="0" selection-end-column="79" />
+          <folding>
+            <element signature="e#310#878#0" expanded="false" />
+            <element signature="e#919#2921#0" expanded="false" />
+            <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4590">
+          <caret line="270" column="2" lean-forward="false" selection-start-line="270" selection-start-column="2" selection-end-line="270" selection-end-column="2" />
+          <folding>
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="7" lean-forward="true" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lokobingo/webApp/app/services/headquarters/headquartersResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="4" lean-forward="true" selection-start-line="1" selection-start-column="28" selection-end-line="39" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="149" lean-forward="false" selection-start-line="0" selection-start-column="149" selection-end-line="0" selection-end-column="149" />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/bikeRegister.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="629">
+          <caret line="37" column="64" lean-forward="true" selection-start-line="37" selection-start-column="23" selection-end-line="37" selection-end-column="64" />
+          <folding>
+            <marker date="1505082742077" expanded="true" signature="16948:17006" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/portfolio.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="76" lean-forward="false" selection-start-line="12" selection-start-column="76" selection-end-line="12" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/portfolio.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/routes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/bower_components/ngmap/controllers/map-controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4736">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/bower_components/ngmap/services/ng-map.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/bikeRegister.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="680">
+          <caret line="40" column="64" lean-forward="false" selection-start-line="40" selection-start-column="64" selection-end-line="40" selection-end-column="64" />
+          <folding>
+            <marker date="1505082742077" expanded="true" signature="16948:17006" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../lokobingo/webApp/app/services/headquarters/headquartersResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="4" lean-forward="false" selection-start-line="1" selection-start-column="28" selection-end-line="39" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="157" lean-forward="false" selection-start-line="0" selection-start-column="157" selection-end-line="0" selection-end-column="157" />
+          <folding>
+            <marker date="1505448409221" expanded="true" signature="193:1214" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1048:1211" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1295:1454" ph="{...}" />
+            <marker date="1505448409221" expanded="true" signature="1339:1440" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapResource.service.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="0" selection-start-column="25" selection-end-line="9" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/heatMap/heatMapController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="11" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="8" lean-forward="false" selection-start-line="44" selection-start-column="8" selection-end-line="44" selection-end-column="8" />
+          <folding>
+            <element signature="e#17727#19281#0" expanded="false" />
+            <marker date="1505448409237" expanded="true" signature="18390:18502" ph="{&quot;total&quot;: event.total...}" />
+            <marker date="1505448409237" expanded="true" signature="19208:19273" ph="{&quot;readAsDataUrl&quot;: fileReader.readAsDataURL...}" />
+            <marker date="1505448409237" expanded="true" signature="19515:20133" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/insecureZone.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="51" column="20" lean-forward="false" selection-start-line="51" selection-start-column="20" selection-end-line="51" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/page/js/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="429" column="13" lean-forward="false" selection-start-line="429" selection-start-column="13" selection-end-line="429" selection-end-column="13" />
+          <folding>
+            <element signature="e#310#878#0" expanded="false" />
+            <element signature="e#919#2921#0" expanded="false" />
+            <element signature="e#3115#6305#0" expanded="false" />
+            <element signature="e#11568#11845#0" expanded="false" />
+            <element signature="e#11894#12012#0" expanded="false" />
+            <element signature="e#12057#12805#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

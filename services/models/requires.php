@@ -7,15 +7,18 @@ date_default_timezone_set('America/Bogota');
 
 global $prefijo;
 global $path;
-$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/Library/WebServer/Documents/";
+$path=(isset($_SERVER["DOCUMENT_ROOT"]) && $_SERVER["DOCUMENT_ROOT"]!="") ? $_SERVER["DOCUMENT_ROOT"]."/" : "/var/www/html/";
 
 //para desarrollo
 $path=$path."/bipo/services/";
 //para pruebas/produccion
 //$path=$path."/services/";
-
 require($path."libs/Slim/Slim.php");
+require_once $path ."libs/Facebook/autoload.php";
+require_once $path ."libs/twitter-api-php/TwitterAPIExchange.php";
 require($path."include/config.php");
+require($path."include/utilities.php");
+require($path."include/encrypt.php");
 require($path."models/jsonResponse.php");
 require($path."models/requires.ini.php");
 require($path."controllers/requires.controllers.php");
@@ -23,6 +26,8 @@ require($path."controllers/requires.controllers.php");
 
 \Slim\Slim::registerAutoloader();
 global $app;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface;
 $app = new \Slim\Slim();
 
 	function echoResponse($status_code, $response) {
@@ -32,8 +37,7 @@ $app = new \Slim\Slim();
  
 		// setting response content type to json
 		$app->contentType('application/json');
- 
-		echo json_encode($response);
+		echo json_encode($response,JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR);
 	}
 	function authenticate(\Slim\Route $route) {
 		// Getting request headers
